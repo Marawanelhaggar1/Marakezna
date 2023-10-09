@@ -62,5 +62,17 @@ Route::group(
             }
         );
 
+        Route::group(
+            [
+                'prefix' => 'center'
+            ],
+            function () {
+                Route::get('/', 'HealthCenterController@index');
+                Route::post('/', 'HealthCenterController@create');
+                Route::put('/', 'HealthCenterController@update');
+                Route::delete('/{id}', 'HealthCenterController@delete');
+            }
+        );
+
     }
 );

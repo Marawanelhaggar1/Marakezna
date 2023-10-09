@@ -14,6 +14,13 @@ class healthCenterResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'name'=>$this->name,
+            'الاسم'=>$this->الاسم,
+            'address'=>$this->address,
+            'image'=>$this->image,
+            'working_hours'=>$this->working_hours,
+        ];
     }
 }
