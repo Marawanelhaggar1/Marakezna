@@ -21,7 +21,6 @@ class patientsResource extends JsonResource
             'disease'=>$this->disease,
             'المرض'=>$this->المرض,
             'address'=>$this->address,
-            'image'=>$this->image,
             'email'=>$this->email,
             'doctor_id'=>$this->doctor_id,
             'health_center_id'=>$this->health_center_id,
