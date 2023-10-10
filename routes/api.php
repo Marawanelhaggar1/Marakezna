@@ -74,5 +74,18 @@ Route::group(
             }
         );
 
+        Route::group(
+            [
+                'prefix' => 'doctors'
+            ],
+            function () {
+                Route::get('/', 'DoctorsController@index');
+                Route::post('/', 'DoctorsController@create');
+                Route::put('/', 'DoctorsController@update');
+                Route::delete('/{id}', 'DoctorsController@delete');
+            }
+        );
+
+
     }
 );
