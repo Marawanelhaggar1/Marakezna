@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\HealthCenter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,9 @@ class doctorsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+        $healthCenter = HealthCenter::findOrFail($this->health_center_id);
+
         return [
             'id'=>$this->id,
             'name'=>$this->name,
@@ -22,7 +26,7 @@ class doctorsResource extends JsonResource
             'التخصص'=>$this->التخصص,
             'address'=>$this->address,
             'image'=>$this->image,
-            'health_center_id'=>$this->health_center_id,
+            'health_center'=>$healthCenter->name,
         ];
     }
 }

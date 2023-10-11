@@ -98,6 +98,18 @@ Route::group(
             }
         );
 
+        Route::group(
+            [
+                'prefix' => 'booking'
+            ],
+            function () {
+                Route::get('/', 'BookingsController@index');
+                Route::post('/', 'BookingsController@create');
+                Route::put('/', 'BookingsController@update');
+                Route::delete('/{id}', 'BookingsController@delete');
+            }
+        );
+
 
     }
 );

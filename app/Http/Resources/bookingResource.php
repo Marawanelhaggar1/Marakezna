@@ -7,7 +7,7 @@ use App\Models\HealthCenter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class patientsResource extends JsonResource
+class bookingResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,15 +21,12 @@ class patientsResource extends JsonResource
         $healthCenter = HealthCenter::findOrFail($this->health_center_id);
 
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'disease'=>$this->disease,
-            'المرض'=>$this->المرض,
-            'address'=>$this->address,
-            'email'=>$this->email,
+            'id' => $this->id,
+            'patient_name'=>$this->patient_name,
+            'phone'=>$this->phone,
+            'date'=>$this->date,
             'doctor'=>$doctor->name,
-            'health_center'=>$healthCenter->name,
+            'health_center_id'=>$healthCenter->name
         ];
     }
 }

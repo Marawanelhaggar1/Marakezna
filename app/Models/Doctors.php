@@ -19,4 +19,7 @@ class Doctors extends Model
     public function patients(){
         return $this->hasMany(Patients::class);
     }
+    public function booking(){
+        return $this->hasMany(Bookings::class);
+    }
 }
