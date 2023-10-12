@@ -14,7 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group(
+    [
+        'namespace' => 'App\Http\Controllers',
+    ],
+    function(){
 
+        Route::get('/google','SocialiteController@redirectToGoogle');
+        Route::get('api/google/callback', 'SocialiteController@handelGoogleCallback');
+    }
+);
 
 
 Route::group(
@@ -30,6 +39,8 @@ Route::group(
 
             Route::post('/register', 'auth@register');
             Route::post('/login', 'auth@login');
+            Route::get('/google','SocialiteController@redirectToGoogle');
+                Route::get('/google/callback', 'SocialiteController@handelGoogleCallback');
 
          }
         );
