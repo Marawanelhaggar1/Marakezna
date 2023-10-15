@@ -10,24 +10,33 @@ use Illuminate\Http\Request;
 
 class ServiceGroupController extends Controller
 {
-    public function index(){
-        $services=ServiceGroup::all();
+    public function index()
+    {
+        $services = ServiceGroup::all();
         return servicesGroupResource::collection($services);
     }
 
-     public function create(createServicesGroupRequest $request){
-        $services=$request->createServiceGroup();
+    public function getById($id)
+    {
+        $serviceGroup = ServiceGroup::find($id);
+        return new servicesGroupResource($serviceGroup);
+    }
+
+    public function create(createServicesGroupRequest $request)
+    {
+        $services = $request->createServiceGroup();
         return new servicesGroupResource($services);
     }
 
-    public function update(updateServicesGroupRequest $request){
-        $services=$request->updateServiceGroup();
+    public function update(updateServicesGroupRequest $request)
+    {
+        $services = $request->updateServiceGroup();
         return new servicesGroupResource($services);
     }
 
     public function delete($id)
     {
-        $service=ServiceGroup::find($id);
+        $service = ServiceGroup::find($id);
         $service->delete();
         return response()->json([
             'success' => true,

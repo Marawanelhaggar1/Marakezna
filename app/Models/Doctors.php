@@ -9,17 +9,24 @@ class Doctors extends Model
 {
     use HasFactory;
 
-    protected $fillable=['الاسم','name','specialization','التخصص','image','address','health_center_id'];
-    protected $table='doctors';
+    protected $fillable = ['الاسم', 'name', 'specialization', 'التخصص', 'image', 'address', 'health_center_id'];
+    protected $table = 'doctors';
 
-    public function healthCenter(){
+    public function healthCenter()
+    {
         return $this->belongsTo(HealthCenter::class);
     }
 
-    public function patients(){
+    public function patients()
+    {
         return $this->hasMany(Patients::class);
     }
-    public function booking(){
+    public function booking()
+    {
         return $this->hasMany(Bookings::class);
+    }
+    public function visits()
+    {
+        return $this->hasMany(Visits::class);
     }
 }

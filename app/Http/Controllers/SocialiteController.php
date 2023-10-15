@@ -12,37 +12,44 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-   public function redirectToGoogle(){
+    public function redirectToGoogle()
+    {
         return Socialite::driver('google')->redirect();
     }
 
-   public function handelGoogleCallback(){
+    public function handelGoogleCallback()
+    {
 
-       $user=Socialite::driver('google')->stateless()->user();
-       $findUser = User::where('social_id', $user->id)->first();
-       if($findUser){
-                return response()->json([
-                    'success' => true,
-                    'message' =>'Successfully logged in',
-                    'data' =>['token' => auth()->user()->createToken('auth_token')->plainTextToken,]
-                ]);
-            }else{
-                $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'social_id' => $user->id,
-                    'password' => Hash::make('my-google')
-                ]);
+        $user = Socialite::driver('google')->stateless()->user();
+        $findUser = User::where('social_id', $user->id)->first();
+        if ($findUser) {
+            // dd($user);
+            Auth::login($findUser);
+            $response = response()->json([
+                'success' => true,
+                'message' => 'Successfully logged in',
+                'data' => [
+                    'token'
+                    => auth()->user()->createToken('auth_token')->plainTextToken,
+                ]
+                //  ]
+            ]);
 
-                 return response()->json([
-                    'success' => true,
-                    'message' =>'Successfully logged in',
-                    'data' =>['token' => auth()->user()->createToken('auth_token')->plainTextToken,]
-                ]);
-                // return redirect('/home');
-            }
+            return $response;
+        } else {
+            $newUser = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'social_id' => $user->id,
+                'password' => Hash::make('my-google')
+            ]);
 
-
+            return response()->json([
+                'success' => true,
+                'message' => 'Successfully logged in',
+                'data' => ['token' => auth()->user()->createToken('auth_token')->plainTextToken,]
+            ]);
+            // return redirect('/home');
+        }
     }
-
 }

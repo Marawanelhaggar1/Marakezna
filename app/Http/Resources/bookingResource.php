@@ -22,11 +22,11 @@ class bookingResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'patient_name'=>$this->patient_name,
-            'phone'=>$this->phone,
-            'date'=>$this->date,
-            'doctor'=>$doctor->name,
-            'health_center_id'=>$healthCenter->name
+            'patient_name' => $this->patient_name,
+            'phone' => $this->phone,
+            'date' => $this->date,
+            'doctor' => $doctor->name,
+            'health_center_id' => $healthCenter->name
         ];
     }
 }

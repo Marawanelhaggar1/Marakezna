@@ -10,24 +10,33 @@ use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
-    public function index(){
-        $services=Services::all();
+    public function index()
+    {
+        $services = Services::all();
         return servicesResource::collection($services);
     }
 
-    public function create(createServicesRequest $request){
-        $services=$request->createService();
+    public function getById($id)
+    {
+        $service = Services::find($id);
+        return new servicesResource($service);
+    }
+
+    public function create(createServicesRequest $request)
+    {
+        $services = $request->createService();
         return new servicesResource($services);
     }
 
-    public function update(updateServicesRequest $request){
-        $services=$request->updateService();
+    public function update(updateServicesRequest $request)
+    {
+        $services = $request->updateService();
         return new servicesResource($services);
     }
 
     public function delete($id)
     {
-        $service=Services::find($id);
+        $service = Services::find($id);
         $service->delete();
         return response()->json([
             'success' => true,

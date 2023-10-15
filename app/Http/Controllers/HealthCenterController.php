@@ -10,23 +10,33 @@ use Illuminate\Http\Request;
 
 class HealthCenterController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $healthCenter = HealthCenter::all();
         return healthCenterResource::collection($healthCenter);
     }
 
-    public function create(createHealthCenterRequest $request){
-        $healthCenter=$request->createHealthCenter();
+    public function getById($id)
+    {
+        $healthCenter = HealthCenter::find($id);
         return new healthCenterResource($healthCenter);
     }
 
-    public function update(updateHealthCenterRequest $request){
-        $healthCenter=$request->updateHealthCenter();
+    public function create(createHealthCenterRequest $request)
+    {
+        $healthCenter = $request->createHealthCenter();
         return new healthCenterResource($healthCenter);
     }
 
-    public function delete($id){
-        $healthCenter=HealthCenter::find($id);
+    public function update(updateHealthCenterRequest $request)
+    {
+        $healthCenter = $request->updateHealthCenter();
+        return new healthCenterResource($healthCenter);
+    }
+
+    public function delete($id)
+    {
+        $healthCenter = HealthCenter::find($id);
         $healthCenter->delete();
         return response()->json([
             'success' => true,

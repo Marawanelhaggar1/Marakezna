@@ -10,23 +10,33 @@ use Illuminate\Http\Request;
 
 class DoctorsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $doctor = Doctors::all();
         return doctorsResource::collection($doctor);
     }
 
-    public function create(createDoctorRequest $request){
-        $doctor=$request->createDoctor();
+    public function getById($id)
+    {
+        $doctor = Doctors::find($id);
         return new doctorsResource($doctor);
     }
 
-    public function update(updateDoctorRequest $request){
-        $doctor=$request->updateDoctor();
+    public function create(createDoctorRequest $request)
+    {
+        $doctor = $request->createDoctor();
         return new doctorsResource($doctor);
     }
 
-    public function delete($id){
-        $doctor=Doctors::find($id);
+    public function update(updateDoctorRequest $request)
+    {
+        $doctor = $request->updateDoctor();
+        return new doctorsResource($doctor);
+    }
+
+    public function delete($id)
+    {
+        $doctor = Doctors::find($id);
         $doctor->delete();
         return response()->json([
             'success' => true,

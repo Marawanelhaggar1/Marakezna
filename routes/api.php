@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     [
         'namespace' => 'App\Http\Controllers',
-    ],
-    function(){
 
-        Route::get('/google','SocialiteController@redirectToGoogle');
+
+    ],
+    function () {
+        Route::get('/google', 'SocialiteController@redirectToGoogle');
         Route::get('api/google/callback', 'SocialiteController@handelGoogleCallback');
     }
 );
@@ -28,21 +29,20 @@ Route::group(
 
 Route::group(
     [
-        'namespace'=>'App\Http\Controllers',
-        'middleware'=>'api'
-    ],function(){
+        'namespace' => 'App\Http\Controllers',
+        'middleware' => 'api'
+    ],
+    function () {
 
-        Route::group([
+        Route::group(
+            [
                 'prefix' => 'auth'
-        ],
-         function(){
+            ],
+            function () {
 
-            Route::post('/register', 'auth@register');
-            Route::post('/login', 'auth@login');
-            Route::get('/google','SocialiteController@redirectToGoogle');
-                Route::get('/google/callback', 'SocialiteController@handelGoogleCallback');
-
-         }
+                Route::post('/register', 'auth@register');
+                Route::post('/login', 'auth@login');
+            }
         );
 
         Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -55,6 +55,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'ServiceGroupController@index');
+                Route::get('/{id}', 'ServiceGroupController@getById');
                 Route::post('/', 'ServiceGroupController@create');
                 Route::put('/', 'ServiceGroupController@update');
                 Route::delete('/{id}', 'ServiceGroupController@delete');
@@ -67,6 +68,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'ServicesController@index');
+                Route::get('/{id}', 'ServicesController@getById');
                 Route::post('/', 'ServicesController@create');
                 Route::put('/', 'ServicesController@update');
                 Route::delete('/{id}', 'ServicesController@delete');
@@ -79,6 +81,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'HealthCenterController@index');
+                Route::get('/{id}', 'HealthCenterController@getById');
                 Route::post('/', 'HealthCenterController@create');
                 Route::put('/', 'HealthCenterController@update');
                 Route::delete('/{id}', 'HealthCenterController@delete');
@@ -91,6 +94,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'DoctorsController@index');
+                Route::get('/{id}', 'DoctorsController@getById');
                 Route::post('/', 'DoctorsController@create');
                 Route::put('/', 'DoctorsController@update');
                 Route::delete('/{id}', 'DoctorsController@delete');
@@ -103,6 +107,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'PatientsController@index');
+                Route::get('/{id}', 'PatientsController@getById');
                 Route::post('/', 'PatientsController@create');
                 Route::put('/', 'PatientsController@update');
                 Route::delete('/{id}', 'PatientsController@delete');
@@ -115,12 +120,11 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'BookingsController@index');
+                Route::get('/{id}', 'BookingsController@getById');
                 Route::post('/', 'BookingsController@create');
                 Route::put('/', 'BookingsController@update');
                 Route::delete('/{id}', 'BookingsController@delete');
             }
         );
-
-
     }
 );
