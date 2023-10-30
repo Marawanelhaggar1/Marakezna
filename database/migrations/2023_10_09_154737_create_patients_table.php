@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('الاسم');
             $table->string('name');
-            $table->string('email');
-            $table->string('المرض');
-            $table->string('disease');
-
+            $table->string('email')->nullable();
+            $table->string('المرض')->nullable();
+            $table->string('disease')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedBigInteger('health_center_id')->nullable();
             $table->unsignedBigInteger('doctor_id');
 

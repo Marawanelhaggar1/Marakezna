@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('specialization');
             $table->string('التخصص');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('address')->nullable();
             $table->unsignedBigInteger('health_center_id')->nullable();
 

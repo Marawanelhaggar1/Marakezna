@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('الاسم');
             $table->string('name');
             $table->string('address');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->json('working_hours');
             $table->timestamps();
         });

@@ -12,7 +12,7 @@ class updatePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -23,20 +23,23 @@ class updatePatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'=>'required|exists:patients,id',
-            'name'=>'required|unique:patients,name,' .$this->id,
-            'الاسم'=>'required',
-            'disease'=>'required',
-            'المرض'=>'required',
-            'address'=>'required',
-            'email'=>'required|email',
-            'health_center_id'=>'required|exists:health_centers,id',
-            'doctor_id'=>'required|exists:doctors,id',
+            'id' => 'required|exists:patients,id',
+            'name' => 'required|unique:patients,name,' . $this->id,
+            'الاسم' => 'required',
+            'disease' => 'nullable',
+            'المرض' => 'nullable',
+            'address' => 'required',
+            'image' => 'nullable',
+
+            'email' => 'nullable|email',
+            'health_center_id' => 'nullable|exists:health_centers,id',
+            'doctor_id' => 'required|exists:doctors,id',
         ];
     }
 
-    public function updatePatient():Patients{
-        $patient=Patients::findOrFail($this->id);
+    public function updatePatient(): Patients
+    {
+        $patient = Patients::findOrFail($this->id);
 
         $patient->update([
             'id' => $this->id,
@@ -44,6 +47,7 @@ class updatePatientRequest extends FormRequest
             'الاسم' => $this->الاسم,
             'disease' => $this->disease,
             'المرض' => $this->المرض,
+            'image' => $this->image,
             'address' => $this->address,
             'email' => $this->email,
             'doctor_id' => $this->doctor_id,

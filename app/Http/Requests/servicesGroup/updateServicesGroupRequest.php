@@ -12,7 +12,7 @@ class updateServicesGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -23,21 +23,21 @@ class updateServicesGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'=>'required|exists:service_groups,id',
-            'name'=>'required|unique:service_groups,name,' .$this->id,
-            'الاسم'=>'required',
+            'id' => 'required|exists:service_groups,id',
+            'name' => 'required|unique:service_groups,name,' . $this->id,
+            'الاسم' => 'required',
         ];
     }
 
-    public function updateServiceGroup():ServiceGroup{
+    public function updateServiceGroup(): ServiceGroup
+    {
         $serviceGroup = ServiceGroup::findOrFail($this->id);
         $serviceGroup->update([
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
+            'id' => $this->id,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
         ]);
 
         return $serviceGroup;
-
     }
 }

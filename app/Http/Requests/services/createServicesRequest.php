@@ -12,7 +12,7 @@ class createServicesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -23,17 +23,18 @@ class createServicesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'الاسم'=>'required',
-            'service_group_id'=>'required|exists:service_groups,id',
+            'name' => 'required',
+            'الاسم' => 'required',
+            'service_group_id' => 'required|exists:service_groups,id',
         ];
     }
 
-    public function createService():Services{
+    public function createService(): Services
+    {
         return Services::create([
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'service_group_id'=>$this->service_group_id,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
+            'service_group_id' => $this->service_group_id,
         ]);
     }
 }

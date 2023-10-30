@@ -12,7 +12,7 @@ class createHealthCenterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return  auth()->user()->isAdmin();
     }
 
     /**
@@ -23,21 +23,22 @@ class createHealthCenterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'الاسم'=>'required',
-            'address'=>'required',
-            'image'=>'nullable',
-            'working_hours'=>'required',
+            'name' => 'required',
+            'الاسم' => 'required',
+            'address' => 'required',
+            'image' => 'nullable',
+            'working_hours' => 'required',
         ];
     }
 
-    public function createHealthCenter():HealthCenter{
+    public function createHealthCenter(): HealthCenter
+    {
         return HealthCenter::create([
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'address'=>$this->address,
-            'image'=>$this->image,
-            'working_hours'=>$this->working_hours,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
+            'address' => $this->address,
+            'image' => $this->image,
+            'working_hours' => $this->working_hours,
         ]);
     }
 }

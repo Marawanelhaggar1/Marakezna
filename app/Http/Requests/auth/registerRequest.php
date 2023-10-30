@@ -23,19 +23,32 @@ class registerRequest extends FormRequest
      */
     public function rules(): array
     {
-      return [
-            'name'=>'required|string|max:50',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required|string|min:8',
+        return [
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'mobile' => 'nullable|unique:users,mobile,',
+            'gender' => 'nullable',
+            'date_of_birth' => 'nullable|date',
+            'social_id' => 'nullable',
+            'role' => 'required'
 
         ];
     }
 
-    public function registerUser(){
+    public function registerUser()
+    {
         $user = User::create([
-            'name' => $this->name,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
             'email' => $this->email,
-            'password' => Hash::make($this->password)
+            'password' => Hash::make($this->password),
+            'gender' => $this->gender,
+            'social_id' => $this->social_id,
+            'mobile' => $this->mobile,
+            'date_of_birth' => $this->date_of_birth,
+            'role' => $this->admin
         ]);
 
         return $user;

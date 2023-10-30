@@ -12,7 +12,7 @@ class updateHealthCenterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -23,24 +23,25 @@ class updateHealthCenterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id'=>'required|exists:health_centers,id',
-            'name'=>'required|unique:health_centers,name,' .$this->id,
-            'الاسم'=>'required',
-            'address'=>'required',
-            'image'=>'nullable',
-            'working_hours'=>'required',
+            'id' => 'required|exists:health_centers,id',
+            'name' => 'required|unique:health_centers,name,' . $this->id,
+            'الاسم' => 'required',
+            'address' => 'required',
+            'image' => 'nullable',
+            'working_hours' => 'required',
         ];
     }
 
-    public function updateHealthCenter():HealthCenter{
+    public function updateHealthCenter(): HealthCenter
+    {
         $health = HealthCenter::findOrFail($this->id);
         $health->update([
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'address'=>$this->address,
-            'image'=>$this->image,
-            'working_hours'=>$this->working_hours,
+            'id' => $this->id,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
+            'address' => $this->address,
+            'image' => $this->image,
+            'working_hours' => $this->working_hours,
         ]);
 
         return $health;

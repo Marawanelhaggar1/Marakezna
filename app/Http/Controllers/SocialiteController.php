@@ -12,16 +12,17 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
+    // public function redirectToGoogle()
+    // {
+    //     return Socialite::driver('google')->redirect();
+    // }
 
-    public function handelGoogleCallback()
+    public function handelGoogleCallback(Request $request)
     {
 
-        $user = Socialite::driver('google')->stateless()->user();
-        $findUser = User::where('social_id', $user->id)->first();
+        $social_id = $request->social_id;
+        // $user = Socialite::driver('google')->stateless()->user();
+        $findUser = User::where('social_id', $social_id)->first();
         if ($findUser) {
             // dd($user);
             Auth::login($findUser);
@@ -38,18 +39,24 @@ class SocialiteController extends Controller
             return $response;
         } else {
             $newUser = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'social_id' => $user->id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'social_id' => $social_id,
                 'password' => Hash::make('my-google')
             ]);
 
-            return response()->json([
+            Auth::login($newUser);
+
+
+
+            $response = response()->json([
                 'success' => true,
                 'message' => 'Successfully logged in',
                 'data' => ['token' => auth()->user()->createToken('auth_token')->plainTextToken,]
             ]);
-            // return redirect('/home');
+
+            return $response;
         }
     }
 }

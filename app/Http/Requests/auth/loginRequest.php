@@ -22,23 +22,30 @@ class loginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' =>'required|email|exists:users,email',
-            'password' =>'required|string'
+            'email' => 'nullable|email|exists:users,email',
+            'mobile' => 'nullable|exists:users,mobile',
+            'password' => 'required|string'
         ];
     }
 
-    public function loginUser(){
-        $credentials = $this->only('email', 'password');
+    public function loginUser()
+    {
 
-      try{
+        if ($this->email) {
+            $credentials = $this->only('email', 'password');
+        } else {
+
+            $credentials = $this->only('mobile', 'password');
+        }
+
+        try {
             $auth = auth()->attempt($credentials);
 
-            if(!$auth) throw new \Exception('invalid credentials');
+            if (!$auth) throw new \Exception('invalid credentials');
             return [
                 'token' => auth()->user()->createToken('auth_token')->plainTextToken,
 
             ];
-
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

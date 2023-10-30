@@ -12,7 +12,7 @@ class createDoctorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -23,26 +23,27 @@ class createDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'الاسم'=>'required',
-            'specialization'=>'required',
-            'التخصص'=>'required',
-            'address'=>'required',
-            'image'=>'required',
-            'health_center_id'=>'required|exists:health_centers,id',
+            'name' => 'required',
+            'الاسم' => 'required',
+            'specialization' => 'required',
+            'التخصص' => 'required',
+            'address' => 'nullable',
+            'image' => 'nullable',
+            'health_center_id' => 'nullable|exists:health_centers,id',
 
         ];
     }
 
-    public function createDoctor():Doctors{
+    public function createDoctor(): Doctors
+    {
         return Doctors::create([
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'specialization'=>$this->specialization,
-            'التخصص'=>$this->التخصص,
-            'address'=>$this->address,
-            'image'=>$this->image,
-            'health_center_id'=>$this->health_center_id,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
+            'specialization' => $this->specialization,
+            'التخصص' => $this->التخصص,
+            'address' => $this->address,
+            'image' => $this->image,
+            'health_center_id' => $this->health_center_id,
         ]);
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('patient_name');
             $table->string('phone');
             $table->dateTime('date');
-            $table->string('diagnose');
+            $table->string('diagnose')->nullable();
 
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('health_center_id')->nullable();

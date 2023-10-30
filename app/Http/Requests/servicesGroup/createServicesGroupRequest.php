@@ -12,7 +12,7 @@ class createServicesGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isAdmin();
     }
 
     /**
@@ -23,15 +23,16 @@ class createServicesGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'الاسم'=>'required',
+            'name' => 'required',
+            'الاسم' => 'required',
         ];
     }
 
-    public function createServiceGroup():ServiceGroup{
+    public function createServiceGroup(): ServiceGroup
+    {
         return ServiceGroup::create([
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
         ]);
     }
 }
