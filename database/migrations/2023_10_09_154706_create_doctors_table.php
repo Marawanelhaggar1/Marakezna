@@ -15,13 +15,21 @@ return new class extends Migration
             $table->id();
             $table->string('الاسم');
             $table->string('name');
-            $table->string('specialization');
-            $table->string('التخصص');
+            $table->string('fee');
+            $table->string('title');
+            $table->string('اللقب');
+            $table->json('working_hours');
+            $table->json('ساعات_العمل');
+            $table->json('schedule');
+            $table->json('الجدول');
             $table->string('image')->nullable();
             $table->string('address')->nullable();
+            $table->string('العنوان')->nullable();
             $table->unsignedBigInteger('health_center_id')->nullable();
+            $table->unsignedBigInteger('specialization_id');
 
             $table->foreign('health_center_id')->references('id')->on('health_centers');
+            $table->foreign('specialization_id')->references('id')->on('specializations');
             $table->timestamps();
         });
     }

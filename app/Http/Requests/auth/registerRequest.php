@@ -48,7 +48,7 @@ class registerRequest extends FormRequest
             'social_id' => $this->social_id,
             'mobile' => $this->mobile,
             'date_of_birth' => $this->date_of_birth,
-            'role' => $this->admin
+            'role' => $this->role
         ]);
 
         return $user;

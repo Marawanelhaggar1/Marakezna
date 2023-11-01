@@ -128,5 +128,18 @@ Route::group(
                 Route::delete('/{id}', 'BookingsController@delete')->middleware(['auth:sanctum']);
             }
         );
+
+        Route::group(
+            [
+                'prefix' => 'specialization'
+            ],
+            function () {
+                Route::get('/', 'SpecializationController@index');
+                Route::get('/{id}', 'SpecializationController@getById');
+                Route::post('/', 'SpecializationController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'SpecializationController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'SpecializationController@delete')->middleware(['auth:sanctum']);
+            }
+        );
     }
 );
