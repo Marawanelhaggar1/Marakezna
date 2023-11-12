@@ -29,6 +29,7 @@ class updateBookingRequest extends FormRequest
             'diagnose' => 'nullable',
             'date' => 'required|date',
             'doctor_id' => 'required|exists:doctors,id',
+            'status' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
         ];
     }
@@ -43,7 +44,8 @@ class updateBookingRequest extends FormRequest
             'diagnose' => $this->diagnose,
             'date' => $this->date,
             'doctor_id' => $this->doctor_id,
-            'health_center_id' => $this->health_center_id
+            'status' => $this->status,
+            'health_center_id' => $this->health_center_id,
         ]);
         return $booking;
     }

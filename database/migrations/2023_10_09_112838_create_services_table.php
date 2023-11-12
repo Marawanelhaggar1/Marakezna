@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('الاسم');
             $table->string('name');
-            $table->unsignedBigInteger('service_group_id');
+            $table->string('descriptionEn');
+            $table->string('descriptionAr');
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('service_group_id')->nullable();
 
             $table->foreign('service_group_id')->references('id')->on('service_groups');
             $table->timestamps();

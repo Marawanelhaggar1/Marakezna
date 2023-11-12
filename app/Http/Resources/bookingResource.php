@@ -16,17 +16,39 @@ class bookingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-        $doctor = Doctors::findOrFail($this->doctor_id);
-        $healthCenter = HealthCenter::findOrFail($this->health_center_id);
-
+        $healthCenter_nameEn = null;
+        $healthCenter_nameAr = null;
+        $healthCenter_id = null;
+        // $doctor_nameEn = null;
+        // $doctor_nameAr = null;
+        // $doctor_id = null;
+        $doctor = Doctors::find($this->doctor_id);
+        $healthCenter = HealthCenter::find($this->health_center_id);
+        if ($healthCenter) {
+            $healthCenter_nameEn = $healthCenter->name;
+            $healthCenter_nameAr = $healthCenter->الاسم;
+            $healthCenter_id = $healthCenter->id;
+        }
+        // if ($doctor) {
+        //     $doctor_nameEn = $doctor->name;
+        //     $doctor_nameAr = $doctor->الاسم;
+        //     $doctor_id = $doctor->id;
+        // }
         return [
             'id' => $this->id,
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
             'date' => $this->date,
-            'doctor' => $doctor->name,
-            'health_center_id' => $healthCenter->name
+            'doctor' => [
+                'id' => $this->doctor_id,
+                'name' => $doctor->name,
+            ],
+            'health_center' => [
+                'id' => $healthCenter_id,
+                'nameEn' => $healthCenter_nameEn,
+                'nameAr' => $healthCenter_nameAr,
+            ],
+            'status' => $this->status
         ];
     }
 }

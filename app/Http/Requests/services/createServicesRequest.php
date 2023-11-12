@@ -25,7 +25,10 @@ class createServicesRequest extends FormRequest
         return [
             'name' => 'required',
             'الاسم' => 'required',
-            'service_group_id' => 'required|exists:service_groups,id',
+            'service_group_id' => 'nullable|exists:service_groups,id',
+            'descriptionEn' => 'required',
+            'descriptionAr' => 'required',
+            'image' => 'nullable'
         ];
     }
 
@@ -35,6 +38,9 @@ class createServicesRequest extends FormRequest
             'name' => $this->name,
             'الاسم' => $this->الاسم,
             'service_group_id' => $this->service_group_id,
+            'descriptionEn' => $this->descriptionEn,
+            'descriptionAr' => $this->descriptionAr,
+            'image' => $this->image,
         ]);
     }
 }

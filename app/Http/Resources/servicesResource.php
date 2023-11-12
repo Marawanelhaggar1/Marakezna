@@ -15,13 +15,27 @@ class servicesResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-        $serviceGroup = ServiceGroup::findOrFail($this->service_group_id);
+        $serviceGroup_id = null;
+        $serviceGroup_En = null;
+        $serviceGroup_Ar = null;
+        $serviceGroup = ServiceGroup::find($this->service_group_id);
+        if ($serviceGroup) {
+            $serviceGroup_id = $serviceGroup->id;
+            $serviceGroup_En = $serviceGroup->name;
+            $serviceGroup_Ar = $serviceGroup->الاسم;
+        }
         return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'service_group'=>$serviceGroup->name,
+            'id' => $this->id,
+            'name' => $this->name,
+            'الاسم' => $this->الاسم,
+            'service_group' => [
+                'id' => $serviceGroup_id,
+                'nameEn' => $serviceGroup_En,
+                'nameAr' => $serviceGroup_Ar,
+            ],
+            'descriptionEn' => $this->descriptionEn,
+            'descriptionAr' => $this->descriptionAr,
+            'image' => $this->image,
         ];
     }
 }

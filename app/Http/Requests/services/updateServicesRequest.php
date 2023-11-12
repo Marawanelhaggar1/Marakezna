@@ -26,7 +26,10 @@ class updateServicesRequest extends FormRequest
             'id' => 'required|exists:services,id',
             'name' => 'required|unique:services,name,' . $this->id,
             'الاسم' => 'required',
-            'service_group_id' => 'required|exists:service_groups,id',
+            'service_group_id' => 'nullable|exists:service_groups,id',
+            'descriptionEn' => 'required',
+            'descriptionAr' => 'required',
+            'image' => 'nullable'
         ];
     }
 
@@ -38,6 +41,9 @@ class updateServicesRequest extends FormRequest
             'name' => $this->name,
             'الاسم' => $this->الاسم,
             'service_group_id' => $this->service_group_id,
+            'descriptionEn' => $this->descriptionEn,
+            'descriptionAr' => $this->descriptionAr,
+            'image' => $this->image,
 
         ]);
 

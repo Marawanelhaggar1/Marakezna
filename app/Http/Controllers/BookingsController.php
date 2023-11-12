@@ -24,6 +24,7 @@ class BookingsController extends Controller
 
     public function create(createBookingRequest $request)
     {
+        $imagePath = $request->getImagePath();
         $booking = $request->createBooking();
         return new bookingResource($booking);
     }

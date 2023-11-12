@@ -16,11 +16,15 @@ class doctorsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $healthCenter_name = null;
+        $healthCenter_nameEn = null;
+        $healthCenter_nameAr = null;
+        $healthCenter_id = null;
         $healthCenter = HealthCenter::find($this->health_center_id);
         $specialization = Specialization::find($this->specialization_id);
         if ($healthCenter) {
-            $healthCenter_name = $healthCenter->name;
+            $healthCenter_nameEn = $healthCenter->name;
+            $healthCenter_nameAr = $healthCenter->الاسم;
+            $healthCenter_id = $healthCenter->id;
         }
 
         return [
@@ -29,7 +33,7 @@ class doctorsResource extends JsonResource
             'الاسم' => $this->الاسم,
             'specialization'  => [
                 'id' => $specialization->id,
-                'specialization' => $specialization->name,
+                'specialization' => $specialization->specialization,
                 'التخصص' => $specialization->التخصص
             ],
             'fee' => $this->fee,
@@ -42,7 +46,11 @@ class doctorsResource extends JsonResource
             'working_hours' => $this->working_hours,
             'ساعات_العمل' => $this->ساعات_العمل,
             'image' => $this->image,
-            'health_center' => $healthCenter_name,
+            'health_center' => [
+                'id' => $healthCenter_id,
+                'nameEn' => $healthCenter_nameEn,
+                'nameAr' => $healthCenter_nameAr,
+            ]
         ];
     }
 }

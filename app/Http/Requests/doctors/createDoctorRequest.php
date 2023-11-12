@@ -28,7 +28,7 @@ class createDoctorRequest extends FormRequest
             'specialization_id' => 'required|exists:specializations,id',
             'fee' => 'required',
             'address' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'ساعات_العمل' => 'required',
             'اللقب' => 'required',
@@ -41,15 +41,23 @@ class createDoctorRequest extends FormRequest
         ];
     }
 
+
+    public function getImagePath(): string
+    {
+        return $this->file('image')->store('doctors_images', 'public');
+    }
+
     public function createDoctor(): Doctors
     {
+
+
         return Doctors::create([
             'name' => $this->name,
             'الاسم' => $this->الاسم,
             'specialization_id' => $this->specialization_id,
             'fee' => $this->fee,
             'address' => $this->address,
-            'image' => $this->image,
+            'image' => $this->getImagePath(),
             'health_center_id' => $this->health_center_id,
             'title' => $this->title,
             'schedule' => $this->schedule,
