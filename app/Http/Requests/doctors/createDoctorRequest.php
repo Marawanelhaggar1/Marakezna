@@ -31,10 +31,10 @@ class createDoctorRequest extends FormRequest
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'ساعات_العمل' => 'required',
+            'working_hours' => 'required',
             'اللقب' => 'required',
             'title' => 'required',
-            'العنوان' => 'required',
-            'working_hours' => 'required',
+            'العنوان' => 'nullable',
             'schedule' => 'required',
             'الجدول' => 'required',
 

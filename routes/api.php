@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SlideController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +45,8 @@ Route::group(
 
                 Route::post('/register', 'auth@register');
                 Route::post('/login', 'auth@login');
-                Route::post('/reset-password', 'auth@forgetPassword');
+                // Route::post('/reset-password', 'auth@forgetPassword');
+                Route::post('/forgot-password', 'auth@sendResetLinkEmail');
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
         );
@@ -100,6 +104,45 @@ Route::group(
                 Route::post('/', 'DoctorsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'DoctorsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'DoctorsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+        Route::group(
+            [
+                'prefix' => 'setting'
+            ],
+            function () {
+
+                Route::get('/', 'SettingsController@index');
+                Route::get('/{id}', 'SettingsController@getById');
+                Route::post('/', 'SettingsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'SettingsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'SettingsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+        Route::group(
+            [
+                'prefix' => 'contact'
+            ],
+            function () {
+
+                Route::get('/', 'ContactController@index');
+                Route::get('/{id}', 'ContactController@getById');
+                Route::post('/', 'ContactController@create');
+                // Route::put('/', 'ContactController@update');
+                Route::delete('/{id}', 'ContactController@delete');
+            }
+        );
+        Route::group(
+            [
+                'prefix' => 'slides'
+            ],
+            function () {
+
+                Route::get('/', 'SlideController@index');
+                Route::get('/{id}', 'SlideController@getById');
+                Route::post('/', 'SlideController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'SlideController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'SlideController@delete')->middleware(['auth:sanctum']);
             }
         );
 

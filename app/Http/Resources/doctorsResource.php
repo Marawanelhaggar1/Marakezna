@@ -45,7 +45,7 @@ class doctorsResource extends JsonResource
             'اللقب' => $this->اللقب,
             'working_hours' => $this->working_hours,
             'ساعات_العمل' => $this->ساعات_العمل,
-            'image' => $this->image,
+            'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
             'health_center' => [
                 'id' => $healthCenter_id,
                 'nameEn' => $healthCenter_nameEn,

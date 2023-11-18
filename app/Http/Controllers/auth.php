@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+// use Illuminate\Support\Str;
 use App\Http\Requests\auth\loginRequest;
 use App\Http\Requests\auth\registerRequest;
 use App\Models\User;
@@ -10,9 +11,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Support\Facades\Password;
+use App\Mail\ResetPasswordMail;
+
+use function Laravel\Prompts\password;
 
 class auth extends Controller
 {
+    // use SendsPasswordResetEmails;
+
     public function register(registerRequest $request)
     {
         $user = $request->registerUser();
@@ -33,45 +41,53 @@ class auth extends Controller
         ]);
     }
 
-    // public function forgetPassword(Request $request)
+
+    // public function forgotPassword(Request $request)
     // {
-    //     try {
-    //         $user = User::where('email', $request->email)->get();
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //     ]);
 
-    //         if (count($user) > 0) {
-    //             $token = Str::random(40);
-    //             $domain = URL::to('/');
-    //             $url = $domain . '/reset-password?token=' . $token;
+    //     $user = User::where('email', $request->email)->first();
 
-    //             $data['url'] = $url;
-    //             $data['email'] = $request->email;
-    //             $data['title'] = 'Password Reset ';
-    //             $data['body'] = "please click the link below to reset your password";
-
-    //             Mail::send('forgetPasswordMail', ['data' => $data], function ($message) use ($data) {
-    //                 $message->to($data['email'])->subject($data['title']);
-    //             });
-
-    //             dd($data);
-    //             PasswordReset::updateOrCreate([
-    //                 ['email' => $request->email], ['email' => $request->email, 'token' => $token]
-    //             ]);
-
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'please check your email to reset your password',
-    //             ]);
-    //         } else {
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'user not found',
-    //             ]);
-    //         }
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => $e->getMessage(),
-    //         ]);
+    //     if (!$user) {
+    //         return response()->json(['message' => 'User not found'], 404);
     //     }
+
+    //     $token = Str::random(60);
+    //     $user->password_reset_token = $token;
+    //     $user->save();
+
+
+    //     $resetPasswordMail = new ResetPasswordMail($user);
+
+    //     Mail::to($user->email)->send($resetPasswordMail);
+
+
+    //     return response()->json(['message' => 'Password reset email sent']);
     // }
+
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password_reset_token' => 'required|string',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $user = User::where('email', $request->email)
+            ->where('password_reset_token', $request->password_reset_token)
+            ->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Invalid email or token'], 422);
+        }
+
+        $user->password = bcrypt($request->password);
+        $user->password_reset_token = null;
+        $user->save();
+
+        return response()->json(['message' => 'Password reset successfully']);
+    }
 }

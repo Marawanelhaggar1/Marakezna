@@ -24,7 +24,7 @@ class updateSpecializationRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:specializations,id',
-            'specialization' => 'required|unique:service_groups,name,' . $this->id,
+            'specialization' => 'required|unique:specializations,name,' . $this->id,
             'التخصص' => 'required'
         ];
     }
