@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\auth;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
@@ -51,6 +53,12 @@ class registerRequest extends FormRequest
             'role' => $this->role
         ]);
 
-        return $user;
+        // Generate a token for the user
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        // Log in the user using the created token
+        Auth::login($user);
+
+        return ['user' => $user, 'token' => $token];
     }
 }

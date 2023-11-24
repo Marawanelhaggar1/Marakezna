@@ -28,6 +28,7 @@ class createSettingRequest extends FormRequest
             'nameAr' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'mobile_background' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'footerLogo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'address' => 'nullable',
             'addressAr' => 'nullable',
@@ -43,6 +44,11 @@ class createSettingRequest extends FormRequest
     public function getLogoPath(): string
     {
         return $this->file('logo')->store('setting_images', 'public');
+    }
+
+    public function getMobilePath(): string
+    {
+        return $this->file('mobile_background')->store('setting_images', 'public');
     }
 
     public function getFaviconPath(): string
@@ -64,6 +70,7 @@ class createSettingRequest extends FormRequest
             'logo' => $this->getLogoPath(),
             'favicon' => $this->getFaviconPath(),
             'footerLogo' => $this->getFooterLogoPath(),
+            'mobile_background' => $this->getMobilePath(),
             'address' => $this->address,
             'addressAr' => $this->addressAr,
             'phone' => $this->phone,

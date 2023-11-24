@@ -20,6 +20,8 @@ class settingResource extends JsonResource
             'nameAr' => $this->nameAr,
             'logo'
             => 'http://127.0.0.1:8000/storage/' . $this->logo,
+            'mobile_background'
+            => 'http://127.0.0.1:8000/storage/' . $this->mobile_background,
             'favicon'
             => 'http://127.0.0.1:8000/storage/' . $this->favicon,
             'footerLogo' =>

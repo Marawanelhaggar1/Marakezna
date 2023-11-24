@@ -26,17 +26,15 @@ class createDoctorRequest extends FormRequest
             'name' => 'required',
             'الاسم' => 'required',
             'specialization_id' => 'required|exists:specializations,id',
-            'fee' => 'required',
+            'fee' => 'required|integer',
             'address' => 'nullable',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'health_center_id' => 'nullable|exists:health_centers,id',
-            'ساعات_العمل' => 'required',
-            'working_hours' => 'required',
             'اللقب' => 'required',
             'title' => 'required',
             'العنوان' => 'nullable',
-            'schedule' => 'required',
-            'الجدول' => 'required',
+            'السعر' => 'required|integer',
+            'rating' => 'required|integer',
 
         ];
     }
@@ -60,12 +58,10 @@ class createDoctorRequest extends FormRequest
             'image' => $this->getImagePath(),
             'health_center_id' => $this->health_center_id,
             'title' => $this->title,
-            'schedule' => $this->schedule,
-            'الجدول' => $this->الجدول,
             'العنوان' => $this->العنوان,
             'اللقب' => $this->اللقب,
-            'working_hours' => $this->working_hours,
-            'ساعات_العمل' => $this->ساعات_العمل,
+            'rating' => $this->rating,
+            'السعر' => $this->السعر,
         ]);
     }
 }

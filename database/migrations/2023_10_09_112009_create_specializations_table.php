@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('specializations', function (Blueprint $table) {
             $table->id();
+            $table->string('icon')->nullable();
             $table->string('specialization');
             $table->string('التخصص');
             $table->timestamps();

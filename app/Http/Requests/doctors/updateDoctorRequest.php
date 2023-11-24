@@ -27,7 +27,7 @@ class updateDoctorRequest extends FormRequest
             'name' => 'required|unique:doctors,name,' . $this->id,
             'الاسم' => 'required',
             'specialization_id' => 'required|exists:specializations,id',
-            'fee' => 'required',
+            'fee' => 'required|integer',
             'address' => 'nullable',
             'image' => 'nullable',
             'health_center_id' => 'nullable|exists:health_centers,id',
@@ -35,9 +35,8 @@ class updateDoctorRequest extends FormRequest
             'اللقب' => 'required',
             'title' => 'required',
             'العنوان' => 'required',
-            'working_hours' => 'required',
-            'schedule' => 'required',
-            'الجدول' => 'required',
+            'rating' => 'required|integer',
+            'السعر' => 'required|integer',
 
         ];
     }
@@ -56,12 +55,10 @@ class updateDoctorRequest extends FormRequest
             'image' => $this->image,
             'health_center_id' => $this->health_center_id,
             'title' => $this->title,
-            'schedule' => $this->schedule,
-            'الجدول' => $this->الجدول,
             'العنوان' => $this->العنوان,
             'اللقب' => $this->اللقب,
-            'working_hours' => $this->working_hours,
-            'ساعات_العمل' => $this->ساعات_العمل,
+            'rating' => $this->rating,
+            'السعر' => $this->السعر,
         ]);
 
         return $doctor;

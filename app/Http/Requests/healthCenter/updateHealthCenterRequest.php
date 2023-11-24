@@ -28,8 +28,15 @@ class updateHealthCenterRequest extends FormRequest
             'الاسم' => 'required',
             'address' => 'required',
             'image' => 'nullable',
-            'working_hours' => 'required',
+            'addressAr' => 'required',
+            'description' => 'required',
+            'descriptionAr' => 'required'
         ];
+    }
+
+    public function getImagePath(): string
+    {
+        return $this->file('image')->store('center_images', 'public');
     }
 
     public function updateHealthCenter(): HealthCenter
@@ -40,8 +47,10 @@ class updateHealthCenterRequest extends FormRequest
             'name' => $this->name,
             'الاسم' => $this->الاسم,
             'address' => $this->address,
-            'image' => $this->image,
-            'working_hours' => $this->working_hours,
+            'image' => $this->getImagePath(),
+            'addressAr' => $this->addressAr,
+            'description' => $this->description,
+            'descriptionAr' => $this->descriptionAr
         ]);
 
         return $health;

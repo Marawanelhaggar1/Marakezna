@@ -18,6 +18,7 @@ class specializationResource extends JsonResource
             'id' => $this->id,
             'specialization' => $this->specialization,
             'التخصص' => $this->التخصص,
+            'icon' => $this->icon
         ];
     }
 }

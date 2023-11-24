@@ -12,19 +12,16 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    // public function redirectToGoogle()
-    // {
-    //     return Socialite::driver('google')->redirect();
-    // }
+
+
 
     public function handelGoogleCallback(Request $request)
     {
 
         $social_id = $request->social_id;
-        // $user = Socialite::driver('google')->stateless()->user();
+
         $findUser = User::where('social_id', $social_id)->first();
         if ($findUser) {
-            // dd($user);
             Auth::login($findUser);
             $response = response()->json([
                 'success' => true,
@@ -33,7 +30,7 @@ class SocialiteController extends Controller
                     'token'
                     => auth()->user()->createToken('auth_token')->plainTextToken,
                 ]
-                //  ]
+
             ]);
 
             return $response;

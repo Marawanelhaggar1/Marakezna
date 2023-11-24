@@ -26,6 +26,7 @@ class createSpecializationRequest extends FormRequest
 
             'specialization' => 'required',
             'التخصص' => 'required',
+            'icon' => 'nullable',
         ];
     }
 
@@ -34,6 +35,7 @@ class createSpecializationRequest extends FormRequest
         return Specialization::create([
             'specialization' => $this->specialization,
             'التخصص' => $this->التخصص,
+            'icon' => $this->icon
         ]);
     }
 }

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bookings', function ($table) {
-            $table->enum('status', ['submitted', 'confirmed', 'done', 'cancelled', 'rescheduled']);
+        Schema::table('settings', function ($table) {
+            $table->string('mobile_background');
         });
     }
 
@@ -21,8 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('booking', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

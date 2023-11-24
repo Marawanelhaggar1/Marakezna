@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('الاسم');
             $table->string('name');
             $table->string('address');
+            $table->string('addressAr');
+            $table->string('descriptionAr');
+            $table->string('description');
             $table->string('image')->nullable();
-            $table->json('working_hours');
             $table->timestamps();
         });
     }

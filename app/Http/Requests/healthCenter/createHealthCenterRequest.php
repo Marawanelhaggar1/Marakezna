@@ -26,19 +26,27 @@ class createHealthCenterRequest extends FormRequest
             'name' => 'required',
             'الاسم' => 'required',
             'address' => 'required',
-            'image' => 'nullable',
-            'working_hours' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'addressAr' => 'required',
+            'description' => 'required',
+            'descriptionAr' => 'required',
         ];
     }
 
+    public function getImagePath(): string
+    {
+        return $this->file('image')->store('center_images', 'public');
+    }
     public function createHealthCenter(): HealthCenter
     {
         return HealthCenter::create([
             'name' => $this->name,
             'الاسم' => $this->الاسم,
             'address' => $this->address,
-            'image' => $this->image,
-            'working_hours' => $this->working_hours,
+            'image' => $this->getImagePath(),
+            'addressAr' => $this->addressAr,
+            'description' => $this->description,
+            'descriptionAr' => $this->descriptionAr
         ]);
     }
 }

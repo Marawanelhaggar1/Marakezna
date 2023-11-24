@@ -15,13 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('الاسم');
             $table->string('name');
-            $table->string('fee');
+            $table->integer('fee');
+            $table->integer('السعر');
+            $table->integer('rating');
             $table->string('title');
             $table->string('اللقب');
-            $table->json('working_hours');
-            $table->json('ساعات_العمل');
-            $table->json('schedule');
-            $table->json('الجدول');
             $table->string('image')->nullable();
             $table->string('address')->nullable();
             $table->string('العنوان')->nullable();

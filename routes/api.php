@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\VisitsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,18 +17,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-// Route::group(
-//     [
-//         'namespace' => 'App\Http\Controllers',
-
-
-//     ],
-//     function () {
-//         Route::get('/google', 'SocialiteController@redirectToGoogle');
-//         Route::get('api/google/callback', 'SocialiteController@handelGoogleCallback');
-//     }
-// );
 
 
 Route::group(
@@ -46,7 +35,7 @@ Route::group(
                 Route::post('/register', 'auth@register');
                 Route::post('/login', 'auth@login');
                 // Route::post('/reset-password', 'auth@forgetPassword');
-                Route::post('/forgot-password', 'auth@sendResetLinkEmail');
+                // Route::post('/forgot-password', 'auth@sendResetLinkEmail');
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
         );
@@ -182,6 +171,47 @@ Route::group(
                 Route::post('/', 'SpecializationController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'SpecializationController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'SpecializationController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'visits'
+            ],
+            function () {
+                Route::get('/', 'VisitsController@index');
+                Route::get('/{id}', 'VisitsController@getById');
+                Route::post('/', 'VisitsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'VisitsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'VisitsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'doctor/schedule',
+            ],
+            function () {
+                Route::get('/', 'DoctorScheduleController@index');
+                Route::get('/{id}', 'DoctorScheduleController@show');
+                Route::get('doc/{id}', 'DoctorScheduleController@getSchedulesByDoctor');
+                Route::post('/', 'DoctorScheduleController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'DoctorScheduleController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'DoctorScheduleController@destroy')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'center/schedule',
+            ],
+            function () {
+                Route::get('/', 'HealthCenterScheduleController@index');
+                Route::get('/{id}', 'HealthCenterScheduleController@show');
+                Route::get('cen/{id}', 'HealthCenterScheduleController@getSchedulesByCenter');
+                Route::post('/', 'HealthCenterScheduleController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'HealthCenterScheduleController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'HealthCenterScheduleController@destroy')->middleware(['auth:sanctum']);
             }
         );
     }

@@ -9,15 +9,18 @@ class HealthCenter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'الاسم', 'address', 'image', 'working_hours'];
-    protected $casts = [
-        'working_hours' => 'array'
-    ];
+    protected $fillable = ['name', 'الاسم', 'address', 'image',  'addressAr', 'description', 'descriptionAr'];
+
     protected $table = 'health_centers';
 
     public function doctors()
     {
         return $this->hasMany(Doctors::class);
+    }
+
+    public function centerSchedule()
+    {
+        return $this->hasMany(HealthCenterSchedule::class);
     }
 
     public function patients()

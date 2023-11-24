@@ -9,7 +9,7 @@ class Bookings extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['patient_name', 'phone', 'date', 'doctor_id', 'health_center_id', 'status'];
+    protected $fillable = ['patient_name', 'phone', 'date', 'doctor_id', 'health_center_id', 'status', 'location', 'description'];
     protected $table = 'bookings';
     public function healthCenter()
     {
