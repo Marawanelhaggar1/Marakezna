@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('الاسم');
-            $table->string('name');
+            $table->string('nameEn');
+            $table->string('nameAr');
             $table->string('descriptionEn');
             $table->string('descriptionAr');
             $table->string('image')->nullable();

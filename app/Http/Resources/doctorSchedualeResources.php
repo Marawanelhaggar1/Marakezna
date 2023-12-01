@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class specializationResource extends JsonResource
+class doctorSchedualeResources extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,19 +14,21 @@ class specializationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         if (app()->getLocale() == 'Ar') {
-
             return [
                 'id' => $this->id,
-                'specialty' => $this->specialtyAr,
-                'icon' => $this->icon
+                'date' => $this->dateAr,
+                'start_time' => $this->start_timeAr,
+                'end_time' => $this->end_timeAr,
+                'doctor_id' => $this->doctor_id
             ];
         } else {
             return [
                 'id' => $this->id,
-                'specialty' => $this->specialtyEn,
-                'icon' => $this->icon
+                'date' => $this->date,
+                'start_time' => $this->start_time,
+                'end_time' => $this->end_time,
+                'doctor_id' => $this->doctor_id
             ];
         }
     }

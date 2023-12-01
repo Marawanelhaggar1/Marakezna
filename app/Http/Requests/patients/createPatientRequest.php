@@ -23,12 +23,12 @@ class createPatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'الاسم' => 'required',
-            'disease' => 'nullable',
-            'المرض' => 'nullable',
-            'address' => 'required',
-            'image' => 'nullable',
+            'nameEn' => 'required',
+            'nameAr' => 'required',
+            'diseaseEn' => 'nullable',
+            'diseaseAr' => 'nullable',
+            'addressEn' => 'nullable',
+            'addressAr' => 'nullable',
             'email' => 'nullable|email',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'doctor_id' => 'required|exists:doctors,id',
@@ -38,13 +38,13 @@ class createPatientRequest extends FormRequest
     public function createPatient(): Patients
     {
         return Patients::create([
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
-            'disease' => $this->disease,
-            'المرض' => $this->المرض,
-            'address' => $this->address,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
+            'diseaseEn' => $this->diseaseEn,
+            'diseaseAr' => $this->diseaseAr,
+            'addressEn' => $this->addressEn,
+            'addressAr' => $this->addressAr,
             'email' => $this->email,
-            'image' => $this->image,
             'doctor_id' => $this->doctor_id,
             'health_center_id' => $this->health_center_id,
         ]);

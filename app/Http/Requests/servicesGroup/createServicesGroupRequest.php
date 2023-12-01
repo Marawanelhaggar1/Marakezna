@@ -23,16 +23,16 @@ class createServicesGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'الاسم' => 'required',
+            'nameEn' => 'required',
+            'nameAr' => 'required',
         ];
     }
 
     public function createServiceGroup(): ServiceGroup
     {
         return ServiceGroup::create([
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
         ]);
     }
 }

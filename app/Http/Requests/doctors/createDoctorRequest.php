@@ -23,18 +23,19 @@ class createDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'الاسم' => 'required',
-            'specialization_id' => 'required|exists:specializations,id',
-            'fee' => 'required|integer',
-            'address' => 'nullable',
+            'nameEn' => 'required',
+            'nameAr' => 'required',
+            'feeEn' => 'required|integer',
+            'feeAr' => 'required',
+            'addressEn' => 'nullable',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'titleEn' => 'required',
+            'titleAr' => 'required',
+            'addressAr' => 'nullable',
+            'ratingEn' => 'required|integer',
+            'ratingAr' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
-            'اللقب' => 'required',
-            'title' => 'required',
-            'العنوان' => 'nullable',
-            'السعر' => 'required|integer',
-            'rating' => 'required|integer',
+            'specialization_id' => 'required|exists:specializations,id',
 
         ];
     }
@@ -50,18 +51,19 @@ class createDoctorRequest extends FormRequest
 
 
         return Doctors::create([
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
-            'specialization_id' => $this->specialization_id,
-            'fee' => $this->fee,
-            'address' => $this->address,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
+            'feeAr' => $this->feeAr,
+            'feeEn' => $this->feeEn,
+            'addressEn' => $this->addressEn,
+            'addressAr' => $this->addressAr,
             'image' => $this->getImagePath(),
+            'titleEn' => $this->titleEn,
+            'titleAr' => $this->titleAr,
+            'ratingEn' => $this->ratingEn,
+            'ratingAr' => $this->ratingAr,
             'health_center_id' => $this->health_center_id,
-            'title' => $this->title,
-            'العنوان' => $this->العنوان,
-            'اللقب' => $this->اللقب,
-            'rating' => $this->rating,
-            'السعر' => $this->السعر,
+            'specialization_id' => $this->specialization_id,
         ]);
     }
 }

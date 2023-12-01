@@ -9,11 +9,16 @@ class Specialization extends Model
 {
     use HasFactory;
 
-    public $fillable = ['specialization', 'التخصص', 'icon'];
+    public $fillable = ['specialtyEn', 'specialtyAr', 'icon'];
     public $table = 'specializations';
 
     public function specialization()
     {
         return $this->hasMany(Specialization::class);
     }
+
+    // public function scopeSelection($query)
+    // {
+    //     return $query->select('id', );
+    // }
 }

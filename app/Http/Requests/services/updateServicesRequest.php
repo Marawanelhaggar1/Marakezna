@@ -24,13 +24,22 @@ class updateServicesRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:services,id',
-            'name' => 'required|unique:services,name,' . $this->id,
-            'الاسم' => 'required',
+            'nameEn' => 'required|unique:services,name,' . $this->id,
+            'nameAr' => 'required',
             'service_group_id' => 'nullable|exists:service_groups,id',
             'descriptionEn' => 'required',
             'descriptionAr' => 'required',
-            'image' => 'nullable'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
+    }
+    public function getImagePath(): string
+    {
+        if ($this->image) {
+
+            return $this->file('image')->store('service_images', 'public');
+        } else {
+            return 'medical_centre.png';
+        }
     }
 
     public function updateService(): Services
@@ -38,12 +47,12 @@ class updateServicesRequest extends FormRequest
         $service = Services::findOrFail($this->id);
         $service->update([
             'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
             'service_group_id' => $this->service_group_id,
             'descriptionEn' => $this->descriptionEn,
             'descriptionAr' => $this->descriptionAr,
-            'image' => $this->image,
+            'image' => $this->getImagePath(),
 
         ]);
 

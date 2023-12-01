@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('health_centers', function (Blueprint $table) {
             $table->id();
-            $table->string('الاسم');
-            $table->string('name');
+            $table->string('nameEn');
+            $table->string('nameAr');
             $table->string('address');
             $table->string('addressAr');
             $table->string('descriptionAr');

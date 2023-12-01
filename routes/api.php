@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\MobileSettingController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\VisitsController;
+use App\Http\Controllers\WebSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     [
         'namespace' => 'App\Http\Controllers',
-        'middleware' => 'api'
+        'middleware' => ['api', 'changeLanguage']
     ],
     function () {
 
@@ -97,17 +100,33 @@ Route::group(
         );
         Route::group(
             [
-                'prefix' => 'setting'
+                'prefix' => 'mobile/setting'
             ],
             function () {
 
-                Route::get('/', 'SettingsController@index');
-                Route::get('/{id}', 'SettingsController@getById');
-                Route::post('/', 'SettingsController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'SettingsController@update')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'SettingsController@delete')->middleware(['auth:sanctum']);
+                Route::get('/', 'MobileSettingController@index');
+                Route::get('/{id}', 'MobileSettingController@getById');
+                Route::post('/', 'MobileSettingController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'MobileSettingController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'MobileSettingController@delete')->middleware(['auth:sanctum']);
             }
         );
+
+
+        Route::group(
+            [
+                'prefix' => 'web/setting'
+            ],
+            function () {
+
+                Route::get('/', 'WebSettingController@index');
+                Route::get('/{id}', 'WebSettingController@getById');
+                Route::post('/', 'WebSettingController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'WebSettingController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'WebSettingController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
         Route::group(
             [
                 'prefix' => 'contact'
@@ -184,6 +203,19 @@ Route::group(
                 Route::post('/', 'VisitsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'VisitsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'VisitsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'insurance'
+            ],
+            function () {
+                Route::get('/', 'InsuranceController@index');
+                Route::get('/{id}', 'InsuranceController@getById');
+                Route::post('/', 'InsuranceController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'InsuranceController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'InsuranceController@delete')->middleware(['auth:sanctum']);
             }
         );
 

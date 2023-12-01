@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('social_id')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
-            $table->enum('role', ['user', 'admin'])->nullable();
+            $table->enum('role', ['user', 'admin', 'doctor'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

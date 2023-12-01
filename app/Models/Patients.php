@@ -9,7 +9,7 @@ class Patients extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['الاسم', 'name', 'email', 'المرض', 'disease', 'health_center_id', 'doctor_id'];
+    protected $fillable = ['nameAr', 'nameEn', 'email', 'diseaseEn', 'diseaseAr', 'health_center_id', 'doctor_id', 'addressEn', 'addressAr',];
 
     protected $table = 'patients';
 

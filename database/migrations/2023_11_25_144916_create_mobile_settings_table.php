@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('mobile_settings', function (Blueprint $table) {
             $table->id();
             $table->string('email');
             $table->string('name');
             $table->string('nameAr');
             $table->string('logo');
-            $table->string('favicon');
-            $table->string('footerLogo');
             $table->string('address')->nullable();
             $table->string('addressAr')->nullable();
             $table->string('phone');
+            $table->string('background1');
+            $table->string('background2');
             $table->string('phoneAr');
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('mobile_settings');
     }
 };

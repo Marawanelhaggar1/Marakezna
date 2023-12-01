@@ -20,35 +20,49 @@ class doctorsResource extends JsonResource
         $healthCenter_nameAr = null;
         $healthCenter_id = null;
         $healthCenter = HealthCenter::find($this->health_center_id);
-        $specialization = Specialization::find($this->specialization_id);
+        $specialty = Specialization::find($this->specialization_id);
         if ($healthCenter) {
-            $healthCenter_nameEn = $healthCenter->name;
-            $healthCenter_nameAr = $healthCenter->الاسم;
+            $healthCenter_nameEn = $healthCenter->nameEn;
+            $healthCenter_nameAr = $healthCenter->nameAr;
             $healthCenter_id = $healthCenter->id;
         }
 
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
-            'specialization'  => [
-                'id' => $specialization->id,
-                'specialization' => $specialization->specialization,
-                'التخصص' => $specialization->التخصص
-            ],
-            'fee' => $this->fee,
-            'address' => $this->address,
-            'title' => $this->title,
-            'rating' => $this->rating,
-            'السعر' => $this->السعر,
-            'العنوان' => $this->العنوان,
-            'اللقب' => $this->اللقب,
-            'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-            'health_center' => [
-                'id' => $healthCenter_id,
-                'nameEn' => $healthCenter_nameEn,
-                'nameAr' => $healthCenter_nameAr,
-            ]
-        ];
+        if (app()->getLocale() == 'Ar') {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameAr,
+                'specialty'  => [
+                    'id' => $specialty->id,
+                    'specialty' => $specialty->specialtyAr,
+                ],
+                'fee' => $this->feeAr,
+                'address' => $this->addressAr,
+                'title' => $this->titleAr,
+                'rating' => $this->ratingAr,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'health_center' => [
+                    'id' => $healthCenter_id,
+                    'name' => $healthCenter_nameAr,
+                ]
+            ];
+        } else {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameEn,
+                'specialty'  => [
+                    'id' => $specialty->id,
+                    'specialty' => $specialty->specialtyEn,
+                ],
+                'fee' => $this->feeEn,
+                'address' => $this->addressEn,
+                'title' => $this->titleEn,
+                'rating' => $this->ratingEn,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'health_center' => [
+                    'id' => $healthCenter_id,
+                    'name' => $healthCenter_nameEn,
+                ]
+            ];
+        }
     }
 }

@@ -9,6 +9,7 @@ class HealthCenterSchedule extends Model
 {
     use HasFactory;
     protected $fillable = [
+
         'center_id',
         'date',
         'dateAr',

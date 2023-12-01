@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\centerSchedualeResources;
+use App\Http\Resources\healthCenterResource;
 use App\Models\HealthCenterSchedule;
 use Illuminate\Http\Request;
 
@@ -11,8 +13,8 @@ class HealthCenterScheduleController extends Controller
     {
         // Retrieve all doctor schedules
         $centerSchedules = HealthCenterSchedule::all();
-
-        return response()->json($centerSchedules);
+        dd($centerSchedules);
+        return  centerSchedualeResources::collection($centerSchedules);
     }
 
     public function create(Request $request)
@@ -39,7 +41,7 @@ class HealthCenterScheduleController extends Controller
         // Retrieve a single doctor schedule
         $centerSchedule = HealthCenterSchedule::findOrFail($id);
 
-        return response()->json($centerSchedule);
+        return new centerSchedualeResources($centerSchedule);
     }
 
     public function update(Request $request, $id)
@@ -76,6 +78,6 @@ class HealthCenterScheduleController extends Controller
         // Retrieve all schedules for the specified doctor ID
         $centerSchedules = HealthCenterSchedule::where('center_id', $centerId)->get();
 
-        return response()->json($centerSchedules);
+        return centerSchedualeResources::collection($centerSchedules);
     }
 }

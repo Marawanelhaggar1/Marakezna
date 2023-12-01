@@ -14,17 +14,22 @@ class slideResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'title' => $this->title,
-            'titleAr' => $this->titleAr,
-            'sub_title' => $this->sub_title,
-            'sub_titleAr' => $this->sub_titleAr,
-            'description' => $this->description,
-            'descriptionAr' => $this->descriptionAr,
-            'image' =>
-            'http://127.0.0.1:8000/storage/' . $this->image,
-            'imageAr' =>
-            'http://127.0.0.1:8000/storage/' . $this->imageAr,
-        ];
+        if (app()->getLocale() == 'Ar') {
+            return [
+                'title' => $this->titleAr,
+                'sub_title' => $this->sub_titleAr,
+                'description' => $this->descriptionAr,
+                'image' =>
+                'http://127.0.0.1:8000/storage/' . $this->imageAr,
+            ];
+        } else {
+            return [
+                'title' => $this->title,
+                'sub_title' => $this->sub_title,
+                'description' => $this->description,
+                'image' =>
+                'http://127.0.0.1:8000/storage/' . $this->image,
+            ];
+        }
     }
 }

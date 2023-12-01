@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('diagnose')->nullable();
             $table->string('location')->nullable();
             $table->string('description')->nullable();
+            $table->enum('status', ['submitted', 'confirmed', 'done', 'cancelled', 'rescheduled']);
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('health_center_id')->nullable();
 

@@ -23,24 +23,34 @@ class createServicesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'الاسم' => 'required',
+            'nameEn' => 'required',
+            'nameAr' => 'required',
             'service_group_id' => 'nullable|exists:service_groups,id',
             'descriptionEn' => 'required',
             'descriptionAr' => 'required',
-            'image' => 'nullable'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
+    }
+
+    public function getImagePath(): string
+    {
+        if ($this->image) {
+
+            return $this->file('image')->store('service_images', 'public');
+        } else {
+            return 'medical_centre.png';
+        }
     }
 
     public function createService(): Services
     {
         return Services::create([
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
             'service_group_id' => $this->service_group_id,
             'descriptionEn' => $this->descriptionEn,
             'descriptionAr' => $this->descriptionAr,
-            'image' => $this->image,
+            'image' => $this->getImagePath(),
         ]);
     }
 }

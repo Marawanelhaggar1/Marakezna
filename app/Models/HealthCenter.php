@@ -9,7 +9,7 @@ class HealthCenter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'الاسم', 'address', 'image',  'addressAr', 'description', 'descriptionAr'];
+    protected $fillable = ['nameEn', 'nameAr', 'address', 'image',  'addressAr', 'description', 'descriptionAr'];
 
     protected $table = 'health_centers';
 

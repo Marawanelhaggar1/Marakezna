@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\doctorSchedualeResources;
 use App\Models\DoctorSchedule;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,8 @@ class DoctorScheduleController extends Controller
     {
         // Retrieve all doctor schedules
         $doctorSchedules = DoctorSchedule::all();
-
-        return response()->json($doctorSchedules);
+        return doctorSchedualeResources::collection($doctorSchedules);
     }
-
     public function create(Request $request)
     {
         // Validate the incoming request
@@ -39,7 +38,7 @@ class DoctorScheduleController extends Controller
         // Retrieve a single doctor schedule
         $doctorSchedule = DoctorSchedule::findOrFail($id);
 
-        return response()->json($doctorSchedule);
+        return new doctorSchedualeResources($doctorSchedule);
     }
 
     public function getSchedulesByDoctor($doctorId)
@@ -47,7 +46,7 @@ class DoctorScheduleController extends Controller
         // Retrieve all schedules for the specified doctor ID
         $doctorSchedules = DoctorSchedule::where('doctor_id', $doctorId)->get();
 
-        return response()->json($doctorSchedules);
+        return doctorSchedualeResources::collection($doctorSchedules);
     }
 
 

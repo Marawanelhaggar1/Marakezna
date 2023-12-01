@@ -16,20 +16,35 @@ class patientsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
+        $healthCenter_nameEn = null;
+        $healthCenter_nameAr = null;
         $doctor = Doctors::findOrFail($this->doctor_id);
-        $healthCenter = HealthCenter::findOrFail($this->health_center_id);
-
-        return [
-            'id'=>$this->id,
-            'name'=>$this->name,
-            'الاسم'=>$this->الاسم,
-            'disease'=>$this->disease,
-            'المرض'=>$this->المرض,
-            'address'=>$this->address,
-            'email'=>$this->email,
-            'doctor'=>$doctor->name,
-            'health_center'=>$healthCenter->name,
-        ];
+        $healthCenter = HealthCenter::find($this->health_center_id);
+        if ($healthCenter) {
+            $healthCenter_nameEn = $healthCenter->nameEn;
+            $healthCenter_nameAr = $healthCenter->nameAr;
+            $healthCenter_id = $healthCenter->id;
+        }
+        if (app()->getLocale() == 'Ar') {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameAr,
+                'disease' => $this->diseaseAr,
+                'address' => $this->addressAr,
+                'email' => $this->email,
+                'doctor' => $doctor->nameAr,
+                'health_center' => $healthCenter_nameAr,
+            ];
+        } else {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameEn,
+                'disease' => $this->diseaseEn,
+                'address' => $this->addressEn,
+                'email' => $this->email,
+                'doctor' => $doctor->nameEn,
+                'health_center' => $healthCenter_nameEn,
+            ];
+        }
     }
 }

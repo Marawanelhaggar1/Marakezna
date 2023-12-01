@@ -24,8 +24,8 @@ class createSpecializationRequest extends FormRequest
     {
         return [
 
-            'specialization' => 'required',
-            'التخصص' => 'required',
+            'specialtyEn' => 'required',
+            'specialtyAr' => 'required',
             'icon' => 'nullable',
         ];
     }
@@ -33,8 +33,8 @@ class createSpecializationRequest extends FormRequest
     public function createSpecialization(): Specialization
     {
         return Specialization::create([
-            'specialization' => $this->specialization,
-            'التخصص' => $this->التخصص,
+            'specialtyEn' => $this->specialtyEn,
+            'specialtyAr' => $this->specialtyAr,
             'icon' => $this->icon
         ]);
     }

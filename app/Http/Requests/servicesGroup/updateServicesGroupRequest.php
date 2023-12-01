@@ -24,8 +24,8 @@ class updateServicesGroupRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:service_groups,id',
-            'name' => 'required|unique:service_groups,name,' . $this->id,
-            'الاسم' => 'required',
+            'nameEn' => 'required|unique:service_groups,name,' . $this->id,
+            'nameAr' => 'required',
         ];
     }
 
@@ -34,8 +34,8 @@ class updateServicesGroupRequest extends FormRequest
         $serviceGroup = ServiceGroup::findOrFail($this->id);
         $serviceGroup->update([
             'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
+            'nameAr' => $this->nameAr,
+            'nameEn' => $this->nameEn,
         ]);
 
         return $serviceGroup;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\settings;
+namespace App\Http\Requests\WebSetting;
 
-use App\Models\Settings;
+use App\Models\WebSetting;
 use Illuminate\Foundation\Http\FormRequest;
 
-class createSettingRequest extends FormRequest
+class createWebSettingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,18 +26,17 @@ class createSettingRequest extends FormRequest
             'email' => 'required',
             'name' => 'required',
             'nameAr' => 'required',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'mobile_background' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'footerLogo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'address' => 'nullable',
-            'addressAr' => 'nullable',
             'phone' => 'required',
             'phoneAr' => 'required',
-            'linkedin' => 'nullable',
+            'address' => 'nullable',
+            'addressAr' => 'nullable',
+            'x' => 'nullable',
             'facebook' => 'nullable',
             'instagram' => 'nullable',
-            'x' => 'nullable',
+            'linkedin' => 'nullable',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'footerLogo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
@@ -46,9 +45,9 @@ class createSettingRequest extends FormRequest
         return $this->file('logo')->store('setting_images', 'public');
     }
 
-    public function getMobilePath(): string
+    public function getFooterLogoPath(): string
     {
-        return $this->file('mobile_background')->store('setting_images', 'public');
+        return $this->file('footerLogo')->store('setting_images', 'public');
     }
 
     public function getFaviconPath(): string
@@ -56,29 +55,23 @@ class createSettingRequest extends FormRequest
         return $this->file('favicon')->store('setting_images', 'public');
     }
 
-    public function getFooterLogoPath(): string
+    public function createWebSetting(): WebSetting
     {
-        return $this->file('footerLogo')->store('setting_images', 'public');
-    }
-
-    public function createSetting(): Settings
-    {
-        return Settings::create([
+        return WebSetting::create([
             'email' => $this->email,
             'name' => $this->name,
             'nameAr' => $this->nameAr,
-            'logo' => $this->getLogoPath(),
-            'favicon' => $this->getFaviconPath(),
-            'footerLogo' => $this->getFooterLogoPath(),
-            'mobile_background' => $this->getMobilePath(),
-            'address' => $this->address,
-            'addressAr' => $this->addressAr,
             'phone' => $this->phone,
             'phoneAr' => $this->phoneAr,
-            'instagram' => $this->instagram,
+            'address' => $this->address,
+            'addressAr' => $this->addressAr,
+            'x' => $this->x,
             'facebook' => $this->facebook,
             'linkedin' => $this->linkedin,
-            'x' => $this->x,
+            'instagram' => $this->instagram,
+            'logo' => $this->getLogoPath(),
+            'favicon' => $this->getFaviconPath(),
+            'footerLogo' => $this->getFooterLogoPath()
         ]);
     }
 }

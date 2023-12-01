@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class specializationResource extends JsonResource
+class insuranceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,19 +14,19 @@ class specializationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         if (app()->getLocale() == 'Ar') {
-
             return [
                 'id' => $this->id,
-                'specialty' => $this->specialtyAr,
-                'icon' => $this->icon
+                'name' => $this->nameAr,
+                'percentage' => $this->percentageAr,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image
             ];
         } else {
             return [
                 'id' => $this->id,
-                'specialty' => $this->specialtyEn,
-                'icon' => $this->icon
+                'name' => $this->name,
+                'percentage' => $this->percentage,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image
             ];
         }
     }

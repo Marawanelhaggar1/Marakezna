@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('الاسم');
-            $table->string('name');
-            $table->integer('fee');
-            $table->integer('السعر');
-            $table->integer('rating');
-            $table->string('title');
-            $table->string('اللقب');
+            $table->string('nameAr');
+            $table->string('nameEn');
+            $table->integer('feeEn');
+            $table->string('feeAr');
+            $table->string('ratingAr');
+            $table->integer('ratingEn');
+            $table->string('titleEn');
+            $table->string('titleAr');
             $table->string('image')->nullable();
-            $table->string('address')->nullable();
-            $table->string('العنوان')->nullable();
+            $table->string('addressEn')->nullable();
+            $table->string('addressAr')->nullable();
             $table->unsignedBigInteger('health_center_id')->nullable();
             $table->unsignedBigInteger('specialization_id');
 

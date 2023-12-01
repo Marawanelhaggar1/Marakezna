@@ -24,7 +24,7 @@ class updateHealthCenterRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:health_centers,id',
-            'name' => 'required|unique:health_centers,name,' . $this->id,
+            'nameEn' => 'required|unique:health_centers,name,' . $this->id,
             'الاسم' => 'required',
             'address' => 'required',
             'image' => 'nullable',
@@ -44,8 +44,8 @@ class updateHealthCenterRequest extends FormRequest
         $health = HealthCenter::findOrFail($this->id);
         $health->update([
             'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
             'address' => $this->address,
             'image' => $this->getImagePath(),
             'addressAr' => $this->addressAr,

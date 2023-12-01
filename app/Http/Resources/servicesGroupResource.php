@@ -14,11 +14,17 @@ class servicesGroupResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
 
-        ];
+        if (app()->getLocale() == 'Ar') {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameAr,
+            ];
+        } else {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameEn,
+            ];
+        }
     }
 }

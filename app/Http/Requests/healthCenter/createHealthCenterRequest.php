@@ -23,8 +23,8 @@ class createHealthCenterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'الاسم' => 'required',
+            'nameEn' => 'required',
+            'nameAr' => 'required',
             'address' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
@@ -40,8 +40,8 @@ class createHealthCenterRequest extends FormRequest
     public function createHealthCenter(): HealthCenter
     {
         return HealthCenter::create([
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
             'address' => $this->address,
             'image' => $this->getImagePath(),
             'addressAr' => $this->addressAr,

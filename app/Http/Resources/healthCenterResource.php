@@ -14,18 +14,22 @@ class healthCenterResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
-            'address' => $this->address,
-            'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-            'addressAr' => $this->addressAr,
-            'description' => $this->description,
-            'descriptionAr' => $this->descriptionAr
-
-        ];
+        if (app()->getLocale() == 'Ar') {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameAr,
+                'address' => $this->addressAr,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'description' => $this->descriptionAr,
+            ];
+        } else {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameEn,
+                'address' => $this->address,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'description' => $this->description,
+            ];
+        }
     }
 }

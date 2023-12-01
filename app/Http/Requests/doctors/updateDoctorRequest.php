@@ -24,21 +24,28 @@ class updateDoctorRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:doctors,id',
-            'name' => 'required|unique:doctors,name,' . $this->id,
-            'الاسم' => 'required',
-            'specialization_id' => 'required|exists:specializations,id',
-            'fee' => 'required|integer',
-            'address' => 'nullable',
-            'image' => 'nullable',
+            'nameEn' =>
+            'required|unique:doctors,name,' . $this->id,
+            'nameAr' =>
+            'required|unique:doctors,name,' . $this->id,
+            'feeEn' => 'required|integer',
+            'feeAr' => 'required',
+            'addressEn' => 'nullable',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'titleEn' => 'required',
+            'titleAr' => 'required',
+            'addressAr' => 'nullable',
+            'ratingEn' => 'required|integer',
+            'ratingAr' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
-            'ساعات_العمل' => 'required',
-            'اللقب' => 'required',
-            'title' => 'required',
-            'العنوان' => 'required',
-            'rating' => 'required|integer',
-            'السعر' => 'required|integer',
+            'specialization_id' => 'required|exists:specializations,id',
 
         ];
+    }
+
+    public function getImagePath(): string
+    {
+        return $this->file('image')->store('doctors_images', 'public');
     }
 
     public function updateDoctor(): Doctors
@@ -47,18 +54,19 @@ class updateDoctorRequest extends FormRequest
 
         $doctor->update([
             'id' => $this->id,
-            'name' => $this->name,
-            'الاسم' => $this->الاسم,
-            'specialization_id' => $this->specialization_id,
-            'fee' => $this->fee,
-            'address' => $this->address,
-            'image' => $this->image,
+            'nameEn' => $this->nameEn,
+            'nameAr' => $this->nameAr,
+            'feeAr' => $this->feeAr,
+            'feeEn' => $this->feeEn,
+            'addressEn' => $this->addressEn,
+            'addressAr' => $this->addressAr,
+            'image' => $this->getImagePath(),
+            'titleEn' => $this->titleEn,
+            'titleAr' => $this->titleAr,
+            'ratingEn' => $this->ratingEn,
+            'ratingAr' => $this->ratingAr,
             'health_center_id' => $this->health_center_id,
-            'title' => $this->title,
-            'العنوان' => $this->العنوان,
-            'اللقب' => $this->اللقب,
-            'rating' => $this->rating,
-            'السعر' => $this->السعر,
+            'specialization_id' => $this->specialization_id,
         ]);
 
         return $doctor;

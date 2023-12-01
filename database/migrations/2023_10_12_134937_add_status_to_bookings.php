@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('bookings', function ($table) {
-            $table->enum('status', ['submitted', 'confirmed', 'done', 'cancelled', 'rescheduled']);
         });
     }
 

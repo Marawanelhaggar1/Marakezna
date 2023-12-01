@@ -24,8 +24,8 @@ class updateSpecializationRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:specializations,id',
-            'specialization' => 'required|unique:specializations,name,' . $this->id,
-            'التخصص' => 'required',
+            'specialtyEn' => 'required|unique:specializations,name,' . $this->id,
+            'specialtyAr' => 'required',
             'icon' => 'nullable',
 
         ];
@@ -36,8 +36,8 @@ class updateSpecializationRequest extends FormRequest
         $specialization = Specialization::findOrFail($this->id);
         $specialization->update([
             'id' => $this->id,
-            'specialization' => $this->specialization,
-            'التخصص' => $this->التخصص,
+            'specialtyEn' => $this->specialtyEn,
+            'specialtyAr' => $this->specialtyAr,
             'icon' => $this->icon
 
         ]);
