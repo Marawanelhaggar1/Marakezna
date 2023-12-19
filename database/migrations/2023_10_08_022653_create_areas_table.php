@@ -11,19 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('health_centers', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id();
             $table->string('nameEn');
             $table->string('nameAr');
-            $table->string('address');
-            $table->string('addressAr');
-            $table->string('descriptionAr');
-            $table->unsignedBigInteger(
-                'area_id'
-            );
-            $table->string('description');
-            $table->string('image')->nullable();
-            $table->foreign('area_id')->references('id')->on('areas');
             $table->timestamps();
         });
     }
@@ -33,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('health_centers');
+        Schema::dropIfExists('areas');
     }
 };

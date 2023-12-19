@@ -36,8 +36,9 @@ class bookingResource extends JsonResource
             'description' => $this->description,
             'doctor' => [
                 'id' => $this->doctor_id,
-                'name' => $doctor->name,
+                'name' => $doctor->nameEn,
             ],
+            'payment' => $this->payment,
             'health_center' => [
                 'id' => $healthCenter_id,
                 'nameEn' => $healthCenter_nameEn,

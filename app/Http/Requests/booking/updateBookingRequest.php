@@ -12,7 +12,7 @@ class updateBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->isAdmin();
+        return auth()->user()->isUser();
     }
 
     /**
@@ -33,6 +33,8 @@ class updateBookingRequest extends FormRequest
             'doctor_id' => 'required|exists:doctors,id',
             'status' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
+            'payment' => 'nullable'
+
         ];
     }
 
@@ -49,7 +51,8 @@ class updateBookingRequest extends FormRequest
             'status' => $this->status,
             'location' => $this->location,
             'description' => $this->description,
-            'health_center_id' => $this->health_center_id,
+            'health_center_id' => $this->health_center_id, 'payment' => $this->payment,
+
         ]);
         return $booking;
     }

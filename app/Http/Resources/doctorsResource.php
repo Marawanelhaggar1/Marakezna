@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\DoctorSchedule;
 use App\Models\HealthCenter;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
@@ -26,6 +27,10 @@ class doctorsResource extends JsonResource
             $healthCenter_nameAr = $healthCenter->nameAr;
             $healthCenter_id = $healthCenter->id;
         }
+        $doctorSchedule = [];
+        $doctorSchedule = DoctorSchedule::where('doctor_id', $this->id)->get();
+        $doctorSchedule = doctorSchedualeResources::collection($doctorSchedule);
+
 
         if (app()->getLocale() == 'Ar') {
             return [
@@ -43,7 +48,8 @@ class doctorsResource extends JsonResource
                 'health_center' => [
                     'id' => $healthCenter_id,
                     'name' => $healthCenter_nameAr,
-                ]
+                ],
+                'doctorSchedule' => $doctorSchedule
             ];
         } else {
             return [
@@ -61,7 +67,9 @@ class doctorsResource extends JsonResource
                 'health_center' => [
                     'id' => $healthCenter_id,
                     'name' => $healthCenter_nameEn,
-                ]
+                ],
+                'doctorSchedule' => $doctorSchedule
+
             ];
         }
     }

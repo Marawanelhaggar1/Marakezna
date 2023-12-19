@@ -43,4 +43,10 @@ class HealthCenterController extends Controller
             'message' => 'Successfully deleted health Center'
         ]);
     }
+
+    public function getByArea($id)
+    {
+        $center = HealthCenter::Where('area_id', $id)->get();
+        return healthCenterResource::collection($center);
+    }
 }

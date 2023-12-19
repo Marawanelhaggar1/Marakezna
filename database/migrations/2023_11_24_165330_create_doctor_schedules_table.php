@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('doctor_schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('doctor_id');
-            $table->date('date');
+            $table->string('date');
             $table->string('dateAr');
             $table->time('start_time');
             $table->string('start_timeAr');

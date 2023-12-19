@@ -28,6 +28,7 @@ class createHealthCenterRequest extends FormRequest
             'address' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
+            'area_id' => 'required|exists:areas,id',
             'description' => 'required',
             'descriptionAr' => 'required',
         ];
@@ -46,7 +47,8 @@ class createHealthCenterRequest extends FormRequest
             'image' => $this->getImagePath(),
             'addressAr' => $this->addressAr,
             'description' => $this->description,
-            'descriptionAr' => $this->descriptionAr
+            'descriptionAr' => $this->descriptionAr,
+            'area_id' => $this->area_id
         ]);
     }
 }

@@ -9,9 +9,14 @@ class HealthCenter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nameEn', 'nameAr', 'address', 'image',  'addressAr', 'description', 'descriptionAr'];
+    protected $fillable = ['nameEn', 'nameAr', 'area_id', 'address', 'image',  'addressAr', 'description', 'descriptionAr'];
 
     protected $table = 'health_centers';
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 
     public function doctors()
     {

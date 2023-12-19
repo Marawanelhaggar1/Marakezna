@@ -30,7 +30,9 @@ class updateHealthCenterRequest extends FormRequest
             'image' => 'nullable',
             'addressAr' => 'required',
             'description' => 'required',
-            'descriptionAr' => 'required'
+            'descriptionAr' => 'required',
+            'area_id' => 'required|exists:areas,id',
+
         ];
     }
 
@@ -50,7 +52,9 @@ class updateHealthCenterRequest extends FormRequest
             'image' => $this->getImagePath(),
             'addressAr' => $this->addressAr,
             'description' => $this->description,
-            'descriptionAr' => $this->descriptionAr
+            'descriptionAr' => $this->descriptionAr,
+            'area_id' => $this->area_id
+
         ]);
 
         return $health;

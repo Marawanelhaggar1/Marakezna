@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MobileSettingController;
@@ -75,11 +76,26 @@ Route::group(
 
         Route::group(
             [
+                'prefix' => 'area'
+            ],
+
+            function () {
+                Route::get('/', 'AreaController@index');
+                Route::get('/{id}', 'AreaController@getById');
+                Route::post('/', 'AreaController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'AreaController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'AreaController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
                 'prefix' => 'center'
             ],
             function () {
                 Route::get('/', 'HealthCenterController@index');
                 Route::get('/{id}', 'HealthCenterController@getById');
+                Route::get('/area/{id}', 'HealthCenterController@getByArea');
                 Route::post('/', 'HealthCenterController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'HealthCenterController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'HealthCenterController@delete')->middleware(['auth:sanctum']);
@@ -93,6 +109,8 @@ Route::group(
             function () {
                 Route::get('/', 'DoctorsController@index');
                 Route::get('/{id}', 'DoctorsController@getById');
+                Route::get('/specialty/{id}', 'DoctorsController@getDoctorBySpecialty');
+                Route::get('/center/{id}', 'DoctorsController@getDoctorByCenter');
                 Route::post('/', 'DoctorsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'DoctorsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'DoctorsController@delete')->middleware(['auth:sanctum']);
@@ -187,6 +205,8 @@ Route::group(
             function () {
                 Route::get('/', 'SpecializationController@index');
                 Route::get('/{id}', 'SpecializationController@getById');
+                Route::post('search/specialization', 'DoctorsController@search');
+
                 Route::post('/', 'SpecializationController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'SpecializationController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'SpecializationController@delete')->middleware(['auth:sanctum']);

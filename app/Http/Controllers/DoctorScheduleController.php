@@ -19,7 +19,7 @@ class DoctorScheduleController extends Controller
         // Validate the incoming request
         $request->validate([
             'doctor_id' => 'required|exists:doctors,id',
-            'date' => 'required|date|after_or_equal:today',
+            'date' => 'required',
             'dateAr' => 'required',
             'start_timeAr' => 'required',
             'end_timeAr' => 'required',
@@ -55,7 +55,7 @@ class DoctorScheduleController extends Controller
         // Validate the incoming request
         $request->validate([
             'doctor_id' => 'exists:doctors,id',
-            'date' => 'date',
+            'date' => 'required',
             'dateAr' => 'required',
             'start_timeAr' => 'required',
             'end_timeAr' => 'required',
