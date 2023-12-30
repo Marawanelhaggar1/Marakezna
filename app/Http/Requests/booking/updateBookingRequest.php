@@ -29,13 +29,39 @@ class updateBookingRequest extends FormRequest
             'diagnose' => 'nullable',
             'location' => 'nullable',
             'description' => 'nullable',
-            'date' => 'required|date',
+            'date' => 'required',
             'doctor_id' => 'required|exists:doctors,id',
             'status' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'payment' => 'nullable'
 
         ];
+    }
+
+    public function getTheDate($targetDay)
+    {
+        // Validate the target day input
+        $validDays = app()->getLocale() == 'Ar'
+            ? ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت']
+            : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        if (!in_array($targetDay, $validDays)) {
+            dd('Invalid target day. Please provide a valid day name (e.g., Sunday, Monday, etc.).');
+            // return;
+        }
+
+        // Get the current date
+        $today = now();
+
+        // Calculate the next occurrence of the target day
+        $targetIndex = array_search($targetDay, $validDays);
+        $nextOccurrence = $today->copy();
+        $nextOccurrence->addDays(($targetIndex + 7 - $today->dayOfWeek) % 7);
+
+        // Format the date as "dd/mm/yyyy"
+        $formattedDate = $nextOccurrence->format('Y/m/d');
+        // $this->schedule['date'] = $formattedDate;
+        return $formattedDate;
     }
 
     public function updateBooking(): Bookings
@@ -46,7 +72,7 @@ class updateBookingRequest extends FormRequest
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
             'diagnose' => $this->diagnose,
-            'date' => $this->date,
+            'date' => $this->getTheDate($this->date),
             'doctor_id' => $this->doctor_id,
             'status' => $this->status,
             'location' => $this->location,

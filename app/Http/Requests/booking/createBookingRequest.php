@@ -25,7 +25,7 @@ class createBookingRequest extends FormRequest
         return [
             'patient_name' => 'required',
             'phone' => 'required',
-            'date' => 'required|date',
+            'date' => 'required',
             'diagnose' => 'nullable',
             'location' => 'nullable',
             'description' => 'nullable',
@@ -36,12 +36,40 @@ class createBookingRequest extends FormRequest
         ];
     }
 
+    public function getTheDate($targetDay)
+    {
+        // Validate the target day input
+        $validDays = app()->getLocale() == 'Ar'
+            ? ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت']
+            : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        if (!in_array($targetDay, $validDays)) {
+            dd('Invalid target day. Please provide a valid day name (e.g., Sunday, Monday, etc.).');
+            // return;
+        }
+
+        // Get the current date
+        $today = now();
+
+        // Calculate the next occurrence of the target day
+        $targetIndex = array_search($targetDay, $validDays);
+        $nextOccurrence = $today->copy();
+        $nextOccurrence->addDays(($targetIndex + 7 - $today->dayOfWeek) % 7);
+
+        // Format the date as "dd/mm/yyyy"
+        $formattedDate = $nextOccurrence->format('Y/m/d');
+        // $this->schedule['date'] = $formattedDate;
+        return $formattedDate;
+    }
+
     public function createBooking(): Bookings
     {
+
+        // dd($this->getTheDate($this->date));
         return Bookings::create([
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
-            'date' => $this->date,
+            'date' => $this->getTheDate($this->date),
             'diagnose' => $this->diagnose,
             'doctor_id' => $this->doctor_id,
             'health_center_id' => $this->health_center_id,

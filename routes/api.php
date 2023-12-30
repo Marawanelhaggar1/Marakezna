@@ -111,6 +111,7 @@ Route::group(
                 Route::get('/{id}', 'DoctorsController@getById');
                 Route::get('/specialty/{id}', 'DoctorsController@getDoctorBySpecialty');
                 Route::get('/center/{id}', 'DoctorsController@getDoctorByCenter');
+                Route::get('/{center_id}/{specialty_id}', 'DoctorsController@getDoctorByCenterAndSpecialty');
                 Route::post('/', 'DoctorsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'DoctorsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'DoctorsController@delete')->middleware(['auth:sanctum']);
@@ -264,6 +265,13 @@ Route::group(
                 Route::post('/', 'HealthCenterScheduleController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'HealthCenterScheduleController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'HealthCenterScheduleController@destroy')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'search'],
+            function () {
+                Route::post('/', 'DoctorsController@search');
             }
         );
     }

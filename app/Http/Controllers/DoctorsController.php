@@ -60,6 +60,12 @@ class DoctorsController extends Controller
         return doctorsResource::collection($doctors);
     }
 
+    public function getDoctorByCenterAndSpecialty($center_id, $specialty_id)
+    {
+        $doctors = Doctors::where('health_center_id', $center_id)->where('specialization_id', $specialty_id)
+            ->get();
+        return doctorsResource::collection($doctors);
+    }
 
     public function search(Request $request)
     {
