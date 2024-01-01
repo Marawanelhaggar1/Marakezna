@@ -33,7 +33,8 @@ class updateBookingRequest extends FormRequest
             'doctor_id' => 'required|exists:doctors,id',
             'status' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
-            'payment' => 'nullable'
+            'payment' => 'nullable', 'user_id' => 'required|exists:users,id',
+            'email' => 'required|email',
 
         ];
     }
@@ -41,20 +42,18 @@ class updateBookingRequest extends FormRequest
     public function getTheDate($targetDay)
     {
         // Validate the target day input
-        $validDays = app()->getLocale() == 'Ar'
-            ? ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت']
-            : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        $validDaysAr = ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت'];
+        $validDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        if (!in_array($targetDay, $validDays)) {
+        if (!in_array($targetDay, $validDays) && !in_array($targetDay, $validDaysAr)) {
             dd('Invalid target day. Please provide a valid day name (e.g., Sunday, Monday, etc.).');
-            // return;
         }
 
         // Get the current date
         $today = now();
 
         // Calculate the next occurrence of the target day
-        $targetIndex = array_search($targetDay, $validDays);
+        $targetIndex = array_search($targetDay, $validDays) || array_search($targetDay, $validDaysAr);
         $nextOccurrence = $today->copy();
         $nextOccurrence->addDays(($targetIndex + 7 - $today->dayOfWeek) % 7);
 
@@ -63,7 +62,6 @@ class updateBookingRequest extends FormRequest
         // $this->schedule['date'] = $formattedDate;
         return $formattedDate;
     }
-
     public function updateBooking(): Bookings
     {
         $booking = Bookings::findOrFail($this->id);
@@ -77,7 +75,10 @@ class updateBookingRequest extends FormRequest
             'status' => $this->status,
             'location' => $this->location,
             'description' => $this->description,
-            'health_center_id' => $this->health_center_id, 'payment' => $this->payment,
+            'health_center_id' => $this->health_center_id,
+            'payment' => $this->payment,
+            'user_id' => $this->user_id,
+            'email' => $this->email,
 
         ]);
         return $booking;

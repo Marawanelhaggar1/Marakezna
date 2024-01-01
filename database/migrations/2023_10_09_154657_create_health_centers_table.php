@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('addressAr');
             $table->string('descriptionAr');
+            $table->boolean('scan');
+            $table->boolean('lab');
             $table->unsignedBigInteger(
                 'area_id'
             );

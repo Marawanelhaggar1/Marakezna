@@ -32,6 +32,8 @@ class createBookingRequest extends FormRequest
             'doctor_id' => 'required|exists:doctors,id',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'status' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'email' => 'required|email',
             'payment' => 'nullable'
         ];
     }
@@ -39,20 +41,18 @@ class createBookingRequest extends FormRequest
     public function getTheDate($targetDay)
     {
         // Validate the target day input
-        $validDays = app()->getLocale() == 'Ar'
-            ? ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت']
-            : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        $validDaysAr = ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت'];
+        $validDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-        if (!in_array($targetDay, $validDays)) {
+        if (!in_array($targetDay, $validDays) && !in_array($targetDay, $validDaysAr)) {
             dd('Invalid target day. Please provide a valid day name (e.g., Sunday, Monday, etc.).');
-            // return;
         }
 
         // Get the current date
         $today = now();
 
         // Calculate the next occurrence of the target day
-        $targetIndex = array_search($targetDay, $validDays);
+        $targetIndex = array_search($targetDay, $validDays) || array_search($targetDay, $validDaysAr);
         $nextOccurrence = $today->copy();
         $nextOccurrence->addDays(($targetIndex + 7 - $today->dayOfWeek) % 7);
 
@@ -69,6 +69,8 @@ class createBookingRequest extends FormRequest
         return Bookings::create([
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
+            'user_id' => $this->user_id,
+            'email' => $this->email,
             'date' => $this->getTheDate($this->date),
             'diagnose' => $this->diagnose,
             'doctor_id' => $this->doctor_id,

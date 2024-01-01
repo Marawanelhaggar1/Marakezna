@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use Illuminate\Support\Str;
 use App\Http\Requests\auth\loginRequest;
 use App\Http\Requests\auth\registerRequest;
+use App\Http\Requests\auth\updateProfile;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -41,6 +42,16 @@ class auth extends Controller
         ]);
     }
 
+
+    public function updateProfile(updateProfile $request)
+    {
+        $user = $request->updateUserProfile();
+        return response()->json([
+            'success' => true,
+            'message' => 'Successfully updated user',
+            'data' => $user
+        ]);
+    }
 
     // public function forgotPassword(Request $request)
     // {

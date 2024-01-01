@@ -33,6 +33,7 @@ class bookingResource extends JsonResource
             'phone' => $this->phone,
             'date' => $this->date,
             'location' => $this->location,
+            'email' => $this->email,
             'description' => $this->description,
             'doctor' => [
                 'id' => $this->doctor_id,

@@ -27,7 +27,19 @@ class createSpecializationRequest extends FormRequest
             'specialtyEn' => 'required',
             'specialtyAr' => 'required',
             'icon' => 'nullable',
+            'image' => 'nullable',
         ];
+    }
+
+
+    public function getImagePath()
+    {
+        if ($this->image) {
+
+            return $this->file('image')->store('service_images', 'public');
+        } else {
+            return null;
+        }
     }
 
     public function createSpecialization(): Specialization
@@ -35,7 +47,8 @@ class createSpecializationRequest extends FormRequest
         return Specialization::create([
             'specialtyEn' => $this->specialtyEn,
             'specialtyAr' => $this->specialtyAr,
-            'icon' => $this->icon
+            'icon' => $this->icon,
+            'image' => $this->getImagePath(),
         ]);
     }
 }

@@ -38,8 +38,7 @@ Route::group(
 
                 Route::post('/register', 'auth@register');
                 Route::post('/login', 'auth@login');
-                // Route::post('/reset-password', 'auth@forgetPassword');
-                // Route::post('/forgot-password', 'auth@sendResetLinkEmail');
+                Route::put('/update/profile', 'auth@updateProfile');
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
         );
@@ -96,6 +95,8 @@ Route::group(
                 Route::get('/', 'HealthCenterController@index');
                 Route::get('/{id}', 'HealthCenterController@getById');
                 Route::get('/area/{id}', 'HealthCenterController@getByArea');
+                Route::get('/category/lab', 'HealthCenterController@getLabs');
+                Route::get('/category/scan', 'HealthCenterController@getScans');
                 Route::post('/', 'HealthCenterController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'HealthCenterController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'HealthCenterController@delete')->middleware(['auth:sanctum']);
@@ -193,6 +194,7 @@ Route::group(
             function () {
                 Route::get('/', 'BookingsController@index');
                 Route::get('/{id}', 'BookingsController@getById');
+                Route::get('/user/{id}', 'BookingsController@getByUserId')->middleware(['auth:sanctum']);;
                 Route::post('/', 'BookingsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'BookingsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'BookingsController@delete')->middleware(['auth:sanctum']);

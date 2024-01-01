@@ -32,11 +32,23 @@ class registerRequest extends FormRequest
             'password' => 'required|string|min:8|confirmed',
             'mobile' => 'nullable|unique:users,mobile,',
             'gender' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|date',
             'social_id' => 'nullable',
             'role' => 'required'
 
         ];
+    }
+
+
+    public function getImagePath()
+    {
+        if ($this->image) {
+
+            return $this->file('image')->store('user_images', 'public');
+        } else {
+            return null;
+        }
     }
 
     public function registerUser()
@@ -50,7 +62,8 @@ class registerRequest extends FormRequest
             'social_id' => $this->social_id,
             'mobile' => $this->mobile,
             'date_of_birth' => $this->date_of_birth,
-            'role' => $this->role
+            'role' => $this->role,
+            'image' => $this->getImagePath()
         ]);
 
         // Generate a token for the user

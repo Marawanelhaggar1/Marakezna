@@ -25,6 +25,12 @@ class servicesResource extends JsonResource
             $serviceGroup_Ar = $serviceGroup->nameAr;
         }
 
+        if ($this->image) {
+            $image = 'http://127.0.0.1:8000/storage/' . $this->image;
+        } else {
+            $image = null;
+        }
+
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
@@ -34,7 +40,7 @@ class servicesResource extends JsonResource
                     'name' => $serviceGroup_Ar,
                 ],
                 'description' => $this->descriptionAr,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'image' => $image,
             ];
         } else {
             return [
@@ -45,7 +51,7 @@ class servicesResource extends JsonResource
                     'name' => $serviceGroup_En,
                 ],
                 'description' => $this->descriptionEn,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'image' => $image,
             ];
         }
     }

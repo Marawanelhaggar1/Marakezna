@@ -43,4 +43,10 @@ class BookingsController extends Controller
             'message' => 'Successfully deleted health Center'
         ]);
     }
+
+    public function getByUserId($id)
+    {
+        $bookings = Bookings::where('user_id', $id)->get();
+        return bookingResource::collection($bookings);
+    }
 }

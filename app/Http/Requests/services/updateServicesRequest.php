@@ -32,13 +32,13 @@ class updateServicesRequest extends FormRequest
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
-    public function getImagePath(): string
+    public function getImagePath()
     {
         if ($this->image) {
 
             return $this->file('image')->store('service_images', 'public');
         } else {
-            return 'medical_centre.png';
+            return null;
         }
     }
 

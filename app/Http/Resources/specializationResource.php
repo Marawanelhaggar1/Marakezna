@@ -15,18 +15,28 @@ class specializationResource extends JsonResource
     public function toArray(Request $request): array
     {
 
+        if ($this->image) {
+            $image = 'http://127.0.0.1:8000/storage/' . $this->image;
+        } else {
+            $image = null;
+        }
+
         if (app()->getLocale() == 'Ar') {
 
             return [
                 'id' => $this->id,
                 'specialty' => $this->specialtyAr,
-                'icon' => $this->icon
+                'icon' => $this->icon,
+                'image' => $image,
+
             ];
         } else {
             return [
                 'id' => $this->id,
                 'specialty' => $this->specialtyEn,
-                'icon' => $this->icon
+                'icon' => $this->icon,
+                'image' => $image,
+
             ];
         }
     }

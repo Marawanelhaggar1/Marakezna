@@ -26,7 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'social_id',
-        'role'
+        'role',
+        'image',
     ];
 
     /**
@@ -60,5 +61,10 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role == 'admin' || 'user' || 'doctor';
+    }
+
+    public function booking()
+    {
+        return $this->hasMany(Bookings::class);
     }
 }

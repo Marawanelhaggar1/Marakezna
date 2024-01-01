@@ -27,9 +27,21 @@ class updateSpecializationRequest extends FormRequest
             'specialtyEn' => 'required|unique:specializations,name,' . $this->id,
             'specialtyAr' => 'required',
             'icon' => 'nullable',
-
+            'image' => 'nullable',
         ];
     }
+
+    public function getImagePath()
+    {
+        if ($this->image) {
+
+            return $this->file('image')->store('service_images', 'public');
+        } else {
+            return null;
+        }
+    }
+
+
 
     public function updateSpecialization(): Specialization
     {
@@ -38,7 +50,8 @@ class updateSpecializationRequest extends FormRequest
             'id' => $this->id,
             'specialtyEn' => $this->specialtyEn,
             'specialtyAr' => $this->specialtyAr,
-            'icon' => $this->icon
+            'icon' => $this->icon, 'image' => $this->getImagePath(),
+
 
         ]);
 
