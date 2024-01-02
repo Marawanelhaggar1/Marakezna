@@ -37,6 +37,7 @@ class updateDoctorRequest extends FormRequest
             'addressAr' => 'nullable',
             'ratingEn' => 'required|integer',
             'ratingAr' => 'required',
+            'waiting' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
 
@@ -65,6 +66,7 @@ class updateDoctorRequest extends FormRequest
             'titleAr' => $this->titleAr,
             'ratingEn' => $this->ratingEn,
             'ratingAr' => $this->ratingAr,
+            'waiting' => $this->waiting,
             'health_center_id' => $this->health_center_id,
             'specialization_id' => $this->specialization_id,
         ]);

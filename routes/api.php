@@ -96,7 +96,9 @@ Route::group(
                 Route::get('/{id}', 'HealthCenterController@getById');
                 Route::get('/area/{id}', 'HealthCenterController@getByArea');
                 Route::get('/category/lab', 'HealthCenterController@getLabs');
+                Route::get('/category/lab/area/{id}', 'HealthCenterController@getLabsByArea');
                 Route::get('/category/scan', 'HealthCenterController@getScans');
+                Route::get('/category/scan/area/{id}', 'HealthCenterController@getScansByArea');
                 Route::post('/', 'HealthCenterController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'HealthCenterController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'HealthCenterController@delete')->middleware(['auth:sanctum']);

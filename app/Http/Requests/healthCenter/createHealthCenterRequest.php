@@ -31,6 +31,8 @@ class createHealthCenterRequest extends FormRequest
             'area_id' => 'required|exists:areas,id',
             'description' => 'required',
             'descriptionAr' => 'required',
+            'phone' => 'required',
+            'whatsApp' => 'required',
             'scan' => 'required|boolean',
             'lab' => 'required|boolean'
         ];
@@ -53,6 +55,8 @@ class createHealthCenterRequest extends FormRequest
             'area_id' => $this->area_id,
             'scan' => $this->scan,
             'lab' => $this->lab,
+            'phone' => $this->phone,
+            'whatsApp' => $this->whatsApp,
         ]);
     }
 }

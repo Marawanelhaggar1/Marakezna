@@ -25,7 +25,7 @@ class updateHealthCenterRequest extends FormRequest
         return [
             'id' => 'required|exists:health_centers,id',
             'nameEn' => 'required|unique:health_centers,name,' . $this->id,
-            'الاسم' => 'required',
+            'nameAr' => 'required',
             'address' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
@@ -33,7 +33,9 @@ class updateHealthCenterRequest extends FormRequest
             'descriptionAr' => 'required',
             'area_id' => 'required|exists:areas,id',
             'scan' => 'required|boolean',
-            'lab' => 'required|boolean'
+            'lab' => 'required|boolean',
+            'phone' => 'required',
+            'whatsApp' => 'required',
         ];
     }
 
@@ -57,6 +59,8 @@ class updateHealthCenterRequest extends FormRequest
             'area_id' => $this->area_id,
             'scan' => $this->scan,
             'lab' => $this->lab,
+            'phone' => $this->phone,
+            'whatsApp' => $this->whatsApp,
 
         ]);
 

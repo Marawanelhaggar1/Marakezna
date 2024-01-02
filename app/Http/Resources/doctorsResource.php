@@ -35,6 +35,7 @@ class doctorsResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
+                'waiting' => $this->waiting,
                 'name' => $this->nameAr,
                 'specialty'  => [
                     'id' => $specialty->id,
@@ -54,6 +55,7 @@ class doctorsResource extends JsonResource
         } else {
             return [
                 'id' => $this->id,
+                'waiting' => $this->waiting,
                 'name' => $this->nameEn,
                 'specialty'  => [
                     'id' => $specialty->id,

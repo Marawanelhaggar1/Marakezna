@@ -24,7 +24,7 @@ class updateBookingRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:bookings,id',
-            'patient_name' => 'required|unique:bookings,name,' . $this->id,
+            'patient_name' => 'required',
             'phone' => 'required',
             'diagnose' => 'nullable',
             'location' => 'nullable',

@@ -62,4 +62,17 @@ class HealthCenterController extends Controller
         $center = HealthCenter::Where('scan', true)->get();
         return healthCenterResource::collection($center);
     }
+
+    public function getLabsByArea($id)
+    {
+        $center = HealthCenter::Where('lab', true)->where('area_id', $id)->get();
+        return healthCenterResource::collection($center);
+    }
+
+    public function getScansByArea($id)
+    {
+
+        $center = HealthCenter::Where('scan', true)->where('area_id', $id)->get();
+        return healthCenterResource::collection($center);
+    }
 }

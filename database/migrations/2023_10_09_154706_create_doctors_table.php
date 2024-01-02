@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nameAr');
             $table->string('nameEn');
             $table->integer('feeEn');
+            $table->integer('waiting');
             $table->string('feeAr');
             $table->string('ratingAr');
             $table->integer('ratingEn');

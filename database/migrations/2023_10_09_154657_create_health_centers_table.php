@@ -24,6 +24,8 @@ return new class extends Migration
                 'area_id'
             );
             $table->string('description');
+            $table->string('phone');
+            $table->string('whatsApp');
             $table->string('image')->nullable();
             $table->foreign('area_id')->references('id')->on('areas');
             $table->timestamps();
