@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 // use Illuminate\Support\Str;
+
+use App\Http\Requests\auth\changePassword;
 use App\Http\Requests\auth\loginRequest;
 use App\Http\Requests\auth\registerRequest;
 use App\Http\Requests\auth\updateProfile;
@@ -50,6 +52,15 @@ class auth extends Controller
             'success' => true,
             'message' => 'Successfully updated user',
             'data' => $user
+        ]);
+    }
+
+    public function changePassword(changePassword $request)
+    {
+        $user = $request->changePassword();
+        return response()->json([
+            'success' => true,
+            'message' => 'password changed Successfully',
         ]);
     }
 

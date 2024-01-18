@@ -32,6 +32,7 @@ class bookingResource extends JsonResource
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
             'date' => $this->date,
+            'time' => $this->time,
             'location' => $this->location,
             'email' => $this->email,
             'description' => $this->description,

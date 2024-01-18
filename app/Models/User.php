@@ -67,4 +67,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bookings::class);
     }
+
+    public function doctorCalls()
+    {
+        return $this->hasMany(DoctorCalls::class);
+    }
+
+    public function centerCalls()
+    {
+        return $this->hasMany(CenterCalls::class);
+    }
 }

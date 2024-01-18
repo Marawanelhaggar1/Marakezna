@@ -36,6 +36,8 @@ class updateHealthCenterRequest extends FormRequest
             'lab' => 'required|boolean',
             'phone' => 'required',
             'whatsApp' => 'required',
+            'description2' => 'nullable',
+            'description2Ar' => 'nullable',
         ];
     }
 
@@ -56,6 +58,8 @@ class updateHealthCenterRequest extends FormRequest
             'addressAr' => $this->addressAr,
             'description' => $this->description,
             'descriptionAr' => $this->descriptionAr,
+            'description2' => $this->description2,
+            'description2Ar' => $this->description2Ar,
             'area_id' => $this->area_id,
             'scan' => $this->scan,
             'lab' => $this->lab,

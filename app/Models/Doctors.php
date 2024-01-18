@@ -9,7 +9,7 @@ class Doctors extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nameAr', 'nameEn', 'specialization_id', 'feeEn', 'image', 'addressAr', 'health_center_id', 'titleEn', 'titleAr', 'addressEn', 'feeAr', 'ratingEn', 'ratingAr', 'waiting'];
+    protected $fillable = ['nameAr', 'nameEn', 'specialization_id', 'feeEn', 'image', 'addressAr', 'health_center_id', 'titleEn', 'titleAr', 'addressEn', 'feeAr', 'ratingEn', 'ratingAr', 'waiting', 'phone', 'whatsApp'];
 
 
     protected $table = 'doctors';
@@ -32,6 +32,12 @@ class Doctors extends Model
     {
         return $this->hasMany(Bookings::class);
     }
+
+    public function calls()
+    {
+        return $this->hasMany(DoctorCalls::class);
+    }
+
     public function visits()
     {
         return $this->hasMany(Visits::class);

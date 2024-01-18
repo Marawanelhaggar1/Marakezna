@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DoctorCallsController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MobileSettingController;
 use App\Http\Controllers\SettingsController;
@@ -39,6 +40,7 @@ Route::group(
                 Route::post('/register', 'auth@register');
                 Route::post('/login', 'auth@login');
                 Route::put('/update/profile', 'auth@updateProfile');
+                Route::put('/change/password', 'auth@changePassword');
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
         );
@@ -86,6 +88,22 @@ Route::group(
                 Route::delete('/{id}', 'AreaController@delete')->middleware(['auth:sanctum']);
             }
         );
+
+
+        Route::group(
+            [
+                'prefix' => 'doctor/calls'
+            ],
+
+            function () {
+                Route::get('/', 'DoctorCallsController@index');
+                Route::get('/{id}', 'DoctorCallsController@getById');
+                Route::post('/', 'DoctorCallsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'DoctorCallsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'DoctorCallsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
 
         Route::group(
             [

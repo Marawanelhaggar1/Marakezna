@@ -31,20 +31,33 @@ class loginRequest extends FormRequest
     public function loginUser()
     {
 
-        if ($this->email) {
-            $credentials = $this->only('email', 'password');
-        } else {
 
-            $credentials = $this->only('mobile', 'password');
+        $credentials = [
+            'password' => $this->input('password'),
+        ];
+
+        // Check if either 'email' or 'mobile' is present
+        if ($this->filled('email')) {
+            $credentials['email'] = $this->input('email');
+        } elseif ($this->filled('mobile')) {
+            $credentials['mobile'] = $this->input('mobile');
+        } else {
+            // Neither 'email' nor 'mobile' is present
+            return response()->json([
+                'success' => false,
+                'message' => 'Either email or mobile must be provided.',
+            ], 422);
         }
 
         try {
             $auth = auth()->attempt($credentials);
 
-            if (!$auth) throw new \Exception('invalid credentials');
+            if (!$auth) {
+                throw new \Exception('Invalid credentials');
+            }
+
             return [
                 'token' => auth()->user()->createToken('auth_token')->plainTextToken,
-
             ];
         } catch (\Exception $e) {
             return response()->json([

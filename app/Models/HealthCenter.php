@@ -9,7 +9,7 @@ class HealthCenter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nameEn', 'nameAr', 'area_id', 'address', 'image',  'addressAr', 'description', 'descriptionAr', 'scan', 'lab', 'phone', 'whatsApp'];
+    protected $fillable = ['nameEn', 'nameAr', 'area_id', 'address', 'image',  'addressAr', 'description1', 'description1Ar', 'scan', 'lab', 'phone', 'whatsApp', 'description2' . 'description2Ar'];
 
     protected $table = 'health_centers';
 
@@ -41,5 +41,10 @@ class HealthCenter extends Model
     public function visits()
     {
         return $this->hasMany(Visits::class);
+    }
+
+    public function centerCalls()
+    {
+        return $this->hasMany(CenterCalls::class);
     }
 }

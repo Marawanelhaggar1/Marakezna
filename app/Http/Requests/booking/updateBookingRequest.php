@@ -30,6 +30,7 @@ class updateBookingRequest extends FormRequest
             'location' => 'nullable',
             'description' => 'nullable',
             'date' => 'required',
+            'time' => 'required|date_format:H:i',
             'doctor_id' => 'required|exists:doctors,id',
             'status' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
@@ -78,7 +79,8 @@ class updateBookingRequest extends FormRequest
             'health_center_id' => $this->health_center_id,
             'payment' => $this->payment,
             'user_id' => $this->user_id,
-            'email' => $this->email,
+            'email' => $this->email, 'time' => $this->time,
+
 
         ]);
         return $booking;

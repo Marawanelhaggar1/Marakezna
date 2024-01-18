@@ -17,13 +17,15 @@ return new class extends Migration
             $table->string('nameAr');
             $table->string('address');
             $table->string('addressAr');
-            $table->string('descriptionAr');
+            $table->string('description1Ar');
             $table->boolean('scan');
             $table->boolean('lab');
             $table->unsignedBigInteger(
                 'area_id'
             );
-            $table->string('description');
+            $table->string('description1');
+            $table->string('description2')->nullable();
+            $table->string('description2Ar')->nullable();
             $table->string('phone');
             $table->string('whatsApp');
             $table->string('image')->nullable();

@@ -35,6 +35,8 @@ class updateDoctorRequest extends FormRequest
             'titleEn' => 'required',
             'titleAr' => 'required',
             'addressAr' => 'nullable',
+            'phone' => 'nullable',
+            'whatsApp' => 'nullable',
             'ratingEn' => 'required|integer',
             'ratingAr' => 'required',
             'waiting' => 'required',
@@ -69,6 +71,8 @@ class updateDoctorRequest extends FormRequest
             'waiting' => $this->waiting,
             'health_center_id' => $this->health_center_id,
             'specialization_id' => $this->specialization_id,
+            'phone' => $this->phone,
+            'whatsApp' => $this->whatsApp,
         ]);
 
         return $doctor;

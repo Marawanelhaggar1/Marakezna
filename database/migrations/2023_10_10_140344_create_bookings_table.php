@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('patient_name');
             $table->string('phone');
             $table->string('email');
-            $table->dateTime('date');
+            $table->date('date');
+            $table->time('time');
             $table->string('diagnose')->nullable();
             $table->string('location')->nullable();
             $table->string('description')->nullable();

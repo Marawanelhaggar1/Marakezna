@@ -42,6 +42,8 @@ class doctorsResource extends JsonResource
                     'specialty' => $specialty->specialtyAr,
                 ],
                 'fee' => $this->feeAr,
+                'phone' => $this->phone,
+                'whatsApp' => $this->whatsApp,
                 'address' => $this->addressAr,
                 'title' => $this->titleAr,
                 'rating' => $this->ratingAr,
@@ -64,6 +66,8 @@ class doctorsResource extends JsonResource
                 'fee' => $this->feeEn,
                 'address' => $this->addressEn,
                 'title' => $this->titleEn,
+                'phone' => $this->phone,
+                'whatsApp' => $this->whatsApp,
                 'rating' => $this->ratingEn,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
                 'health_center' => [

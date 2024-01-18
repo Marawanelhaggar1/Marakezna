@@ -36,6 +36,7 @@ class healthCenterResource extends JsonResource
                 'lab' => $this->lab,
                 'phone' => $this->phone,
                 'whatsApp' => $this->whatsApp,
+                'description2' => $this->description2Ar,
             ];
         } else {
             return [
@@ -52,6 +53,7 @@ class healthCenterResource extends JsonResource
                 'lab' => $this->lab,
                 'phone' => $this->phone,
                 'whatsApp' => $this->whatsApp,
+                'description2' => $this->description2,
             ];
         }
     }

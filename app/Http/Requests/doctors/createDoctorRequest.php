@@ -37,7 +37,8 @@ class createDoctorRequest extends FormRequest
             'ratingAr' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
-
+            'phone' => 'nullable',
+            'whatsApp' => 'nullable',
         ];
     }
 
@@ -66,6 +67,8 @@ class createDoctorRequest extends FormRequest
             'ratingAr' => $this->ratingAr,
             'health_center_id' => $this->health_center_id,
             'specialization_id' => $this->specialization_id,
+            'phone' => $this->phone,
+            'whatsApp' => $this->whatsApp,
         ]);
     }
 }

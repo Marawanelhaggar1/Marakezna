@@ -17,12 +17,12 @@ class AreaResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'nameAr' => $this->nameAr,
+                'name' => $this->nameAr,
             ];
         } else {
             return [
                 'id' => $this->id,
-                'nameEn' => $this->nameEn,
+                'name' => $this->nameEn,
             ];
         }
     }

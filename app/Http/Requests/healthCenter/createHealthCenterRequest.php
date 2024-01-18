@@ -31,6 +31,8 @@ class createHealthCenterRequest extends FormRequest
             'area_id' => 'required|exists:areas,id',
             'description' => 'required',
             'descriptionAr' => 'required',
+            'description2' => 'nullable',
+            'description2Ar' => 'nullable',
             'phone' => 'required',
             'whatsApp' => 'required',
             'scan' => 'required|boolean',
@@ -55,6 +57,8 @@ class createHealthCenterRequest extends FormRequest
             'area_id' => $this->area_id,
             'scan' => $this->scan,
             'lab' => $this->lab,
+            'description2' => $this->description2,
+            'description2Ar' => $this->description2Ar,
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,
         ]);

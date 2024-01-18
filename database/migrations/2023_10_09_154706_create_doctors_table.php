@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('titleAr');
             $table->string('image')->nullable();
             $table->string('addressEn')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('whatsApp')->nullable();
             $table->string('addressAr')->nullable();
             $table->unsignedBigInteger('health_center_id')->nullable();
             $table->unsignedBigInteger('specialization_id');
