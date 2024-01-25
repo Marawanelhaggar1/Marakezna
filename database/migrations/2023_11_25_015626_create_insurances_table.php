@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('nameAr');
             $table->string('image');
-            $table->string('percentage');
-            $table->string('percentageAr');
+            $table->string('percentage')->nullable();
+            $table->string('percentageAr')->nullable();
             $table->timestamps();
         });
     }

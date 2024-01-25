@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('end_timeAr');
             $table->timestamps();
 
-            $table->foreign('center_id')->references('id')->on('health_centers')->onDelete('cascade');
+            $table->foreign('center_id')->references('id')->on('health_centers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

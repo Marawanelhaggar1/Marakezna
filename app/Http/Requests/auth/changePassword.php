@@ -13,7 +13,7 @@ class changePassword extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return  auth()->user()->isUser() || auth()->user()->isAdmin();
     }
 
     /**

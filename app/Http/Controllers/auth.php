@@ -24,6 +24,12 @@ class auth extends Controller
 {
     // use SendsPasswordResetEmails;
 
+    public function index()
+    {
+        $users = User::all();
+        return $users;
+    }
+
     public function register(registerRequest $request)
     {
         $user = $request->registerUser();

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('feeEn');
             $table->integer('waiting');
             $table->string('feeAr');
-            $table->string('ratingAr');
-            $table->integer('ratingEn');
+            $table->string('ratingAr')->nullable();
+            $table->integer('ratingEn')->nullable();
             $table->string('titleEn');
             $table->string('titleAr');
             $table->string('image')->nullable();
@@ -30,8 +30,8 @@ return new class extends Migration
             $table->unsignedBigInteger('health_center_id')->nullable();
             $table->unsignedBigInteger('specialization_id');
 
-            $table->foreign('health_center_id')->references('id')->on('health_centers');
-            $table->foreign('specialization_id')->references('id')->on('specializations');
+            $table->foreign('health_center_id')->references('id')->on('health_centers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('specialization_id')->references('id')->on('specializations')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

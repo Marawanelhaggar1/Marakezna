@@ -30,12 +30,13 @@ class registerRequest extends FormRequest
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'mobile' => 'nullable|unique:users,mobile,',
+            'mobile' => 'required|unique:users,mobile,',
             'gender' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|date',
             'social_id' => 'nullable',
-            'role' => 'required'
+            'whatsApp' => 'nullable',
+            'role' => 'required',
 
         ];
     }
@@ -63,6 +64,7 @@ class registerRequest extends FormRequest
             'mobile' => $this->mobile,
             'date_of_birth' => $this->date_of_birth,
             'role' => $this->role,
+            'whatsApp' => $this->whatsApp,
             'image' => $this->getImagePath()
         ]);
 

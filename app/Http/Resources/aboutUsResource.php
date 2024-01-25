@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AreaResource extends JsonResource
+class aboutUsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,20 +17,17 @@ class AreaResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'name' => $this->nameAr,
-            ];
-        } else if (app()->getLocale() == 'admin') {
-            return [
-                'id' => $this->id,
-                'nameAr' => $this->nameAr,
-                'nameEn' => $this->nameEn,
-
+                'image' => $this->image,
+                'paragraph1' => $this->paragraph1Ar,
+                'paragraph2' => $this->paragraph2Ar,
             ];
         } else {
             return [
                 'id' => $this->id,
-                'name' => $this->nameEn,
+                'image' => $this->image,
+                'paragraph1' => $this->paragraph1,
+                'paragraph2' => $this->paragraph2,
             ];
-        }
+        };
     }
 }

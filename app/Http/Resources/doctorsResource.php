@@ -37,6 +37,7 @@ class doctorsResource extends JsonResource
                 'id' => $this->id,
                 'waiting' => $this->waiting,
                 'name' => $this->nameAr,
+
                 'specialty'  => [
                     'id' => $specialty->id,
                     'specialty' => $specialty->specialtyAr,
@@ -54,6 +55,38 @@ class doctorsResource extends JsonResource
                 ],
                 'doctorSchedule' => $doctorSchedule
             ];
+        } else if (app()->getLocale() == 'Ar') {
+            return [
+                'id' => $this->id,
+                'waiting' => $this->waiting,
+                'nameAr' => $this->nameAr,
+                'name' => $this->nameEn,
+                'specialty'  => [
+                    'id' => $specialty->id,
+                    'specialtyAr' => $specialty->specialtyAr,
+                    'specialty' => $specialty->specialtyEn,
+                ],
+                'feeAr' => $this->feeAr,
+                'fee' => $this->feeEn,
+                'phone' => $this->phone,
+                'whatsApp' => $this->whatsApp,
+                'addressAr' => $this->addressAr,
+                'titleAr' => $this->titleAr,
+                'ratingAr' => $this->ratingAr,
+                'address' => $this->addressEn,
+                'title' => $this->titleEn,
+                'rating' => $this->ratingEn,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'health_center' => [
+                    'id' => $healthCenter_id,
+                    'nameAr' => $healthCenter_nameAr,
+                    'name' => $healthCenter_nameEn,
+                ],
+                'doctorScheduleAr' => $doctorSchedule,
+                'doctorSchedule' => $doctorSchedule
+
+
+            ];
         } else {
             return [
                 'id' => $this->id,
@@ -62,13 +95,14 @@ class doctorsResource extends JsonResource
                 'specialty'  => [
                     'id' => $specialty->id,
                     'specialty' => $specialty->specialtyEn,
+
                 ],
                 'fee' => $this->feeEn,
                 'address' => $this->addressEn,
                 'title' => $this->titleEn,
+                'rating' => $this->ratingEn,
                 'phone' => $this->phone,
                 'whatsApp' => $this->whatsApp,
-                'rating' => $this->ratingEn,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
                 'health_center' => [
                     'id' => $healthCenter_id,

@@ -34,12 +34,16 @@ class servicesResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'name' => $this->nameAr,
+                'name' => $this->nameEn,
+                'nameAr' => $this->nameAr,
                 'service_group' => [
                     'id' => $serviceGroup_id,
-                    'name' => $serviceGroup_Ar,
+                    'name' => $serviceGroup_En,
+                    'nameAr' => $serviceGroup_Ar,
+
                 ],
-                'description' => $this->descriptionAr,
+                'description' => $this->descriptionEn,
+                'descriptionAr' => $this->descriptionAr,
                 'image' => $image,
             ];
         } else {

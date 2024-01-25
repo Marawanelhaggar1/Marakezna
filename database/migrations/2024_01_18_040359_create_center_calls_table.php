@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('center_calls', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('center_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('center_id')->references('id')->on('health_centers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -21,6 +21,15 @@ class insuranceResource extends JsonResource
                 'percentage' => $this->percentageAr,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image
             ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'name' => $this->name,
+                'percentage' => $this->percentage,
+                'nameAr' => $this->nameAr,
+                'percentageAr' => $this->percentageAr,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image
+            ];
         } else {
             return [
                 'id' => $this->id,

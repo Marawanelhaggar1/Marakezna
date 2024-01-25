@@ -12,7 +12,7 @@ class updateProfile extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->isUser() || auth()->user()->isAdmin();
     }
 
     /**
@@ -23,12 +23,12 @@ class updateProfile extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:users,id',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            'mobile' => 'nullable|unique:users,mobile,' . $this->id,
+            'mobile' => 'required|unique:users,mobile,' . $this->id,
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date_of_birth' => 'nullable|date',
+            'whatsApp' => 'nullable',
         ];
     }
 
@@ -45,12 +45,15 @@ class updateProfile extends FormRequest
 
     public function updateUserProfile()
     {
-        $user = User::findOrFail($this->id);
 
+        $userId
+            = auth()->user()->id;
+        $user = User::findOrFail($userId);
         $user->first_name = $this->input('first_name');
         $user->last_name = $this->input('last_name');
         $user->mobile = $this->input('mobile');
         $user->image = $this->getImagePath();
+        $user->whatsApp = $this->input('whatsApp');
         $user->date_of_birth = $this->input('date_of_birth');
 
         $user->save();

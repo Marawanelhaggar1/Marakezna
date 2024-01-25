@@ -24,21 +24,19 @@ class updateDoctorRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:doctors,id',
-            'nameEn' =>
-            'required|unique:doctors,name,' . $this->id,
-            'nameAr' =>
-            'required|unique:doctors,name,' . $this->id,
+            'nameEn' => 'required|unique:doctors,nameEn,' . $this->id,
+            'nameAr' => 'required|unique:doctors,nameAr,' . $this->id,
             'feeEn' => 'required|integer',
             'feeAr' => 'required',
             'addressEn' => 'nullable',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'titleEn' => 'required',
             'titleAr' => 'required',
             'addressAr' => 'nullable',
             'phone' => 'nullable',
             'whatsApp' => 'nullable',
-            'ratingEn' => 'required|integer',
-            'ratingAr' => 'required',
+            'ratingEn' => 'nullable|integer',
+            'ratingAr' => 'nullable',
             'waiting' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
@@ -48,9 +46,15 @@ class updateDoctorRequest extends FormRequest
 
     public function getImagePath(): string
     {
-        return $this->file('image')->store('doctors_images', 'public');
-    }
+        $doctor = Doctors::findOrFail($this->id);
 
+        if ($this->hasFile('image')) {
+            // Use the store() method to store the image
+            return $this->file('image')->store('doctors_images', 'public');
+        } else {
+            return $doctor->image;
+        }
+    }
     public function updateDoctor(): Doctors
     {
         $doctor = Doctors::findOrFail($this->id);

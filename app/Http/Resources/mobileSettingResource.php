@@ -29,6 +29,24 @@ class mobileSettingResource extends JsonResource
                 'background1' => 'http://127.0.0.1:8000/storage/' . $this->background1,
                 'background2' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
             ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'email' => $this->email,
+                'name' => $this->name,
+                'phone' => $this->phone,
+                'address' => $this->address,
+                'nameAr' => $this->nameAr,
+                'phoneAr' => $this->phoneAr,
+                'addressAr' => $this->addressAr,
+                'x' => $this->x,
+                'facebook' => $this->facebook,
+                'linkedin' => $this->linkedin,
+                'instagram' => $this->instagram,
+                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
+                'background1' => 'http://127.0.0.1:8000/storage/' . $this->background1,
+                'background2' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+            ];
         } else {
             return [
                 'id' => $this->id,

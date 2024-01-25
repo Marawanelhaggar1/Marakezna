@@ -50,6 +50,19 @@ class doctorSchedualeResources extends JsonResource
                 'doctor_id' => $this->doctor_id,
                 'times' => $availableTime
             ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'dateAr' => $this->dateAr,
+                'start_timeAr' => $this->start_timeAr,
+                'end_timeAr' => $this->end_timeAr,
+                'doctor_id' => $this->doctor_id,
+                'timesAr' => $availableTime,
+                'date' => $this->date,
+                'start_time' => $this->start_time,
+                'end_time' => $this->end_time,
+                'times' => $availableTime
+            ];
         } else {
             return [
                 'id' => $this->id,

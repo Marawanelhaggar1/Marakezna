@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('service_group_id')->nullable();
 
-            $table->foreign('service_group_id')->references('id')->on('service_groups');
+            $table->foreign('service_group_id')->references('id')->on('service_groups')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->dateTime('date');
 
-            $table->foreign('health_center_id')->references('id')->on('health_centers');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('health_center_id')->references('id')->on('health_centers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('patient_id')->references('id')->on('patients')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

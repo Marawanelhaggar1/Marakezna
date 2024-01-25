@@ -29,6 +29,24 @@ class webSettingResource extends JsonResource
                 'favicon' => 'http://127.0.0.1:8000/storage/' . $this->favicon,
                 'footerLogo' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
             ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'email' => $this->email,
+                'name' => $this->name,
+                'phone' => $this->phone,
+                'address' => $this->address,
+                'x' => $this->x,
+                'facebook' => $this->facebook,
+                'linkedin' => $this->linkedin,
+                'instagram' => $this->instagram,
+                'nameAr' => $this->nameAr,
+                'phoneAr' => $this->phoneAr,
+                'addressAr' => $this->addressAr,
+                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
+                'favicon' => 'http://127.0.0.1:8000/storage/' . $this->favicon,
+                'footerLogo' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+            ];
         } else {
             return [
                 'id' => $this->id,

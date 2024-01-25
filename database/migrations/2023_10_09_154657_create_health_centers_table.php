@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('whatsApp');
             $table->string('image')->nullable();
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('area_id')->references('id')->on('areas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

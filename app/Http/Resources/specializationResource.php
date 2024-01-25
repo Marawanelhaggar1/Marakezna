@@ -30,6 +30,14 @@ class specializationResource extends JsonResource
                 'image' => $image,
 
             ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'specialty' => $this->specialtyEn,
+                'specialtyAr' => $this->specialtyAr,
+                'icon' => $this->icon,
+                'image' => $image,
+            ];
         } else {
             return [
                 'id' => $this->id,

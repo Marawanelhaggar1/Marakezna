@@ -28,12 +28,27 @@ class patientsResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
+                'email' => $this->email,
                 'name' => $this->nameAr,
                 'disease' => $this->diseaseAr,
                 'address' => $this->addressAr,
-                'email' => $this->email,
                 'doctor' => $doctor->nameAr,
                 'health_center' => $healthCenter_nameAr,
+            ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameEn,
+                'disease' => $this->diseaseEn,
+                'address' => $this->addressEn,
+                'email' => $this->email,
+                'doctor' => $doctor->nameEn,
+                'health_center' => $healthCenter_nameEn,
+                'nameAr' => $this->nameAr,
+                'diseaseAr' => $this->diseaseAr,
+                'addressAr' => $this->addressAr,
+                'doctorAr' => $doctor->nameAr,
+                'health_centerAr' => $healthCenter_nameAr,
             ];
         } else {
             return [

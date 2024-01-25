@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\CenterCallsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DoctorCallsController;
 use App\Http\Controllers\InsuranceController;
@@ -38,6 +40,7 @@ Route::group(
             function () {
 
                 Route::post('/register', 'auth@register');
+                Route::get('/', 'auth@index')->middleware(['auth:sanctum']);;
                 Route::post('/login', 'auth@login');
                 Route::put('/update/profile', 'auth@updateProfile');
                 Route::put('/change/password', 'auth@changePassword');
@@ -104,6 +107,33 @@ Route::group(
             }
         );
 
+        Route::group(
+            [
+                'prefix' => 'center/calls'
+            ],
+
+            function () {
+                Route::get('/', 'CenterCallsController@index');
+                Route::get('/{id}', 'CenterCallsController@getById');
+                Route::post('/', 'CenterCallsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'CenterCallsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'CenterCallsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+        Route::group(
+            [
+                'prefix' => 'about/us'
+            ],
+
+            function () {
+                Route::get('/', 'AboutUsController@index');
+                Route::get('/{id}', 'AboutUsController@getById');
+                Route::post('/', 'AboutUsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'AboutUsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'AboutUsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
 
         Route::group(
             [
@@ -122,6 +152,7 @@ Route::group(
                 Route::delete('/{id}', 'HealthCenterController@delete')->middleware(['auth:sanctum']);
             }
         );
+
 
         Route::group(
             [
