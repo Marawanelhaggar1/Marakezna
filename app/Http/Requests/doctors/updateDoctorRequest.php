@@ -40,8 +40,8 @@ class updateDoctorRequest extends FormRequest
             'waiting' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
-            'featured' => 'required|boolean',
-            'appointment' => 'required|boolean'
+            'featured' => 'nullable|boolean',
+            'appointment' => 'nullable|boolean'
 
         ];
     }

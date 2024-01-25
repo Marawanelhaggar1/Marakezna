@@ -24,21 +24,24 @@ class updateServicesRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:services,id',
-            'nameEn' => 'required|unique:services,name,' . $this->id,
+            'nameEn' => 'required|unique:services,nameEn,' . $this->id,
             'nameAr' => 'required',
             'service_group_id' => 'nullable|exists:service_groups,id',
             'descriptionEn' => 'required',
             'descriptionAr' => 'required',
+            'icon' => 'nullable',
+            'featured' => 'nullable|boolean',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
     public function getImagePath()
     {
+        $service = Services::findOrFail($this->id);
         if ($this->image) {
 
             return $this->file('image')->store('service_images', 'public');
         } else {
-            return null;
+            return $service->image;
         }
     }
 
@@ -53,6 +56,9 @@ class updateServicesRequest extends FormRequest
             'descriptionEn' => $this->descriptionEn,
             'descriptionAr' => $this->descriptionAr,
             'image' => $this->getImagePath(),
+            'icon' => $this->icon,
+            'featured' => $this->featured,
+
 
         ]);
 

@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('nameAr');
             $table->string('descriptionEn');
             $table->string('descriptionAr');
+            $table->boolean('featured')->nullable();
             $table->string('image')->nullable();
+            $table->string('icon')->nullable();
             $table->unsignedBigInteger('service_group_id')->nullable();
 
             $table->foreign('service_group_id')->references('id')->on('service_groups')->onUpdate('cascade')->onDelete('cascade');

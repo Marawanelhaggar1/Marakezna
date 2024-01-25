@@ -39,8 +39,8 @@ class createDoctorRequest extends FormRequest
             'specialization_id' => 'required|exists:specializations,id',
             'phone' => 'nullable',
             'whatsApp' => 'nullable',
-            'featured' => 'required|boolean',
-            'appointment' => 'required|boolean'
+            'featured' => 'nullable|boolean',
+            'appointment' => 'nullable|boolean'
         ];
     }
 

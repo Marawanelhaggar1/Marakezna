@@ -48,6 +48,12 @@ class DoctorsController extends Controller
         ]);
     }
 
+    public function getFeaturedDoctors()
+    {
+        $doctors = Doctors::where('featured', 1)->get();
+        return doctorsResource::collection($doctors);
+    }
+
     public function getDoctorBySpecialty($id)
     {
         $doctors = Doctors::where('specialization_id', $id)->get();

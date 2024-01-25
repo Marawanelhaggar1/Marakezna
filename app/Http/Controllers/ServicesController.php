@@ -43,4 +43,10 @@ class ServicesController extends Controller
             'message' => 'Successfully deleted service'
         ]);
     }
+
+    public function getFeaturedServices()
+    {
+        $services = Services::where('featured', 1)->get();
+        return servicesResource::collection($services);
+    }
 }

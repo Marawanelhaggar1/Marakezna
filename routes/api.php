@@ -40,7 +40,7 @@ Route::group(
             function () {
 
                 Route::post('/register', 'auth@register');
-                Route::get('/', 'auth@index')->middleware(['auth:sanctum']);;
+                Route::get('/', 'auth@index');
                 Route::post('/login', 'auth@login');
                 Route::put('/update/profile', 'auth@updateProfile');
                 Route::put('/change/password', 'auth@changePassword');
@@ -71,6 +71,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'ServicesController@index');
+                Route::get('/featured', 'ServicesController@getFeaturedServices');
                 Route::get('/{id}', 'ServicesController@getById');
                 Route::post('/', 'ServicesController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'ServicesController@update')->middleware(['auth:sanctum']);
@@ -160,6 +161,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'DoctorsController@index');
+                Route::get('/featured', 'DoctorsController@getFeaturedDoctors');
                 Route::get('/{id}', 'DoctorsController@getById');
                 Route::get('/specialty/{id}', 'DoctorsController@getDoctorBySpecialty');
                 Route::get('/center/{id}', 'DoctorsController@getDoctorByCenter');

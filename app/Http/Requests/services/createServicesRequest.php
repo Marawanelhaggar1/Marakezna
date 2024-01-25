@@ -29,6 +29,9 @@ class createServicesRequest extends FormRequest
             'descriptionEn' => 'required',
             'descriptionAr' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'icon' => 'nullable',
+            'featured' => 'nullable|boolean',
+
         ];
     }
 
@@ -50,6 +53,8 @@ class createServicesRequest extends FormRequest
             'service_group_id' => $this->service_group_id,
             'descriptionEn' => $this->descriptionEn,
             'descriptionAr' => $this->descriptionAr,
+            'icon' => $this->icon,
+            'featured' => $this->featured,
             'image' => $this->getImagePath(),
         ]);
     }
