@@ -48,6 +48,8 @@ class doctorsResource extends JsonResource
                 'address' => $this->addressAr,
                 'title' => $this->titleAr,
                 'rating' => $this->ratingAr,
+                'featured' => $this->featured,
+                'appointment' => $this->appointment,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
                 'health_center' => [
                     'id' => $healthCenter_id,
@@ -76,6 +78,8 @@ class doctorsResource extends JsonResource
                 'address' => $this->addressEn,
                 'title' => $this->titleEn,
                 'rating' => $this->ratingEn,
+                'featured' => $this->featured,
+                'appointment' => $this->appointment,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
                 'health_center' => [
                     'id' => $healthCenter_id,
@@ -102,6 +106,8 @@ class doctorsResource extends JsonResource
                 'title' => $this->titleEn,
                 'rating' => $this->ratingEn,
                 'phone' => $this->phone,
+                'featured' => $this->featured,
+                'appointment' => $this->appointment,
                 'whatsApp' => $this->whatsApp,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
                 'health_center' => [

@@ -40,6 +40,8 @@ class updateDoctorRequest extends FormRequest
             'waiting' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
+            'featured' => 'required|boolean',
+            'appointment' => 'required|boolean'
 
         ];
     }
@@ -77,6 +79,8 @@ class updateDoctorRequest extends FormRequest
             'specialization_id' => $this->specialization_id,
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,
+            'featured' => $this->featured,
+            'appointment' => $this->appointment,
         ]);
 
         return $doctor;

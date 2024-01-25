@@ -24,6 +24,8 @@ class aboutUsResource extends JsonResource
                 'vision' => $this->visionAr,
                 'values' => $this->valuesAr,
                 'videoLink' => $this->videoLink,
+                'created_at' => $this->created_at,
+
             ];
         } else {
             return [
@@ -35,6 +37,7 @@ class aboutUsResource extends JsonResource
                 'vision' => $this->vision,
                 'values' => $this->values,
                 'videoLink' => $this->videoLink,
+                'created_at' => $this->created_at,
             ];
         };
     }

@@ -39,6 +39,8 @@ class createDoctorRequest extends FormRequest
             'specialization_id' => 'required|exists:specializations,id',
             'phone' => 'nullable',
             'whatsApp' => 'nullable',
+            'featured' => 'required|boolean',
+            'appointment' => 'required|boolean'
         ];
     }
 
@@ -69,6 +71,8 @@ class createDoctorRequest extends FormRequest
             'specialization_id' => $this->specialization_id,
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,
+            'featured' => $this->featured,
+            'appointment' => $this->appointment,
         ]);
     }
 }
