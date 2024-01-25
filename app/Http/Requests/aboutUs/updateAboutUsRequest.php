@@ -25,16 +25,30 @@ class updateAboutUsRequest extends FormRequest
         return [
             'id' => 'required|exists:about_us,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'paragraph1' => 'required',
-            'paragraph1Ar' => 'required',
-            'paragraph2' => 'nullable',
-            'paragraph2Ar' => 'nullable',
+            'paragraph' => 'required',
+            'paragraphAr' => 'required',
+            'title' => 'required',
+            'titleAr' => 'required',
+            'mission' => 'required',
+            'missionAr' => 'required',
+            'vision' => 'required',
+            'visionAr' => 'required',
+            'values' => 'required',
+            'valuesAr' => 'required',
+            'videoLink' => 'nullable',
         ];
     }
 
     public function getImagePath(): string
     {
-        return $this->file('image')->store('aboutUs_images', 'public');
+        $about = AboutUs::findOrFail($this->id);
+
+        if ($this->hasFile('image')) {
+            // Use the store() method to store the image
+            return $this->file('image')->store('aboutUs', 'public');
+        } else {
+            return $about->image;
+        }
     }
 
     public function updateAboutUs(): AboutUs
@@ -43,11 +57,18 @@ class updateAboutUsRequest extends FormRequest
 
         $about->update([
             'id' => $this->id,
-            'image' => $this->getImagePath(),
-            'paragraph1Ar' => $this->paragraph1Ar,
-            'paragraph2Ar' => $this->paragraph2Ar,
-            'paragraph1' => $this->paragraph1,
-            'paragraph2' => $this->paragraph2,
+            'title' => $this->title,
+            'titleAr' => $this->titleAr,
+            'paragraph' => $this->paragraph,
+            'paragraphAr' => $this->paragraphAr,
+            'vision' => $this->vision,
+            'visionAr' => $this->visionAr,
+            'mission' => $this->mission,
+            'missionAr' => $this->missionAr,
+            'values' => $this->values,
+            'valuesAr' => $this->valuesAr,
+            'videoLink' => $this->videoLink, 'image' => $this->getImagePath(),
+
 
         ]);
 

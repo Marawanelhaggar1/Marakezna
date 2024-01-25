@@ -17,16 +17,24 @@ class aboutUsResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'image' => $this->image,
-                'paragraph1' => $this->paragraph1Ar,
-                'paragraph2' => $this->paragraph2Ar,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'title' => $this->titleAr,
+                'paragraph' => $this->paragraphAr,
+                'mission' => $this->missionAr,
+                'vision' => $this->visionAr,
+                'values' => $this->valuesAr,
+                'videoLink' => $this->videoLink,
             ];
         } else {
             return [
                 'id' => $this->id,
-                'image' => $this->image,
-                'paragraph1' => $this->paragraph1,
-                'paragraph2' => $this->paragraph2,
+                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'title' => $this->title,
+                'paragraph' => $this->paragraph,
+                'mission' => $this->mission,
+                'vision' => $this->vision,
+                'values' => $this->values,
+                'videoLink' => $this->videoLink,
             ];
         };
     }

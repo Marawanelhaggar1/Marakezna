@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('title');
+            $table->string('titleAr');
             $table->string('paragraph');
             $table->string('paragraphAr');
             $table->string('mission');
-            $table->string('missionAr');
             $table->string('missionAr');
             $table->string('values');
             $table->string('valuesAr');

@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AboutUs extends Model
 {
     use HasFactory;
-    protected $fillable = ['image', 'paragraph1', 'paragraph1Ar', 'paragraph2', 'paragraph2Ar'];
+    protected $fillable = ['image', 'title', 'titleAr', 'paragraph', 'paragraphAr', 'mission', 'missionAr', 'values', 'valuesAr', 'vision', 'visionAr', 'videoLink'];
     protected $table = 'about_us';
 }
