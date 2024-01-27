@@ -17,6 +17,11 @@ class Specialization extends Model
         return $this->hasMany(Specialization::class);
     }
 
+    public function image()
+    {
+        return $this->belongsTo(Icons::class);
+    }
+
     // public function scopeSelection($query)
     // {
     //     return $query->select('id', );

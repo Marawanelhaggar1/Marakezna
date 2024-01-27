@@ -24,22 +24,22 @@ class updateSpecializationRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:specializations,id',
-            'specialtyEn' => 'required|unique:specializations,name,' . $this->id,
+            'specialtyEn' => 'required|unique:specializations,specialtyEn,' . $this->id,
             'specialtyAr' => 'required',
             'icon' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|exists:icons,id',
         ];
     }
 
-    public function getImagePath()
-    {
-        if ($this->image) {
+    // public function getImagePath()
+    // {
+    //     if ($this->image) {
 
-            return $this->file('image')->store('service_images', 'public');
-        } else {
-            return null;
-        }
-    }
+    //         return $this->file('image')->store('service_images', 'public');
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
 
 
@@ -50,7 +50,7 @@ class updateSpecializationRequest extends FormRequest
             'id' => $this->id,
             'specialtyEn' => $this->specialtyEn,
             'specialtyAr' => $this->specialtyAr,
-            'icon' => $this->icon, 'image' => $this->getImagePath(),
+            'icon' => $this->icon, 'image' => $this->image,
 
 
         ]);

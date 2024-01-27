@@ -43,7 +43,14 @@ class updateHealthCenterRequest extends FormRequest
 
     public function getImagePath(): string
     {
-        return $this->file('image')->store('center_images', 'public');
+        $icon = HealthCenter::findOrFail($this->id);
+
+        if ($this->hasFile('image')) {
+            // Use the store() method to store the image
+            return $this->file('image')->store('center_images', 'public');
+        } else {
+            return $icon->image;
+        }
     }
 
     public function updateHealthCenter(): HealthCenter

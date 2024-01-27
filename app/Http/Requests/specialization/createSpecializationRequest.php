@@ -27,20 +27,20 @@ class createSpecializationRequest extends FormRequest
             'specialtyEn' => 'required',
             'specialtyAr' => 'required',
             'icon' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|exists:icons,id',
         ];
     }
 
 
-    public function getImagePath()
-    {
-        if ($this->image) {
+    // public function getImagePath()
+    // {
+    //     if ($this->image) {
 
-            return $this->file('image')->store('service_images', 'public');
-        } else {
-            return null;
-        }
-    }
+    //         return $this->file('image')->store('service_images', 'public');
+    //     } else {
+    //         return null;
+    //     }
+    // }
 
     public function createSpecialization(): Specialization
     {
@@ -48,7 +48,7 @@ class createSpecializationRequest extends FormRequest
             'specialtyEn' => $this->specialtyEn,
             'specialtyAr' => $this->specialtyAr,
             'icon' => $this->icon,
-            'image' => $this->getImagePath(),
+            'image' => $this->image,
         ]);
     }
 }

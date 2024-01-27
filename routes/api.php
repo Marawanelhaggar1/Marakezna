@@ -5,6 +5,8 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CenterCallsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DoctorCallsController;
+use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\IconsController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MobileSettingController;
 use App\Http\Controllers\SettingsController;
@@ -119,6 +121,34 @@ Route::group(
                 Route::post('/', 'CenterCallsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'CenterCallsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'CenterCallsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'faqs',
+            ],
+
+            function () {
+                Route::get('/', 'FaqsController@index');
+                Route::get('/{id}', 'FaqsController@getById');
+                Route::post('/', 'FaqsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'FaqsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'FaqsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'icons',
+            ],
+
+            function () {
+                Route::get('/', 'IconsController@index');
+                Route::get('/{id}', 'IconsController@getById');
+                Route::post('/', 'IconsController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'IconsController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'IconsController@delete')->middleware(['auth:sanctum']);
             }
         );
         Route::group(

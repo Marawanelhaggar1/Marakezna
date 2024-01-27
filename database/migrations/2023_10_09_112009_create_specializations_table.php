@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('specializations', function (Blueprint $table) {
             $table->id();
             $table->string('icon')->nullable();
-            $table->string('image')->nullable();
+            $table->unsignedBigInteger('image')->nullable();
             $table->string('specialtyEn');
             $table->string('specialtyAr');
+            $table->foreign('image')->references('id')->on('icons')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

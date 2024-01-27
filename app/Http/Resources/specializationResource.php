@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Icons;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +17,8 @@ class specializationResource extends JsonResource
     {
 
         if ($this->image) {
-            $image = 'http://127.0.0.1:8000/storage/' . $this->image;
+            $icon = Icons::findOrFail($this->image);
+            $image = 'http://127.0.0.1:8000/storage/' . $icon->image;
         } else {
             $image = null;
         }

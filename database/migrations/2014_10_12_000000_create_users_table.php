@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('social_id')->nullable();
             $table->string('image')->nullable();
+            $table->string('address')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
             $table->enum('role', ['user', 'admin', 'doctor'])->nullable();
