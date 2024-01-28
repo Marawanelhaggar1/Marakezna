@@ -37,4 +37,21 @@ class AreaController extends Controller
             'message' => 'Successfully deleted area'
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $items = [];
+        $search = $request->input('search');
+        $locale = app()->getLocale();
+
+        if ($locale == 'Ar') {
+            $area = Area::where('nameAr', 'like', '%' . $search . '%')->get();
+        } else {
+            $area = Area::where('nameEn', 'like', '%' . $search . '%')->get();
+        }
+
+        $items = AreaResource::collection($area);
+
+        return $items;
+    }
 }

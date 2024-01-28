@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\healthCenter\createHealthCenterRequest;
 use App\Http\Requests\healthCenter\updateHealthCenterRequest;
 use App\Http\Resources\healthCenterResource;
+use App\Models\Area;
 use App\Models\HealthCenter;
 use Illuminate\Http\Request;
 
@@ -22,15 +23,20 @@ class HealthCenterController extends Controller
         return new healthCenterResource($healthCenter);
     }
 
-    public function create(createHealthCenterRequest $request)
+    public function create(createHealthCenterRequest   $request,)
     {
         $healthCenter = $request->createHealthCenter();
+        // return response()->json([
+        //     'message' => 'success',
+        //     'data' => $healthCenter, 'pivot_column' => $this->pivot->pivot_column,
+        // ]);
         return new healthCenterResource($healthCenter);
     }
 
     public function update(updateHealthCenterRequest $request)
     {
         $healthCenter = $request->updateHealthCenter();
+
         return new healthCenterResource($healthCenter);
     }
 
@@ -46,7 +52,10 @@ class HealthCenterController extends Controller
 
     public function getByArea($id)
     {
-        $center = HealthCenter::Where('area_id', $id)->get();
+        $center =
+            HealthCenter::whereHas('areas', function ($query) use ($id) {
+                $query->where('areas.id', $id);
+            })->get();
         return healthCenterResource::collection($center);
     }
 

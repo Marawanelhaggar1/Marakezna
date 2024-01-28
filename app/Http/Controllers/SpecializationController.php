@@ -43,4 +43,21 @@ class SpecializationController extends Controller
             'message' => 'Successfully deleted specialization'
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $items = [];
+        $search = $request->input('search');
+        $locale = app()->getLocale();
+
+        if ($locale == 'Ar') {
+            $specialization = Specialization::where('specialtyAr', 'like', '%' . $search . '%')->get();
+        } else {
+            $specialization = Specialization::where('specialtyEn', 'like', '%' . $search . '%')->get();
+        }
+
+        $items = specializationResource::collection($specialization);
+
+        return $items;
+    }
 }

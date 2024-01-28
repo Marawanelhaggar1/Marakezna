@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nameAr');
             $table->string('nameEn');
-            $table->integer('feeEn');
+            $table->string('feeEn');
             $table->integer('waiting');
             $table->string('feeAr');
             $table->string('ratingAr')->nullable();
-            $table->integer('ratingEn')->nullable();
+            $table->string('ratingEn')->nullable();
             $table->string('titleEn');
             $table->string('titleAr');
             $table->boolean('featured')->nullable();

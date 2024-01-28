@@ -24,14 +24,15 @@ class updateHealthCenterRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:health_centers,id',
-            'nameEn' => 'required|unique:health_centers,name,' . $this->id,
+            'nameEn' => 'required|unique:health_centers,nameEn,' . $this->id,
             'nameAr' => 'required',
             'address' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
-            'description' => 'required',
-            'descriptionAr' => 'required',
-            'area_id' => 'required|exists:areas,id',
+            'description1' => 'required',
+            'description1Ar' => 'required',
+            'area_id' => 'required|array',  // Assuming you are passing an array of area_ids
+            'area_id.*' => 'exists:areas,id',
             'scan' => 'required|boolean',
             'lab' => 'required|boolean',
             'phone' => 'required',
@@ -63,17 +64,20 @@ class updateHealthCenterRequest extends FormRequest
             'address' => $this->address,
             'image' => $this->getImagePath(),
             'addressAr' => $this->addressAr,
-            'description' => $this->description,
-            'descriptionAr' => $this->descriptionAr,
+            'description1' => $this->description1,
+            'description1Ar' => $this->description1Ar,
             'description2' => $this->description2,
             'description2Ar' => $this->description2Ar,
-            'area_id' => $this->area_id,
+            // 'area_id' => $this->area_id,
             'scan' => $this->scan,
             'lab' => $this->lab,
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,
 
         ]);
+
+        $health->areas()->sync($this->input('area_id'));
+
 
         return $health;
     }

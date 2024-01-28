@@ -88,6 +88,7 @@ Route::group(
 
             function () {
                 Route::get('/', 'AreaController@index');
+                Route::post('/search', 'AreaController@search');
                 Route::get('/{id}', 'AreaController@getById');
                 Route::post('/', 'AreaController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'AreaController@update')->middleware(['auth:sanctum']);
@@ -291,7 +292,7 @@ Route::group(
             function () {
                 Route::get('/', 'SpecializationController@index');
                 Route::get('/{id}', 'SpecializationController@getById');
-                Route::post('search/specialization', 'DoctorsController@search');
+                Route::post('/search', 'SpecializationController@search');
 
                 Route::post('/', 'SpecializationController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'SpecializationController@update')->middleware(['auth:sanctum']);

@@ -20,16 +20,16 @@ return new class extends Migration
             $table->string('description1Ar');
             $table->boolean('scan');
             $table->boolean('lab');
-            $table->unsignedBigInteger(
-                'area_id'
-            );
+            // $table->unsignedBigInteger(
+            //     'area_id'
+            // );
             $table->string('description1');
             $table->string('description2')->nullable();
             $table->string('description2Ar')->nullable();
             $table->string('phone');
             $table->string('whatsApp');
             $table->string('image')->nullable();
-            $table->foreign('area_id')->references('id')->on('areas')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('area_id')->references('id')->on('areas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

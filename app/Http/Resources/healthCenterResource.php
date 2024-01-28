@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Area;
+use App\Models\HealthCenter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,26 +16,32 @@ class healthCenterResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $area = null;
+        // $area = null;
 
-        if ($this->area_id) {
-            $area = Area::find($this->area_id);
-        }
+        // if ($this->area_id) {
+        //     $area = Area::find($this->area_id);
+        // }
 
+        $center = HealthCenter::find($this->id);
+        $area = $center->areas;
+        // dd($center->areas);
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
                 'name' => $this->nameAr,
                 'address' => $this->addressAr,
-                'area' => $area ? [
-                    'id' => $area->id,
-                    'name' => $area->nameAr
-                ] : null,
+                // 'area' => $area ? [
+                //     'id' => $area->id,
+                //     'name' => $area->nameAr
+                // ] : null,
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'description' => $this->descriptionAr,
+                'description' => $this->description1Ar,
                 'description2' => $this->description2Ar,
                 'scan' => $this->scan,
                 'lab' => $this->lab,
+                'areas' => AreaResource::collection($area),
+
+
                 'phone' => $this->phone,
                 'whatsApp' => $this->whatsApp,
             ];
@@ -45,20 +52,22 @@ class healthCenterResource extends JsonResource
                 'address' => $this->address,
                 'nameAr' => $this->nameAr,
                 'addressAr' => $this->addressAr,
-                'area' => $area ? [
-                    'id' => $area->id,
-                    'name' => $area->nameEn,
-                    'nameAr' => $area->nameAr
+                // 'area' => $area ? [
+                //     'id' => $area->id,
+                //     'name' => $area->nameEn,
+                //     'nameAr' => $area->nameAr
 
-                ] : null,
+                // ] : null,
+                'areas' => AreaResource::collection($area),
+
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'description' => $this->description,
+                'description' => $this->description1,
                 'scan' => $this->scan,
                 'lab' => $this->lab,
                 'phone' => $this->phone,
                 'whatsApp' => $this->whatsApp,
                 'description2' => $this->description2,
-                'descriptionAr' => $this->descriptionAr,
+                'descriptionAr' => $this->description1Ar,
                 'description2Ar' => $this->description2Ar,
             ];
         } else {
@@ -66,12 +75,11 @@ class healthCenterResource extends JsonResource
                 'id' => $this->id,
                 'name' => $this->nameEn,
                 'address' => $this->address,
-                'area' => $area ? [
-                    'id' => $area->id,
-                    'name' => $area->nameEn
-                ] : null,
+                'areas' =>
+                AreaResource::collection($area),
+
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'description' => $this->description,
+                'description' => $this->description1,
                 'scan' => $this->scan,
                 'lab' => $this->lab,
                 'phone' => $this->phone,

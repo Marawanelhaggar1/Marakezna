@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\healthCenter;
 
+use App\Models\Area;
 use App\Models\HealthCenter;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,9 +29,10 @@ class createHealthCenterRequest extends FormRequest
             'address' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
-            'area_id' => 'required|exists:areas,id',
-            'description' => 'required',
-            'descriptionAr' => 'required',
+            'area_id' => 'required|array',  // Assuming you are passing an array of area_ids
+            'area_id.*' => 'exists:areas,id',
+            'description1' => 'required',
+            'description1Ar' => 'required',
             'description2' => 'nullable',
             'description2Ar' => 'nullable',
             'phone' => 'required',
@@ -46,21 +48,26 @@ class createHealthCenterRequest extends FormRequest
     }
     public function createHealthCenter(): HealthCenter
     {
-        return HealthCenter::create([
-            'nameEn' => $this->nameEn,
-            'nameAr' => $this->nameAr,
-            'address' => $this->address,
-            'image' => $this->getImagePath(),
-            'addressAr' => $this->addressAr,
-            'description' => $this->description,
-            'descriptionAr' => $this->descriptionAr,
-            'area_id' => $this->area_id,
-            'scan' => $this->scan,
-            'lab' => $this->lab,
-            'description2' => $this->description2,
-            'description2Ar' => $this->description2Ar,
-            'phone' => $this->phone,
-            'whatsApp' => $this->whatsApp,
-        ]);
+        // dd($this->input('area_id'));
+        $healthCenter =
+            HealthCenter::create([
+                'nameEn' => $this->nameEn,
+                'nameAr' => $this->nameAr,
+                'address' => $this->address,
+                'image' => $this->getImagePath(),
+                'addressAr' => $this->addressAr,
+                'description1' => $this->description1,
+                'description1Ar' => $this->description1Ar,
+                // 'area_id' => $this->input('area_id'),
+                'scan' => $this->scan,
+                'lab' => $this->lab,
+                'description2' => $this->description2,
+                'description2Ar' => $this->description2Ar,
+                'phone' => $this->phone,
+                'whatsApp' => $this->whatsApp,
+            ]);
+        $healthCenter->areas()->sync($this->input('area_id'));
+
+        return $healthCenter;
     }
 }

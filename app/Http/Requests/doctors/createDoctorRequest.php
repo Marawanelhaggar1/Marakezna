@@ -25,7 +25,7 @@ class createDoctorRequest extends FormRequest
         return [
             'nameEn' => 'required',
             'nameAr' => 'required',
-            'feeEn' => 'required|integer',
+            'feeEn' => 'required',
             'feeAr' => 'required',
             'addressEn' => 'nullable',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -33,7 +33,7 @@ class createDoctorRequest extends FormRequest
             'titleAr' => 'required',
             'addressAr' => 'nullable',
             'waiting' => 'required',
-            'ratingEn' => 'required|integer',
+            'ratingEn' => 'required',
             'ratingAr' => 'required',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',

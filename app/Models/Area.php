@@ -14,8 +14,13 @@ class Area extends Model
     protected $table = 'areas';
 
 
-    protected function center()
+    public function healthCenters()
     {
-        return $this->hasMany(HealthCenter::class);
+        return $this->belongsToMany(
+            HealthCenter::class,
+            'area_health_center',
+            'area_id',
+            'health_center_id'
+        );
     }
 }
