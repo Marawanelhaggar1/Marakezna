@@ -22,7 +22,8 @@ class doctorCallsResource extends JsonResource
         return [
             'user' => ['id' => $this->user_id, 'first_name' => $user->first_name, 'last_name' => $user->last_name],
 
-            'doctor' => ['id' => $this->doctor_id, 'name' => $doctor->nameEn]
+            'doctor' => ['id' => $this->doctor_id, 'name' => $doctor->nameEn],
+            'created_at' => $this->created_at,
         ];
     }
 }

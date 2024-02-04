@@ -20,6 +20,7 @@ return [
     'allowed_methods' =>  ['*'],
 
     'allowedOrigins' => ['*'],
+    'allowed_origins' => ['*'],  // Corrected key here
 
     'allowed_origins_patterns' => [],
 

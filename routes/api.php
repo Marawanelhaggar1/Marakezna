@@ -44,7 +44,7 @@ Route::group(
                 Route::post('/register', 'auth@register');
                 Route::get('/', 'auth@index');
                 Route::post('/login', 'auth@login');
-                Route::put('/update/profile', 'auth@updateProfile');
+                Route::put('/update/profile', 'auth@updateProfile')->middleware(['auth:sanctum']);
                 Route::put('/change/password', 'auth@changePassword');
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
@@ -224,6 +224,7 @@ Route::group(
             function () {
 
                 Route::get('/', 'WebSettingController@index');
+                Route::get('/count', 'WebSettingController@getNumbers');
                 Route::get('/{id}', 'WebSettingController@getById');
                 Route::post('/', 'WebSettingController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'WebSettingController@update')->middleware(['auth:sanctum']);

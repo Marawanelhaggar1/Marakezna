@@ -21,7 +21,8 @@ class centerCallsResource extends JsonResource
         return [
             'user' => ['id' => $this->user_id, 'first_name' => $user->first_name, 'last_name' => $user->last_name],
 
-            'center' => ['id' => $this->center_id, 'name' => $center->nameEn]
+            'center' => ['id' => $this->center_id, 'name' => $center->nameEn],
+            'created_at' => $this->created_at,
         ];
     }
 }

@@ -18,13 +18,14 @@ class bookingResource extends JsonResource
     {
         $healthCenter_nameEn = null;
         $healthCenter_nameAr = null;
-        $healthCenter_id = null;
+        $healthCenter_image = null;
         $doctor = Doctors::find($this->doctor_id);
+        $doctor_image = $doctor->image;
         $healthCenter = HealthCenter::find($this->health_center_id);
         if ($healthCenter) {
             $healthCenter_nameEn = $healthCenter->nameEn;
             $healthCenter_nameAr = $healthCenter->nameAr;
-            $healthCenter_id = $healthCenter->id;
+            $healthCenter_image = $healthCenter->image;
         }
 
         return [
@@ -39,12 +40,15 @@ class bookingResource extends JsonResource
             'doctor' => [
                 'id' => $this->doctor_id,
                 'name' => $doctor->nameEn,
+                'image' => 'https://pp.etqanis.com/storage/app/public/' . $doctor_image,
             ],
             'payment' => $this->payment,
             'health_center' => [
-                'id' => $healthCenter_id,
+                'id' =>
+                $this->health_center_id,
                 'nameEn' => $healthCenter_nameEn,
                 'nameAr' => $healthCenter_nameAr,
+                'image' => 'https://pp.etqanis.com/storage/app/public/' . $healthCenter_image,
             ],
             'status' => $this->status
         ];

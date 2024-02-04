@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WebSetting\createWebSettingRequest;
 use App\Http\Requests\WebSetting\updateWebSettingRequest;
 use App\Http\Resources\webSettingResource;
+use App\Models\Bookings;
+use App\Models\CenterCalls;
+use App\Models\Doctors;
+use App\Models\HealthCenter;
+use App\Models\User;
 use App\Models\WebSetting;
 use Illuminate\Http\Request;
 
@@ -42,5 +47,18 @@ class WebSettingController extends Controller
             'success' => true,
             'message' => 'Successfully deleted setting'
         ]);
+    }
+
+    public function getNumbers()
+    {
+        // dd(User::count());
+
+        return [
+            'users' => User::count(),
+            'centers' => HealthCenter::count(),
+            'doctors' => Doctors::count(),
+            'appointments' => CenterCalls::count() + Bookings::count()
+
+        ];
     }
 }

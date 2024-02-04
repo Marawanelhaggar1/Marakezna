@@ -53,12 +53,14 @@ class auth extends Controller
 
     public function updateProfile(updateProfile $request)
     {
-        $user = $request->updateUserProfile();
-        return response()->json([
-            'success' => true,
-            'message' => 'Successfully updated user',
-            'data' => $user
-        ]);
+        $user = auth()->user();
+
+        try {
+            $updatedUser = $request->updateUserProfile($user);
+            return response()->json($updatedUser, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function changePassword(changePassword $request)

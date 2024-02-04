@@ -36,6 +36,7 @@ class registerRequest extends FormRequest
             'date_of_birth' => 'nullable|date',
             'social_id' => 'nullable',
             'whatsApp' => 'nullable',
+            'address' => 'nullable',
             'role' => 'required',
 
         ];
@@ -62,6 +63,7 @@ class registerRequest extends FormRequest
             'gender' => $this->gender,
             'social_id' => $this->social_id,
             'mobile' => $this->mobile,
+            'address' => $this->address,
             'date_of_birth' => $this->date_of_birth,
             'role' => $this->role,
             'whatsApp' => $this->whatsApp,
