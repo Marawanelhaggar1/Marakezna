@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('ratingAr')->nullable();
             $table->string('ratingEn')->nullable();
             $table->string('titleEn');
+            $table->boolean('view')->nullable();
             $table->string('titleAr');
             $table->boolean('featured')->nullable();
             $table->boolean('appointment')->nullable();

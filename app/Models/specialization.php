@@ -9,7 +9,7 @@ class Specialization extends Model
 {
     use HasFactory;
 
-    public $fillable = ['specialtyEn', 'specialtyAr', 'icon', 'image'];
+    public $fillable = ['specialtyEn', 'specialtyAr', 'icon', 'image', 'view'];
     public $table = 'specializations';
 
     public function specialization()

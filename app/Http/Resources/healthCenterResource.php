@@ -42,6 +42,7 @@ class healthCenterResource extends JsonResource
                 'areas' => AreaResource::collection($area),
 
 
+                'view' => $this->view,
                 'phone' => $this->phone,
                 'whatsApp' => $this->whatsApp,
             ];
@@ -50,14 +51,10 @@ class healthCenterResource extends JsonResource
                 'id' => $this->id,
                 'name' => $this->nameEn,
                 'address' => $this->address,
+                'view' => $this->view,
                 'nameAr' => $this->nameAr,
                 'addressAr' => $this->addressAr,
-                // 'area' => $area ? [
-                //     'id' => $area->id,
-                //     'name' => $area->nameEn,
-                //     'nameAr' => $area->nameAr
 
-                // ] : null,
                 'areas' => AreaResource::collection($area),
 
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
@@ -77,6 +74,7 @@ class healthCenterResource extends JsonResource
                 'address' => $this->address,
                 'areas' =>
                 AreaResource::collection($area),
+                'view' => $this->view,
 
                 'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
                 'description' => $this->description1,

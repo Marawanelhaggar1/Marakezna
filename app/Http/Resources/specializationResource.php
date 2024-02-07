@@ -28,6 +28,7 @@ class specializationResource extends JsonResource
             return [
                 'id' => $this->id,
                 'specialty' => $this->specialtyAr,
+                'view' => $this->view,
                 'icon' => $this->icon,
                 'image' => $image,
 
@@ -37,6 +38,7 @@ class specializationResource extends JsonResource
                 'id' => $this->id,
                 'specialty' => $this->specialtyEn,
                 'specialtyAr' => $this->specialtyAr,
+                'view' => $this->view,
                 'icon' => $this->icon,
                 'image' => $image,
             ];
@@ -44,6 +46,7 @@ class specializationResource extends JsonResource
             return [
                 'id' => $this->id,
                 'specialty' => $this->specialtyEn,
+                'view' => $this->view,
                 'icon' => $this->icon,
                 'image' => $image,
 

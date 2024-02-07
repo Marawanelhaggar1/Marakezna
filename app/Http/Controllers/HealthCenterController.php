@@ -13,6 +13,12 @@ class HealthCenterController extends Controller
 {
     public function index()
     {
+        $healthCenter = HealthCenter::where('view', null)->orWhere('view', 1)->get();
+        return healthCenterResource::collection($healthCenter);
+    }
+
+    public function getForAdmin()
+    {
         $healthCenter = HealthCenter::all();
         return healthCenterResource::collection($healthCenter);
     }

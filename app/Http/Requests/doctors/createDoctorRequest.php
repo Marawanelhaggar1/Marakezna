@@ -40,7 +40,9 @@ class createDoctorRequest extends FormRequest
             'phone' => 'nullable',
             'whatsApp' => 'nullable',
             'featured' => 'nullable|boolean',
-            'appointment' => 'nullable|boolean'
+            'appointment' => 'nullable|boolean',
+            'view' => 'nullable',
+
         ];
     }
 
@@ -72,7 +74,8 @@ class createDoctorRequest extends FormRequest
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,
             'featured' => $this->featured,
-            'appointment' => $this->appointment,
+            'appointment' => $this->appointment, 'view' => $this->view,
+
         ]);
     }
 }

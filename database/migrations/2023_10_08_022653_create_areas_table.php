@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nameEn');
             $table->string('nameAr');
+            $table->boolean('view')->nullable();
             $table->timestamps();
         });
     }

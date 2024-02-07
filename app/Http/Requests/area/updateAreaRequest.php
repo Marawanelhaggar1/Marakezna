@@ -26,6 +26,8 @@ class updateAreaRequest extends FormRequest
             'id' => 'required|exists:areas,id',
             'nameEn' => 'required|unique:areas,nameEn,' . $this->id,
             'nameAr' => 'required',
+            'view' => 'required',
+
         ];
     }
 
@@ -35,7 +37,8 @@ class updateAreaRequest extends FormRequest
         $area->update([
             'id' => $this->id,
             'nameEn' => $this->nameEn,
-            'nameAr' => $this->nameAr,
+            'nameAr' => $this->nameAr, 'view' => $this->view,
+
         ]);
 
         return $area;

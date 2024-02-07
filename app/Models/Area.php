@@ -9,7 +9,7 @@ class Area extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nameEn', 'nameAr'];
+    protected $fillable = ['nameEn', 'nameAr', 'view'];
 
     protected $table = 'areas';
 

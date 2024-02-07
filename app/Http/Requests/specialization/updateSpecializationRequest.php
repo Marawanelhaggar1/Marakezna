@@ -28,6 +28,8 @@ class updateSpecializationRequest extends FormRequest
             'specialtyAr' => 'required',
             'icon' => 'nullable',
             'image' => 'nullable|exists:icons,id',
+            'view' => 'required',
+
         ];
     }
 
@@ -50,7 +52,9 @@ class updateSpecializationRequest extends FormRequest
             'id' => $this->id,
             'specialtyEn' => $this->specialtyEn,
             'specialtyAr' => $this->specialtyAr,
-            'icon' => $this->icon, 'image' => $this->image,
+            'view' => $this->view,
+            'icon' =>
+            $this->icon, 'image' => $this->image,
 
 
         ]);

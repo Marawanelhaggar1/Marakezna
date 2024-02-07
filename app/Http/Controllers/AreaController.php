@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\area\createAreaRequest;
+use App\Http\Requests\area\updateAreaRequest;
 use App\Http\Resources\AreaResource;
 use App\Models\Area;
 use Illuminate\Http\Request;
@@ -11,10 +12,21 @@ class AreaController extends Controller
 {
     public function index()
     {
-        $areas = Area::all();
+        $areas = Area::where('view', null)->orWhere('view', 1)->get();
         return AreaResource::collection($areas);
     }
 
+    public function getForAdmin()
+    {
+        $healthCenter = Area::all();
+        return AreaResource::collection($healthCenter);
+    }
+
+    public function update(updateAreaRequest $request)
+    {
+        $booking = $request->updateArea();
+        return new AreaResource($booking);
+    }
     public function getById($id)
     {
         $area = Area::find($id);

@@ -28,6 +28,8 @@ class createSpecializationRequest extends FormRequest
             'specialtyAr' => 'required',
             'icon' => 'nullable',
             'image' => 'nullable|exists:icons,id',
+            'view' => 'nullable',
+
         ];
     }
 
@@ -48,6 +50,7 @@ class createSpecializationRequest extends FormRequest
             'specialtyEn' => $this->specialtyEn,
             'specialtyAr' => $this->specialtyAr,
             'icon' => $this->icon,
+            'view' => $this->view,
             'image' => $this->image,
         ]);
     }

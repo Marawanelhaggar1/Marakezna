@@ -45,7 +45,7 @@ Route::group(
                 Route::get('/', 'auth@index');
                 Route::post('/login', 'auth@login');
                 Route::put('/update/profile', 'auth@updateProfile')->middleware(['auth:sanctum']);
-                Route::put('/change/password', 'auth@changePassword');
+                Route::put('/change/password', 'auth@changePassword')->middleware(['auth:sanctum']);
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
         );
@@ -89,6 +89,7 @@ Route::group(
             function () {
                 Route::get('/', 'AreaController@index');
                 Route::post('/search', 'AreaController@search');
+                Route::get('/admin', 'AreaController@getForAdmin');
                 Route::get('/{id}', 'AreaController@getById');
                 Route::post('/', 'AreaController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'AreaController@update')->middleware(['auth:sanctum']);
@@ -173,6 +174,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'HealthCenterController@index');
+                Route::get('/admin', 'HealthCenterController@getForAdmin');
                 Route::get('/{id}', 'HealthCenterController@getById');
                 Route::get('/area/{id}', 'HealthCenterController@getByArea');
                 Route::get('/category/lab', 'HealthCenterController@getLabs');
@@ -192,6 +194,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'DoctorsController@index');
+                Route::get('/admin', 'DoctorsController@getForAdmin');
                 Route::get('/featured', 'DoctorsController@getFeaturedDoctors');
                 Route::get('/{id}', 'DoctorsController@getById');
                 Route::get('/specialty/{id}', 'DoctorsController@getDoctorBySpecialty');
@@ -292,6 +295,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'SpecializationController@index');
+                Route::get('/admin', 'SpecializationController@getForAdmin');
                 Route::get('/{id}', 'SpecializationController@getById');
                 Route::post('/search', 'SpecializationController@search');
 

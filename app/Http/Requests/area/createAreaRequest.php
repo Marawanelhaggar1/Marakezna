@@ -25,6 +25,7 @@ class createAreaRequest extends FormRequest
         return [
             'nameEn' => 'required|unique:areas,nameEn,' . $this->id,
             'nameAr' => 'required',
+            'view' => 'nullable',
         ];
     }
 
@@ -33,6 +34,7 @@ class createAreaRequest extends FormRequest
         return Area::create([
             'nameAr' => $this->nameAr,
             'nameEn' => $this->nameEn,
+            'view' => $this->view,
         ]);
     }
 }

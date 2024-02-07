@@ -16,10 +16,16 @@ class DoctorsController extends Controller
 {
     public function index()
     {
-        $doctor = Doctors::all();
+        $doctor = Doctors::where('view', null)->orWhere('view', 1)->get();
         return doctorsResource::collection($doctor);
     }
 
+
+    public function getForAdmin()
+    {
+        $healthCenter = Doctors::all();
+        return doctorsResource::collection($healthCenter);
+    }
     public function getById($id)
     {
         $doctor = Doctors::find($id);

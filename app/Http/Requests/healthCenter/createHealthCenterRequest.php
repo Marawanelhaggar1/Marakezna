@@ -38,7 +38,9 @@ class createHealthCenterRequest extends FormRequest
             'phone' => 'required',
             'whatsApp' => 'required',
             'scan' => 'required|boolean',
-            'lab' => 'required|boolean'
+            'lab' => 'required|boolean',
+            'view' => 'nullable',
+
         ];
     }
 
@@ -64,7 +66,8 @@ class createHealthCenterRequest extends FormRequest
                 'description2' => $this->description2,
                 'description2Ar' => $this->description2Ar,
                 'phone' => $this->phone,
-                'whatsApp' => $this->whatsApp,
+                'whatsApp' => $this->whatsApp, 'view' => $this->view,
+
             ]);
         $healthCenter->areas()->sync($this->input('area_id'));
 

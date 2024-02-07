@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('image')->nullable();
             $table->string('specialtyEn');
             $table->string('specialtyAr');
+            $table->boolean('view')->nullable();
+
             $table->foreign('image')->references('id')->on('icons')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

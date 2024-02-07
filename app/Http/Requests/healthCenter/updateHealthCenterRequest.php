@@ -39,6 +39,8 @@ class updateHealthCenterRequest extends FormRequest
             'whatsApp' => 'required',
             'description2' => 'nullable',
             'description2Ar' => 'nullable',
+            'view' => 'required',
+
         ];
     }
 
@@ -72,7 +74,8 @@ class updateHealthCenterRequest extends FormRequest
             'scan' => $this->scan,
             'lab' => $this->lab,
             'phone' => $this->phone,
-            'whatsApp' => $this->whatsApp,
+            'whatsApp' => $this->whatsApp, 'view' => $this->view,
+
 
         ]);
 

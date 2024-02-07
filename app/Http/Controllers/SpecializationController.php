@@ -12,6 +12,12 @@ class SpecializationController extends Controller
 {
     public function index()
     {
+        $specializations = Specialization::where('view', null)->orWhere('view', 1)->get();
+        return specializationResource::collection($specializations);
+    }
+
+    public function getForAdmin()
+    {
         $specializations = Specialization::all();
         return specializationResource::collection($specializations);
     }

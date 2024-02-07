@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('description1Ar');
             $table->boolean('scan');
             $table->boolean('lab');
+            $table->boolean('view')->nullable();
+
             // $table->unsignedBigInteger(
             //     'area_id'
             // );

@@ -18,11 +18,14 @@ class AreaResource extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->nameAr,
+                'view' => $this->view,
+
             ];
         } else if (app()->getLocale() == 'admin') {
             return [
                 'id' => $this->id,
                 'nameAr' => $this->nameAr,
+                'view' => $this->view,
                 'nameEn' => $this->nameEn,
 
             ];
@@ -30,6 +33,8 @@ class AreaResource extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->nameEn,
+                'view' => $this->view,
+
             ];
         }
     }
