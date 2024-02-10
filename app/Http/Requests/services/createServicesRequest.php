@@ -29,7 +29,7 @@ class createServicesRequest extends FormRequest
             'descriptionEn' => 'required',
             'descriptionAr' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'icon' => 'nullable',
+            'icon' => 'required|exists:icons,id',
             'featured' => 'nullable|boolean',
 
         ];

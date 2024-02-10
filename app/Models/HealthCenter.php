@@ -20,7 +20,7 @@ class HealthCenter extends Model
 
     public function doctors()
     {
-        return $this->hasMany(Doctors::class);
+        return $this->belongsToMany(Doctors::class, 'health_centers_doctors', 'health_center_id', 'doctor_id');
     }
 
     public function centerSchedule()

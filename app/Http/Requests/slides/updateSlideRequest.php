@@ -25,16 +25,42 @@ class updateSlideRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:slides,id',
-            'title' => 'required|unique:slides,name,' . $this->id,
+            'title' => 'required',
             'titleAr' => 'required',
             'sub_title' => 'required',
             'sub_titleAr' => 'required',
             'description' => 'required',
             'descriptionAr' => 'required',
-            'image' => 'required',
-            'imageAr' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,mp4,svg|max:4096',
+            'imageAr' => 'nullable|image|mimes:jpeg,png,jpg,gif,mp4,svg|max:4096',
         ];
     }
+
+    public function getImagePath(): string
+    {
+        $doctor = Slide::findOrFail($this->id);
+
+        if ($this->hasFile('image')) {
+            // Use the store() method to store the image
+            return $this->file('image')->store('slides_images', 'public');
+        } else {
+            return $doctor->image;
+        }
+    }
+
+    public function getImagePathAr(): string
+    {
+        $doctor = Slide::findOrFail($this->id);
+
+        if ($this->hasFile('image')) {
+            // Use the store() method to store the image
+            return $this->file('imageAr')->store('slides_images', 'public');
+        } else {
+            return $doctor->image;
+        }
+    }
+
+
 
     public function updateSlide(): Slide
     {
@@ -48,8 +74,8 @@ class updateSlideRequest extends FormRequest
             'sub_titleAr' => $this->sub_titleAr,
             'description' => $this->description,
             'descriptionAr' => $this->descriptionAr,
-            'image' => $this->image,
-            'imageAr' => $this->imageAr,
+            'image' => $this->getImagePath(),
+            'imageAr' => $this->getImagePathAr(),
         ]);
 
         return $slide;

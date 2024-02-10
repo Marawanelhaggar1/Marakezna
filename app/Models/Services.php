@@ -15,4 +15,8 @@ class Services extends Model
     {
         return $this->belongsTo(ServiceGroup::class);
     }
+    public function icon()
+    {
+        return $this->belongsTo(Icons::class);
+    }
 }

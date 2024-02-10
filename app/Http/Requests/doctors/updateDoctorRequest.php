@@ -38,7 +38,8 @@ class updateDoctorRequest extends FormRequest
             'ratingEn' => 'nullable',
             'ratingAr' => 'nullable',
             'waiting' => 'required',
-            'health_center_id' => 'nullable|exists:health_centers,id',
+            'health_center_id' => 'required|array',  // Assuming you are passing an array of area_ids
+            'health_center_id.*' => 'exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
             'featured' => 'nullable|boolean',
             'appointment' => 'nullable|boolean',
@@ -85,6 +86,8 @@ class updateDoctorRequest extends FormRequest
             'appointment' => $this->appointment, 'view' => $this->view,
 
         ]);
+        $doctor->healthCenter()->sync($this->input('health_center_id'));
+
 
         return $doctor;
     }

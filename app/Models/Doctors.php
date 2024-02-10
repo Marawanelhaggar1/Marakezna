@@ -16,7 +16,7 @@ class Doctors extends Model
 
     public function healthCenter()
     {
-        return $this->belongsTo(HealthCenter::class);
+        return $this->belongsToMany(HealthCenter::class, 'health_centers_doctors', 'doctor_id', 'health_center_id');
     }
 
     public function patients()

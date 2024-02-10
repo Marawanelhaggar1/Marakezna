@@ -15,4 +15,9 @@ class Icons extends Model
     {
         return $this->hasMany(Specialization::class);
     }
+
+    public function service()
+    {
+        return $this->hasMany(Services::class);
+    }
 }

@@ -35,7 +35,8 @@ class createDoctorRequest extends FormRequest
             'waiting' => 'required',
             'ratingEn' => 'required',
             'ratingAr' => 'required',
-            'health_center_id' => 'nullable|exists:health_centers,id',
+            'health_center_id' => 'required|array',  // Assuming you are passing an array of area_ids
+            'health_center_id.*' => 'exists:health_centers,id',
             'specialization_id' => 'required|exists:specializations,id',
             'phone' => 'nullable',
             'whatsApp' => 'nullable',
@@ -56,7 +57,7 @@ class createDoctorRequest extends FormRequest
     {
 
 
-        return Doctors::create([
+        $doctor = Doctors::create([
             'nameEn' => $this->nameEn,
             'nameAr' => $this->nameAr,
             'feeAr' => $this->feeAr,
@@ -69,7 +70,7 @@ class createDoctorRequest extends FormRequest
             'ratingEn' => $this->ratingEn,
             'waiting' => $this->waiting,
             'ratingAr' => $this->ratingAr,
-            'health_center_id' => $this->health_center_id,
+            // 'health_center_id' => $this->health_center_id,
             'specialization_id' => $this->specialization_id,
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,
@@ -77,5 +78,7 @@ class createDoctorRequest extends FormRequest
             'appointment' => $this->appointment, 'view' => $this->view,
 
         ]);
+        $doctor->healthCenter()->sync($this->input('health_center_id'));
+        return $doctor;
     }
 }

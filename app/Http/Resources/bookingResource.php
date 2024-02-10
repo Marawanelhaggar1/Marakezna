@@ -22,6 +22,7 @@ class bookingResource extends JsonResource
         $doctor = Doctors::find($this->doctor_id);
         $doctor_image = $doctor->image;
         $healthCenter = HealthCenter::find($this->health_center_id);
+        // dd($healthCenter);
         if ($healthCenter) {
             $healthCenter_nameEn = $healthCenter->nameEn;
             $healthCenter_nameAr = $healthCenter->nameAr;

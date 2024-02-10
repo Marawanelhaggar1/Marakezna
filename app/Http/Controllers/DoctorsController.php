@@ -68,13 +68,18 @@ class DoctorsController extends Controller
 
     public function getDoctorByCenter($id)
     {
-        $doctors = Doctors::where('health_center_id', $id)->get();
+        $doctors =
+            Doctors::whereHas('healthCenter', function ($query) use ($id) {
+                $query->where('health_Centers.id', $id);
+            })->get();
         return doctorsResource::collection($doctors);
     }
 
     public function getDoctorByCenterAndSpecialty($center_id, $specialty_id)
     {
-        $doctors = Doctors::where('health_center_id', $center_id)->where('specialization_id', $specialty_id)
+        $doctors = Doctors::whereHas('healthCenter', function ($query) use ($center_id) {
+            $query->where('health_Centers.id', $center_id);
+        })->where('specialization_id', $specialty_id)
             ->get();
         return doctorsResource::collection($doctors);
     }

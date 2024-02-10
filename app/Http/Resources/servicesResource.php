@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Icons;
 use App\Models\ServiceGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,8 +26,15 @@ class servicesResource extends JsonResource
             $serviceGroup_Ar = $serviceGroup->nameAr;
         }
 
+        if ($this->icon) {
+            $icons = Icons::findOrFail($this->icon);
+            $icon = 'https://pp.etqanis.com/storage/app/public/' . $icons->image;
+        } else {
+            $icon = null;
+        }
+
         if ($this->image) {
-            $image = 'http://127.0.0.1:8000/storage/' . $this->image;
+            $image = 'https://pp.etqanis.com/storage/app/public/' . $this->image;
         } else {
             $image = null;
         }
@@ -34,7 +42,7 @@ class servicesResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'icon' => $this->icon,
+                'icon' => $icon,
                 'featured' => $this->featured,
                 'name' => $this->nameAr,
                 'service_group' => [
@@ -45,12 +53,32 @@ class servicesResource extends JsonResource
                 'description' => $this->descriptionAr,
                 'image' => $image,
             ];
+        } else if (app()->getLocale() == 'admin') {
+            return [
+                'id' => $this->id,
+                'name' => $this->nameEn,
+                'nameAr' => $this->nameAr,
+
+                'featured' => $this->featured,
+                'icon' => $icon,
+
+                'service_group' => [
+                    'id' => $serviceGroup_id,
+                    'name' => $serviceGroup_En,
+                    'nameAr' => $serviceGroup_Ar,
+
+                ],
+                'description' => $this->descriptionEn,
+                'descriptionAr' => $this->descriptionAr,
+
+                'image' => $image,
+            ];
         } else {
             return [
                 'id' => $this->id,
                 'name' => $this->nameEn,
                 'featured' => $this->featured,
-                'icon' => $this->icon,
+                'icon' => $icon,
                 'service_group' => [
                     'id' => $serviceGroup_id,
                     'name' => $serviceGroup_En,

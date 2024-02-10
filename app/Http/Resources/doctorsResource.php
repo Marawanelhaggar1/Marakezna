@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Doctors;
 use App\Models\DoctorSchedule;
 use App\Models\HealthCenter;
 use App\Models\Specialization;
@@ -17,19 +18,22 @@ class doctorsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $healthCenter_nameEn = null;
-        $healthCenter_nameAr = null;
-        $healthCenter_id = null;
-        $healthCenter = HealthCenter::find($this->health_center_id);
+        // $healthCenter_nameEn = null;
+        // $healthCenter_nameAr = null;
+        // $healthCenter_id = null;
+        // $healthCenter = HealthCenter::find($this->health_center_id);
         $specialty = Specialization::find($this->specialization_id);
-        if ($healthCenter) {
-            $healthCenter_nameEn = $healthCenter->nameEn;
-            $healthCenter_nameAr = $healthCenter->nameAr;
-            $healthCenter_id = $healthCenter->id;
-        }
+        // if ($health_ce) {
+        //     $healthCenter_nameEn = $healthCenter->nameEn;
+        //     $healthCenter_nameAr = $healthCenter->nameAr;
+        //     $healthCenter_id = $healthCenter->id;
+        // }
+        $doctor = Doctors::find($this->id);
+        $center = $doctor->healthCenter;
         $doctorSchedule = [];
         $doctorSchedule = DoctorSchedule::where('doctor_id', $this->id)->get();
         $doctorSchedule = doctorSchedualeResources::collection($doctorSchedule);
+
 
 
         if (app()->getLocale() == 'Ar') {
@@ -51,11 +55,8 @@ class doctorsResource extends JsonResource
                 'rating' => $this->ratingAr,
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'health_center' => [
-                    'id' => $healthCenter_id,
-                    'name' => $healthCenter_nameAr,
-                ],
+                'image' => 'https://pp.etqanis.com/storage/app/public/' . $this->image,
+                'health_center' => healthCenterResource::collection($center),
                 'doctorSchedule' => $doctorSchedule
             ];
         } else if (app()->getLocale() == 'Ar') {
@@ -82,12 +83,9 @@ class doctorsResource extends JsonResource
                 'view' => $this->view,
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'health_center' => [
-                    'id' => $healthCenter_id,
-                    'nameAr' => $healthCenter_nameAr,
-                    'name' => $healthCenter_nameEn,
-                ],
+                'image' => 'https://pp.etqanis.com/storage/app/public/' . $this->image,
+                'health_center' => healthCenterResource::collection($center),
+
                 'doctorScheduleAr' => $doctorSchedule,
                 'doctorSchedule' => $doctorSchedule
 
@@ -112,11 +110,8 @@ class doctorsResource extends JsonResource
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,
                 'whatsApp' => $this->whatsApp,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'health_center' => [
-                    'id' => $healthCenter_id,
-                    'name' => $healthCenter_nameEn,
-                ],
+                'image' => 'https://pp.etqanis.com/storage/app/public/' . $this->image,
+                'health_center' => healthCenterResource::collection($center),
                 'doctorSchedule' => $doctorSchedule
 
             ];

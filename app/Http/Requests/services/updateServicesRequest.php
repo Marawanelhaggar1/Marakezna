@@ -29,7 +29,7 @@ class updateServicesRequest extends FormRequest
             'service_group_id' => 'nullable|exists:service_groups,id',
             'descriptionEn' => 'required',
             'descriptionAr' => 'required',
-            'icon' => 'nullable',
+            'icon' => 'required|exists:icons,id',
             'featured' => 'nullable|boolean',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];

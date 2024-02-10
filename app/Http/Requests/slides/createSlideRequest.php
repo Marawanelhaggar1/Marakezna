@@ -30,8 +30,10 @@ class createSlideRequest extends FormRequest
             'sub_titleAr' => 'required',
             'description' => 'required',
             'descriptionAr' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'imageAr' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' =>
+            'required|file|mimes:jpeg,png,jpg,gif,svg,mp4|max:4096',
+            'imageAr'
+            => 'required|file|mimes:jpeg,png,jpg,gif,svg,mp4|max:4096',
         ];
     }
     public function getImagePath(): string
