@@ -103,7 +103,7 @@ class auth extends Controller
         $request->validate([
             'email' => 'required|email',
             'password_reset_token' => 'required|string',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:8',
         ]);
 
         $user = User::where('email', $request->email)

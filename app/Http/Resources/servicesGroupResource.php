@@ -19,18 +19,22 @@ class servicesGroupResource extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->nameAr,
+                'services_id' => $this->services_id
             ];
         } else if (app()->getLocale() == 'admin') {
             return [
                 'id' => $this->id,
                 'nameAr' => $this->nameAr,
                 'name' => $this->nameEn,
+                'services_id' => $this->services_id
 
             ];
         } else {
             return [
                 'id' => $this->id,
                 'name' => $this->nameEn,
+                'services_id' => $this->services_id
+
             ];
         }
     }

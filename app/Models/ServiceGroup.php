@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceGroup extends Model
 {
     use HasFactory;
-    protected $fillable = ['nameEn', 'nameAr'];
+    protected $fillable = ['nameEn', 'nameAr', 'services_id'];
     protected $table = 'service_groups';
 
     public function services()
     {
-        return $this->hasMany(Services::class);
+        return $this->belongsTo(Services::class);
     }
 }

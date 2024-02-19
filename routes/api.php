@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CenterCallsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DoctorCallsController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+// ForgotPasswordController
 
 Route::group(
     [
@@ -46,6 +47,8 @@ Route::group(
                 Route::post('/login', 'auth@login');
                 Route::put('/update/profile', 'auth@updateProfile')->middleware(['auth:sanctum']);
                 Route::put('/change/password', 'auth@changePassword')->middleware(['auth:sanctum']);
+                Route::post('/forgot/password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+                Route::post('/reset/password', 'ResetPasswordController@showResetForm')->middleware(['auth:sanctum']);
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
             }
         );

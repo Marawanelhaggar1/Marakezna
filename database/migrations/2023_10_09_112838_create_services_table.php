@@ -15,14 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('nameEn');
             $table->string('nameAr');
-            $table->string('descriptionEn');
-            $table->string('descriptionAr');
+            $table->string('descriptionEn1');
+            $table->string('descriptionAr1');
+            $table->string('descriptionEn2');
+            $table->string('descriptionAr2');
             $table->boolean('featured')->nullable();
             $table->string('image')->nullable();
             $table->unsignedBigInteger('icon')->nullable();
-            $table->unsignedBigInteger('service_group_id')->nullable();
 
-            $table->foreign('service_group_id')->references('id')->on('service_groups')->onUpdate('cascade')->onDelete('cascade');
+
             $table->foreign('icon')->references('id')->on('icons')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();

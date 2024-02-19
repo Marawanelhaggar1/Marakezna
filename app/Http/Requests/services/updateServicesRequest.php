@@ -26,12 +26,13 @@ class updateServicesRequest extends FormRequest
             'id' => 'required|exists:services,id',
             'nameEn' => 'required|unique:services,nameEn,' . $this->id,
             'nameAr' => 'required',
-            'service_group_id' => 'nullable|exists:service_groups,id',
-            'descriptionEn' => 'required',
-            'descriptionAr' => 'required',
+            'descriptionEn1' => 'required',
+            'descriptionAr1' => 'required',
+            'descriptionEn2' => 'nullable',
+            'descriptionAr2' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'icon' => 'required|exists:icons,id',
             'featured' => 'nullable|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
     public function getImagePath()
@@ -52,13 +53,13 @@ class updateServicesRequest extends FormRequest
             'id' => $this->id,
             'nameEn' => $this->nameEn,
             'nameAr' => $this->nameAr,
-            'service_group_id' => $this->service_group_id,
-            'descriptionEn' => $this->descriptionEn,
-            'descriptionAr' => $this->descriptionAr,
-            'image' => $this->getImagePath(),
+            'descriptionEn1' => $this->descriptionEn1,
+            'descriptionAr1' => $this->descriptionAr1,
+            'descriptionEn2' => $this->descriptionEn2,
+            'descriptionAr2' => $this->descriptionAr2,
             'icon' => $this->icon,
             'featured' => $this->featured,
-
+            'image' => $this->getImagePath(),
 
         ]);
 
