@@ -71,7 +71,7 @@ class updateBookingRequest extends FormRequest
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
             'diagnose' => $this->diagnose,
-            'date' => $this->getTheDate($this->date),
+            'date' => $this->date ? $this->getTheDate($this->date) : $booking->date,
             'doctor_id' => $this->doctor_id,
             'status' => $this->status,
             'location' => $this->location,

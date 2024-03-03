@@ -72,7 +72,7 @@ class createBookingRequest extends FormRequest
             'phone' => $this->phone,
             'user_id' => $this->user_id,
             'email' => $this->email,
-            'date' => $this->getTheDate($this->date),
+            'date' =>  $this->getTheDate($this->date),
             'diagnose' => $this->diagnose,
             'time' => $this->time,
             'doctor_id' => $this->doctor_id,

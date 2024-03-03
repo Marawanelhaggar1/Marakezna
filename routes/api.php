@@ -3,13 +3,19 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CenterCallsController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DentalServiceController;
 use App\Http\Controllers\DoctorCallsController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\IconsController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MobileSettingController;
+use App\Http\Controllers\NewEmployeesController;
+use App\Http\Controllers\PicsController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\VisitsController;
@@ -76,6 +82,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'ServicesController@index');
+                Route::get('/dental', 'ServicesController@indexDental');
                 Route::get('/featured', 'ServicesController@getFeaturedServices');
                 Route::get('/{id}', 'ServicesController@getById');
                 Route::post('/', 'ServicesController@create')->middleware(['auth:sanctum']);
@@ -156,6 +163,33 @@ Route::group(
                 Route::delete('/{id}', 'IconsController@delete')->middleware(['auth:sanctum']);
             }
         );
+
+        Route::group(
+            [
+                'prefix' => 'pics',
+            ],
+
+            function () {
+                Route::get('/', 'PicsController@index');
+                Route::get('/{id}', 'PicsController@getById');
+                Route::post('/', 'PicsController@create')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'PicsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'feedback',
+            ],
+
+            function () {
+                Route::get('/', 'FeedbackController@index');
+                Route::get('/{id}', 'FeedbackController@getById');
+                Route::post('/', 'FeedbackController@create')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'FeedbackController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
         Route::group(
             [
                 'prefix' => 'about/us'
@@ -167,6 +201,62 @@ Route::group(
                 Route::post('/', 'AboutUsController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'AboutUsController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'AboutUsController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'dental/service'
+            ],
+
+            function () {
+                Route::get('/', 'DentalServiceController@index');
+                Route::get('/{id}', 'DentalServiceController@getById');
+                Route::post('/', 'DentalServiceController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'DentalServiceController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'DentalServiceController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'new/employee',
+            ],
+
+            function () {
+                Route::get('/', 'NewEmployeesController@index');
+                Route::get('/{id}', 'NewEmployeesController@getById');
+                Route::post('/', 'NewEmployeesController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'NewEmployeesController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'NewEmployeesController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'promotion',
+            ],
+
+            function () {
+                Route::get('/', 'PromotionController@index');
+                Route::get('/{id}', 'PromotionController@getById');
+                Route::post('/', 'PromotionController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'PromotionController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'PromotionController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'career',
+            ],
+
+            function () {
+                Route::get('/', 'CareerController@index');
+                Route::get('/{id}', 'CareerController@getById');
+                Route::post('/', 'CareerController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'CareerController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'CareerController@delete')->middleware(['auth:sanctum']);
             }
         );
 
@@ -298,6 +388,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'SpecializationController@index');
+                Route::get('/paginate/pag', 'SpecializationController@indexPaginate');
                 Route::get('/admin', 'SpecializationController@getForAdmin');
                 Route::get('/{id}', 'SpecializationController@getById');
                 Route::post('/search', 'SpecializationController@search');

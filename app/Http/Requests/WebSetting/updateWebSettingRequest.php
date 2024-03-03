@@ -31,29 +31,57 @@ class updateWebSettingRequest extends FormRequest
             'phoneAr' => 'required',
             'address' => 'nullable',
             'addressAr' => 'nullable',
-            'twitter' => 'nullable',
+            'whatsApp' => 'nullable',
+            'location' => 'required',
             'facebook' => 'nullable',
+            'youtube' => 'nullable',
+            'snapchat' => 'nullable',
+            'whatsAppLink' => 'nullable',
             'instagram' => 'nullable',
             'linkedin' => 'nullable',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'footerLogo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'footerLogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'favicon' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
     public function getLogoPath(): string
     {
-        return $this->file('logo')->store('setting_images', 'public');
+        $setting = WebSetting::findOrFail($this->id);
+
+
+        if ($this->hasFile('logo')) {
+            // Use the store() method to store the image
+            return $this->file('logo')->store('settings_images', 'public');
+        } else {
+            return $setting->logo;
+        }
     }
 
     public function getFooterLogoPath(): string
     {
-        return $this->file('footerLogo')->store('setting_images', 'public');
+        $setting = WebSetting::findOrFail($this->id);
+
+
+        if ($this->hasFile('footerLogo')) {
+            // Use the store() method to store the image
+            return $this->file('footerLogo')->store('settings_images', 'public');
+        } else {
+            return $setting->footerLogo;
+        }
     }
 
     public function getFaviconPath(): string
     {
-        return $this->file('favicon')->store('setting_images', 'public');
+        $setting = WebSetting::findOrFail($this->id);
+
+
+        if ($this->hasFile('favicon')) {
+            // Use the store() method to store the image
+            return $this->file('favicon')->store('settings_images', 'public');
+        } else {
+            return $setting->favicon;
+        }
     }
 
 
@@ -70,7 +98,11 @@ class updateWebSettingRequest extends FormRequest
             'phoneAr' => $this->phoneAr,
             'address' => $this->address,
             'addressAr' => $this->addressAr,
-            'twitter' => $this->twitter,
+            'whatsApp' => $this->whatsApp,
+            'location' => $this->location,
+            'youtube' => $this->youtube,
+            'snapChat' => $this->snapChat,
+            'whatsAppLink' => $this->whatsAppLink,
             'facebook' => $this->facebook,
             'linkedin' => $this->linkedin,
             'instagram' => $this->instagram,
