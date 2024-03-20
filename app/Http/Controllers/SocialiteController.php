@@ -40,6 +40,10 @@ class SocialiteController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'social_id' => $social_id,
+                'mobile' => $request->mobile,
+                'role' => $request->role,
+
+
                 'password' => Hash::make('my-google')
             ]);
 

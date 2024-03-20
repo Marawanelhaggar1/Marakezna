@@ -24,7 +24,7 @@ class updateAboutUsRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:about_us,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'paragraph' => 'required',
             'paragraphAr' => 'required',
             'title' => 'required',

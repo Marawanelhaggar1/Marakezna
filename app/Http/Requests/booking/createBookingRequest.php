@@ -3,7 +3,10 @@
 namespace App\Http\Requests\booking;
 
 use App\Models\Bookings;
+use App\Models\User;
+use App\Notifications\Booking;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Notification;
 
 class createBookingRequest extends FormRequest
 {
@@ -12,7 +15,12 @@ class createBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->isUser();
+        $user = auth()->user();
+        // dd($user);
+        // logger()->info('User Details:', ['user' => $user]);
+
+        // Check if a user is authenticated and call isUser() if true
+        return $user && $user->isUser();
     }
 
     /**
@@ -33,15 +41,13 @@ class createBookingRequest extends FormRequest
             'doctor_id' => 'required|exists:doctors,id',
             'health_center_id' => 'nullable|exists:health_centers,id',
             'status' => 'required',
-            'user_id' => 'required|exists:users,id',
             'email' => 'required|email',
             'payment' => 'nullable'
         ];
     }
 
     public function getTheDate($targetDay)
-    {
-        // Validate the target day input
+    {      // Validate the target day input
         $validDaysAr = ['الأحد', 'الأثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعه', 'السبت'];
         $validDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -49,30 +55,33 @@ class createBookingRequest extends FormRequest
             dd('Invalid target day. Please provide a valid day name (e.g., Sunday, Monday, etc.).');
         }
 
-        // Get the current date
         $today = now();
 
         // Calculate the next occurrence of the target day
-        $targetIndex = array_search($targetDay, $validDays) || array_search($targetDay, $validDaysAr);
-        $nextOccurrence = $today->copy();
-        $nextOccurrence->addDays(($targetIndex + 7 - $today->dayOfWeek) % 7);
+        $targetIndex = array_search($targetDay, $validDays);
+        if ($targetIndex === false) {
+            $targetIndex = array_search($targetDay, $validDaysAr);
+        }
+        $daysUntilNext = ($targetIndex + 7 - $today->dayOfWeek) % 7;
+        $nextOccurrence = $today->copy()->addDays($daysUntilNext);
 
         // Format the date as "dd/mm/yyyy"
         $formattedDate = $nextOccurrence->format('Y/m/d');
-        // $this->schedule['date'] = $formattedDate;
         return $formattedDate;
     }
 
     public function createBooking(): Bookings
     {
+        $user = auth()->user();
+
 
         // dd($this->getTheDate($this->date));
-        return Bookings::create([
+        $booking = Bookings::create([
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
-            'user_id' => $this->user_id,
+            'user_id' => $user->id,
             'email' => $this->email,
-            'date' =>  $this->getTheDate($this->date),
+            'date' => $this->getTheDate($this->date),
             'diagnose' => $this->diagnose,
             'time' => $this->time,
             'doctor_id' => $this->doctor_id,
@@ -82,5 +91,10 @@ class createBookingRequest extends FormRequest
             'payment' => $this->payment,
             'description' => $this->description,
         ]);
+
+        $users = User::where('role', 'admin')->get();
+        $booking_id = $booking->id;
+        Notification::send($users, new Booking($booking_id));
+        return $booking;
     }
 }

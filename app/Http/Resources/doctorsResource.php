@@ -55,11 +55,11 @@ class doctorsResource extends JsonResource
                 'rating' => $this->ratingAr,
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,
-                'image' => 'https://pp.etqanis.com/storage/app/public/' . $this->image,
+                'image' => 'https://marakezna.com/storage/app/public/' . $this->image,
                 'health_center' => healthCenterResource::collection($center),
                 'doctorSchedule' => $doctorSchedule
             ];
-        } else if (app()->getLocale() == 'Ar') {
+        } else if (app()->getLocale() == 'admin') {
             return [
                 'id' => $this->id,
                 'waiting' => $this->waiting,
@@ -83,7 +83,7 @@ class doctorsResource extends JsonResource
                 'view' => $this->view,
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,
-                'image' => 'https://pp.etqanis.com/storage/app/public/' . $this->image,
+                'image' => 'https://marakezna.com/storage/app/public/' . $this->image,
                 'health_center' => healthCenterResource::collection($center),
 
                 'doctorScheduleAr' => $doctorSchedule,
@@ -110,7 +110,7 @@ class doctorsResource extends JsonResource
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,
                 'whatsApp' => $this->whatsApp,
-                'image' => 'https://pp.etqanis.com/storage/app/public/' . $this->image,
+                'image' => 'https://marakezna.com/storage/app/public/' . $this->image,
                 'health_center' => healthCenterResource::collection($center),
                 'doctorSchedule' => $doctorSchedule
 

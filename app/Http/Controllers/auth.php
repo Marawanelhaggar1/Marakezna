@@ -40,18 +40,34 @@ class auth extends Controller
         ], 201);
     }
 
-    public function login(loginRequest $request)
-    {
+   public function login(loginRequest $request)
+{
+    try {
         $user = $request->loginUser();
+        
+        if ($user) {
+            return response()->json([
+                'data' => $user
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+            ], 401); // 401 Unauthorized status code
+        }
+    } catch (\Exception $e) {
+        // Log the exception for debugging purposes
+        // You can customize the error message based on the exception
         return response()->json([
-            'success' => true,
-            'message' => 'Successfully logged in',
-            'data' => $user
-        ]);
+            'success' => false,
+            'message' => 'Login failed. Please try again later.',
+        ], 500); // 500 Internal Server Error status code
     }
+}
 
 
-    public function updateProfile(updateProfile $request)
+
+  public function updateProfile(updateProfile $request)
     {
         $user = auth()->user();
 
@@ -62,6 +78,8 @@ class auth extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+
 
     public function changePassword(changePassword $request)
     {
@@ -103,7 +121,7 @@ class auth extends Controller
         $request->validate([
             'email' => 'required|email',
             'password_reset_token' => 'required|string',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed|min:6',
         ]);
 
         $user = User::where('email', $request->email)

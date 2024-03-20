@@ -14,20 +14,25 @@ class mobileSettingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        if (app()->getLocale() == 'Ar') {
+       if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
                 'email' => $this->email,
                 'name' => $this->nameAr,
                 'phone' => $this->phoneAr,
                 'address' => $this->addressAr,
-                'twitter' => $this->twitter,
+                'location' => $this->location,
+                'tiktok' => $this->tiktok,
+                'whatsAppLink' => $this->whatsAppLink,
+                'whatsApp' => $this->whatsApp,
+                'snapchat' => $this->snapchat,
+                'youtube' => $this->youtube,
                 'facebook' => $this->facebook,
                 'linkedin' => $this->linkedin,
                 'instagram' => $this->instagram,
-                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
-                'background1' => 'http://127.0.0.1:8000/storage/' . $this->background1,
-                'background2' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+                'logo' => 'https://marakezna.com/storage/app/public/' . $this->logo,
+                'background1' => 'https://marakezna.com/storage/app/public/' . $this->background1,
+                'background2' => 'https://marakezna.com/storage/app/public/' . $this->background2
             ];
         } else if (app()->getLocale() == 'admin') {
             return [
@@ -39,13 +44,18 @@ class mobileSettingResource extends JsonResource
                 'nameAr' => $this->nameAr,
                 'phoneAr' => $this->phoneAr,
                 'addressAr' => $this->addressAr,
-                'twitter' => $this->twitter,
+                'location' => $this->location,
+                'tiktok' => $this->tiktok,
+                'whatsAppLink' => $this->whatsAppLink,
+                'whatsApp' => $this->whatsApp,
+                'snapchat' => $this->snapchat,
+                'youtube' => $this->youtube,
                 'facebook' => $this->facebook,
                 'linkedin' => $this->linkedin,
                 'instagram' => $this->instagram,
-                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
-                'background1' => 'http://127.0.0.1:8000/storage/' . $this->background1,
-                'background2' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+                'logo' => 'https://marakezna.com/storage/app/public/' . $this->logo,
+                'background1' => 'https://marakezna.com/storage/app/public/' . $this->background1,
+                'background2' => 'https://marakezna.com/storage/app/public/' . $this->background2
             ];
         } else {
             return [
@@ -54,14 +64,18 @@ class mobileSettingResource extends JsonResource
                 'name' => $this->name,
                 'phone' => $this->phone,
                 'address' => $this->address,
-                'twitter' => $this->twitter,
+                'location' => $this->location,
+                'tiktok' => $this->tiktok,
+                'whatsAppLink' => $this->whatsAppLink,
+                'whatsApp' => $this->whatsApp,
+                'snapchat' => $this->snapchat,
+                'youtube' => $this->youtube,
                 'facebook' => $this->facebook,
                 'linkedin' => $this->linkedin,
                 'instagram' => $this->instagram,
-                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
-                'background1' => 'http://127.0.0.1:8000/storage/' . $this->background1,
-                'background2' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+                'logo' => 'https://marakezna.com/storage/app/public/' . $this->logo,
+                'background1' => 'https://marakezna.com/storage/app/public/' . $this->background1,
+                'background2' => 'https://marakezna.com/storage/app/public/' . $this->background2
             ];
         }
-    }
-}
+    }}

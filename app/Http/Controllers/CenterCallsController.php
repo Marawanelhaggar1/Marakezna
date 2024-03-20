@@ -6,7 +6,10 @@ use App\Http\Requests\centerCalls\createCenterCallsRequest;
 use App\Http\Requests\centerCalls\updateCenterCallsRequest;
 use App\Http\Resources\centerCallsResource;
 use App\Models\CenterCalls;
+use App\Models\User;
+use App\Notifications\Calls;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class CenterCallsController extends Controller
 {
@@ -25,6 +28,7 @@ class CenterCallsController extends Controller
     public function create(createCenterCallsRequest $request)
     {
         $centerCalls = $request->createCall();
+
         return new centerCallsResource($centerCalls);
     }
 

@@ -18,7 +18,7 @@ class specializationResource extends JsonResource
 
         if ($this->image) {
             $icon = Icons::findOrFail($this->image);
-            $image = 'http://127.0.0.1:8000/storage/' . $icon->image;
+            $image = 'https://marakezna.com/storage/app/public/' . $icon->image;
         } else {
             $image = null;
         }
@@ -28,27 +28,29 @@ class specializationResource extends JsonResource
             return [
                 'id' => $this->id,
                 'specialty' => $this->specialtyAr,
-                'view' => $this->view,
                 'icon' => $this->icon,
-                'image' => $image,
+                'image' => $image,                'view' => $this->view,
+
 
             ];
         } else if (app()->getLocale() == 'admin') {
             return [
                 'id' => $this->id,
-                'specialty' => $this->specialtyEn,
+                'specialtyEn' => $this->specialtyEn,
                 'specialtyAr' => $this->specialtyAr,
-                'view' => $this->view,
                 'icon' => $this->icon,
+                'image_id' => $this->image,
+                'view' => $this->view,
+
                 'image' => $image,
             ];
         } else {
             return [
                 'id' => $this->id,
                 'specialty' => $this->specialtyEn,
-                'view' => $this->view,
                 'icon' => $this->icon,
                 'image' => $image,
+                'view' => $this->view,
 
             ];
         }

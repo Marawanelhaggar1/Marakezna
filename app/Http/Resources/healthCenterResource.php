@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Area;
 use App\Models\HealthCenter;
+use App\Models\ServiceGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,73 +17,88 @@ class healthCenterResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // $area = null;
-
-        // if ($this->area_id) {
-        //     $area = Area::find($this->area_id);
-        // }
-
+        $service = ServiceGroup::where('center_id', $this->id)->get();
         $center = HealthCenter::find($this->id);
         $area = $center->areas;
-        // dd($center->areas);
+        $subArea = $center->subAreas;
+        // dd($area);
+
+        $image = $this->image ? 'https://marakezna.com/storage/app/public/' . $this->image : null;
+        $logo = $this->logo ? 'https://marakezna.com/storage/app/public/' . $this->logo : null;
+
+        $description = $this->description1 ?? null;
+        $description2 = $this->description2 ?? null;
+        $descriptionAr = $this->description1Ar ?? null;
+        $description2Ar = $this->description2Ar ?? null;
+
+        $phone = $this->phone ?? null;
+        $whatsApp = $this->whatsAppLink ?? null;
+        $name = $this->nameEn ?? null;
+        $nameAr = $this->nameAr ?? null;
+        $address = $this->address ?? null;
+        $addressAr = $this->addressAr ?? null;
+        $scan = $this->scan ?? null;
+        $lab = $this->lab ?? null;
+
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'name' => $this->nameAr,
-                'address' => $this->addressAr,
-                // 'area' => $area ? [
-                //     'id' => $area->id,
-                //     'name' => $area->nameAr
-                // ] : null,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'description' => $this->description1Ar,
-                'description2' => $this->description2Ar,
-                'scan' => $this->scan,
-                'lab' => $this->lab,
+                'name' => $nameAr,
+                'address' => $addressAr,
+                'image' => $image,
+                'logo' => $logo,
+                'description' => $descriptionAr,
+                'description2' => $description2Ar,
+                'scan' => $scan,
+                'lab' => $lab,
                 'areas' => AreaResource::collection($area),
-
-
+                'sub_areas' => subAreaResource::collection($subArea),
+                'service' => servicesGroupResource::collection($service),
                 'view' => $this->view,
-                'phone' => $this->phone,
-                'whatsApp' => $this->whatsApp,
+                'phone' => $phone,
+                'whatsApp' => $whatsApp,
             ];
-        } else if (app()->getLocale() == 'admin') {
+        } elseif (app()->getLocale() == 'admin') {
             return [
                 'id' => $this->id,
-                'name' => $this->nameEn,
-                'address' => $this->address,
-                'view' => $this->view,
-                'nameAr' => $this->nameAr,
-                'addressAr' => $this->addressAr,
-
+                'name' => $name,
+                'address' => $address,
+                'nameAr' => $nameAr,
+                'addressAr' => $addressAr,
                 'areas' => AreaResource::collection($area),
-
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'description' => $this->description1,
-                'scan' => $this->scan,
-                'lab' => $this->lab,
-                'phone' => $this->phone,
-                'whatsApp' => $this->whatsApp,
-                'description2' => $this->description2,
-                'descriptionAr' => $this->description1Ar,
-                'description2Ar' => $this->description2Ar,
+                'sub_areas' => subAreaResource::collection($subArea),
+                'service' => servicesGroupResource::collection($service),
+                'view' => $this->view,
+                'image' => $image,
+                'logo' => $logo,
+                'description' => $description,
+                'scan' => $scan,
+                'lab' => $lab,
+                'phone' => $phone,
+                'whatsApp' => $whatsApp,
+                'description2' => $description2,
+                'descriptionAr' => $descriptionAr,
+                'description2Ar' => $description2Ar,
             ];
         } else {
             return [
                 'id' => $this->id,
-                'name' => $this->nameEn,
-                'address' => $this->address,
-                'areas' =>
-                AreaResource::collection($area),
+                'name' => $name,
+                'address' => $address,
+                'sub_areas' => subAreaResource::collection(
+                    $subArea
+                ),
+                'areas' => AreaResource::collection($area),
+                'service' => servicesGroupResource::collection($service),
                 'view' => $this->view,
-
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
-                'description' => $this->description1,
-                'scan' => $this->scan,
-                'lab' => $this->lab,
-                'phone' => $this->phone,
-                'whatsApp' => $this->whatsApp,
-                'description2' => $this->description2,
+                'image' => $image,
+                'logo' => $logo,
+                'description' => $description,
+                'scan' => $scan,
+                'lab' => $lab,
+                'phone' => $phone,
+                'whatsApp' => $whatsApp,
+                'description2' => $description2,
             ];
         }
     }

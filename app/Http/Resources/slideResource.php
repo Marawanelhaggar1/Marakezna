@@ -21,7 +21,7 @@ class slideResource extends JsonResource
                 'sub_title' => $this->sub_titleAr,
                 'description' => $this->descriptionAr,
                 'image' =>
-                'http://127.0.0.1:8000/storage/' . $this->imageAr,
+                'https://marakezna.com/storage/app/public/' . $this->imageAr,
             ];
         } else if (app()->getLocale() == 'admin') {
             return [
@@ -30,12 +30,12 @@ class slideResource extends JsonResource
                 'sub_title' => $this->sub_title,
                 'description' => $this->description,
                 'image' =>
-                'http://127.0.0.1:8000/storage/' . $this->image,
+                'https://marakezna.com/storage/app/public/' . $this->image,
                 'titleAr' => $this->titleAr,
                 'sub_titleAr' => $this->sub_titleAr,
                 'descriptionAr' => $this->descriptionAr,
                 'imageAr' =>
-                'http://127.0.0.1:8000/storage/' . $this->imageAr,
+                'https://marakezna.com/storage/app/public/' . $this->imageAr,
             ];
         } else {
             return [
@@ -44,7 +44,7 @@ class slideResource extends JsonResource
                 'sub_title' => $this->sub_title,
                 'description' => $this->description,
                 'image' =>
-                'http://127.0.0.1:8000/storage/' . $this->image,
+                'https://marakezna.com/storage/app/public/' . $this->image,
             ];
         }
     }

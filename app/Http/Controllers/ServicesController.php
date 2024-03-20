@@ -12,12 +12,7 @@ class ServicesController extends Controller
 {
     public function index()
     {
-        $services = Services::where('dental', null)->orWhere('dental', 0)->get();
-        return servicesResource::collection($services);
-    }
-    public function indexDental()
-    {
-        $services = Services::where('dental', 1)->get();
+        $services = Services::all();
         return servicesResource::collection($services);
     }
 

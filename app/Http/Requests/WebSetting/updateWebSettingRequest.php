@@ -31,12 +31,8 @@ class updateWebSettingRequest extends FormRequest
             'phoneAr' => 'required',
             'address' => 'nullable',
             'addressAr' => 'nullable',
-            'whatsApp' => 'nullable',
-            'location' => 'required',
+            'twitter' => 'nullable',
             'facebook' => 'nullable',
-            'youtube' => 'nullable',
-            'snapchat' => 'nullable',
-            'whatsAppLink' => 'nullable',
             'instagram' => 'nullable',
             'linkedin' => 'nullable',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -56,7 +52,7 @@ class updateWebSettingRequest extends FormRequest
         } else {
             return $setting->logo;
         }
-    }
+        }
 
     public function getFooterLogoPath(): string
     {
@@ -67,9 +63,9 @@ class updateWebSettingRequest extends FormRequest
             // Use the store() method to store the image
             return $this->file('footerLogo')->store('settings_images', 'public');
         } else {
-            return $setting->footerLogo;
+            return $setting ->footerLogo;
         }
-    }
+        }
 
     public function getFaviconPath(): string
     {
@@ -82,7 +78,7 @@ class updateWebSettingRequest extends FormRequest
         } else {
             return $setting->favicon;
         }
-    }
+        }
 
 
     public function updateWebSetting(): WebSetting
@@ -98,11 +94,7 @@ class updateWebSettingRequest extends FormRequest
             'phoneAr' => $this->phoneAr,
             'address' => $this->address,
             'addressAr' => $this->addressAr,
-            'whatsApp' => $this->whatsApp,
-            'location' => $this->location,
-            'youtube' => $this->youtube,
-            'snapChat' => $this->snapChat,
-            'whatsAppLink' => $this->whatsAppLink,
+            'twitter' => $this->twitter,
             'facebook' => $this->facebook,
             'linkedin' => $this->linkedin,
             'instagram' => $this->instagram,

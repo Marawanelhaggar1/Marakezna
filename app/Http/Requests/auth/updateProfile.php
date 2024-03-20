@@ -29,16 +29,15 @@ class updateProfile extends FormRequest
     {
         $userId = auth()->id();
 
-        return [
-            'first_name' => 'required|string|max:50',
-            'last_name' => 'required|string|max:50',
-            'mobile' => 'required|unique:users,mobile,' . $userId,
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'date_of_birth' => 'nullable|date',
-            // 'whatsApp' => 'nullable',
-            // 'address' => 'nullable',
-        ];
-    }
+    return [
+        'first_name' => 'required|string|max:50',
+        'last_name' => 'required|string|max:50',
+        'mobile' => 'required|unique:users,mobile,' . $userId,
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'date_of_birth' => 'nullable|date',
+        // 'whatsApp' => 'nullable',
+        // 'address' => 'nullable',
+    ];    }
 
 
     // public function getImagePath()

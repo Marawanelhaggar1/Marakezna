@@ -16,7 +16,7 @@ class iconsResources extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->image
+            'image' => 'https://marakezna.com/storage/app/public/' . $this->image
         ];
     }
 }

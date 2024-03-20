@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Services extends Model
 {
     use HasFactory;
-    protected $fillable = ['nameEn', 'nameAr', 'descriptionEn2', 'descriptionAr2', 'descriptionEn1', 'descriptionAr1', 'image', 'icon', 'featured'];
+    protected $fillable = ['nameEn', 'nameAr', 'service_group_id', 'descriptionEn', 'descriptionAr', 'image', 'icon', 'featured'];
     protected $table = 'services';
 
-    public function serviceGroup()
+    public function serviceGroupId()
     {
-        return $this->hasMany(ServiceGroup::class);
+        return $this->belongsTo(ServiceGroup::class);
     }
     public function icon()
     {

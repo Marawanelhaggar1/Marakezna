@@ -16,20 +16,25 @@ class servicesResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-        $serviceGroup = [];
-        $serviceGroup = ServiceGroup::where('services_id', $this->id)->get();
-        $serviceGroup = servicesGroupResource::collection($serviceGroup);
+        $serviceGroup_id = null;
+        $serviceGroup_En = null;
+        $serviceGroup_Ar = null;
+        $serviceGroup = ServiceGroup::find($this->service_group_id);
+        if ($serviceGroup) {
+            $serviceGroup_id = $serviceGroup->id;
+            $serviceGroup_En = $serviceGroup->nameEn;
+            $serviceGroup_Ar = $serviceGroup->nameAr;
+        }
 
         if ($this->icon) {
             $icons = Icons::findOrFail($this->icon);
-            $icon = 'https://pp.etqanis.com/storage/app/public/' . $icons->image;
+            $icon = 'https://marakezna.com/storage/app/public/' . $icons->image;
         } else {
             $icon = null;
         }
 
         if ($this->image) {
-            $image = 'https://pp.etqanis.com/storage/app/public/' . $this->image;
+            $image = 'https://marakezna.com/storage/app/public/' . $this->image;
         } else {
             $image = null;
         }
@@ -40,9 +45,12 @@ class servicesResource extends JsonResource
                 'icon' => $icon,
                 'featured' => $this->featured,
                 'name' => $this->nameAr,
-                'service_group' => $serviceGroup,
-                'description' => $this->descriptionAr1,
-                'description2' => $this->descriptionAr2,
+                'service_group' => [
+                    'id' => $serviceGroup_id,
+                    'name' => $serviceGroup_Ar,
+
+                ],
+                'description' => $this->descriptionAr,
                 'image' => $image,
             ];
         } else if (app()->getLocale() == 'admin') {
@@ -54,11 +62,15 @@ class servicesResource extends JsonResource
                 'featured' => $this->featured,
                 'icon' => $icon,
 
-                'service_group' => $serviceGroup,
-                'description' => $this->descriptionEn1,
-                'descriptionAr' => $this->descriptionAr1,
-                'description2' => $this->descriptionEn2,
-                'descriptionAr2' => $this->descriptionAr2,
+                'service_group' => [
+                    'id' => $serviceGroup_id,
+                    'name' => $serviceGroup_En,
+                    'nameAr' => $serviceGroup_Ar,
+
+                ],
+                'description' => $this->descriptionEn,
+                'descriptionAr' => $this->descriptionAr,
+                'icon_id' => $this->icon,
 
                 'image' => $image,
             ];
@@ -68,9 +80,11 @@ class servicesResource extends JsonResource
                 'name' => $this->nameEn,
                 'featured' => $this->featured,
                 'icon' => $icon,
-                'service_group' => $serviceGroup,
-                'description' => $this->descriptionEn1,
-                'description2' => $this->descriptionEn2,
+                'service_group' => [
+                    'id' => $serviceGroup_id,
+                    'name' => $serviceGroup_En,
+                ],
+                'description' => $this->descriptionEn,
                 'image' => $image,
             ];
         }

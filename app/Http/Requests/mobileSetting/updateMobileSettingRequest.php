@@ -31,29 +31,55 @@ class updateMobileSettingRequest extends FormRequest
             'phoneAr' => 'required',
             'address' => 'nullable',
             'addressAr' => 'nullable',
-            'twitter' => 'nullable',
             'facebook' => 'nullable',
             'instagram' => 'nullable',
-            'linkedin' => 'nullable',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'footerLogo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+		'linkedin' => 'nullable',
+            'tiktok' => 'nullable',
+            'location' => 'nullable',
+            'whatsAppLink' => 'nullable',
+            'snapchat' => 'nullable',
+            'youtube' => 'nullable',
+            'whatsApp' => 'nullable',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'background1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'background2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
     public function getLogoPath(): string
     {
-        return $this->file('logo')->store('setting_images', 'public');
+        $setting = MobileSetting::findOrFail($this->id);
+
+	if ($this->hasFile('logo')) {
+            // Use the store() method to store the image
+            return $this->file('logo')->store('settings_images', 'public');
+        } else {
+            return $setting->logo;
+        }
     }
 
     public function getBackground1Path(): string
     {
-        return $this->file('background1')->store('setting_images', 'public');
+        $setting = MobileSetting::findOrFail($this->id);
+
+	if ($this->hasFile('background1')) {
+            // Use the store() method to store the image
+            return $this->file('background1')->store('settings_images', 'public');
+        } else {
+            return $setting->background1;
+        }
     }
 
     public function getBackground2Path(): string
     {
-        return $this->file('background2')->store('setting_images', 'public');
+        $setting = MobileSetting::findOrFail($this->id);
+
+	if ($this->hasFile('background2')) {
+            // Use the store() method to store the image
+            return $this->file('background2')->store('settings_images', 'public');
+        } else {
+            return $setting->background2;
+        }
     }
 
     public function updateMobileSetting(): MobileSetting
@@ -69,7 +95,12 @@ class updateMobileSettingRequest extends FormRequest
             'phoneAr' => $this->phoneAr,
             'address' => $this->address,
             'addressAr' => $this->addressAr,
-            'twitter' => $this->twitter,
+'location' => $this->location,
+            'tiktok' => $this->tiktok,
+            'whatsAppLink' => $this->whatsAppLink,
+            'whatsApp' => $this->whatsApp,
+            'snapchat' => $this->snapchat,
+            'youtube' => $this->youtube,
             'facebook' => $this->facebook,
             'linkedin' => $this->linkedin,
             'instagram' => $this->instagram,

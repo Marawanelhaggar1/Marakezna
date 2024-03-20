@@ -17,7 +17,7 @@ class aboutUsResource extends JsonResource
         if (app()->getLocale() == 'Ar') {
             return [
                 'id' => $this->id,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+                'image' => 'https://marakezna.com/storage/app/public/' . $this->image,
                 'title' => $this->titleAr,
                 'paragraph' => $this->paragraphAr,
                 'mission' => $this->missionAr,
@@ -27,10 +27,10 @@ class aboutUsResource extends JsonResource
                 'created_at' => $this->created_at,
 
             ];
-        } else {
-            return [
-                'id' => $this->id,
-                'image' => 'http://127.0.0.1:8000/storage/' . $this->image,
+        } else if(app()->getLocale() == 'admin'){
+		return [
+		'id' => $this->id,
+                'image' => 'https://marakezna.com/storage/app/public/'. $this->image,
                 'title' => $this->title,
                 'paragraph' => $this->paragraph,
                 'mission' => $this->mission,
@@ -38,6 +38,29 @@ class aboutUsResource extends JsonResource
                 'values' => $this->values,
                 'videoLink' => $this->videoLink,
                 'created_at' => $this->created_at,
+		'titleAr' => $this->titleAr,
+                'paragraphAr' => $this->paragraphAr,
+                'missionAr' => $this->missionAr,
+                'visionAr' => $this->visionAr,
+                'valuesAr' => $this->valuesAr,
+		];
+
+
+
+	}
+
+	else {
+            return [
+                'id' => $this->id,
+                'image' => 'https://marakezna.com/storage/app/public/'. $this->image,
+                'title' => $this->title,
+                'paragraph' => $this->paragraph,
+                'mission' => $this->mission,
+                'vision' => $this->vision,
+                'values' => $this->values,
+                'videoLink' => $this->videoLink,
+                'created_at' => $this->created_at,
+
             ];
         };
     }

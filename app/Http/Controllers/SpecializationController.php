@@ -15,11 +15,6 @@ class SpecializationController extends Controller
         $specializations = Specialization::where('view', null)->orWhere('view', 1)->get();
         return specializationResource::collection($specializations);
     }
-    public function indexPaginate()
-    {
-        $specializations = Specialization::where('view', null)->orWhere('view', 1)->paginate(8);
-        return specializationResource::collection($specializations);
-    }
 
     public function getForAdmin()
     {

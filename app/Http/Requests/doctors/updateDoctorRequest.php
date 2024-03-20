@@ -78,7 +78,6 @@ class updateDoctorRequest extends FormRequest
             'ratingEn' => $this->ratingEn,
             'ratingAr' => $this->ratingAr,
             'waiting' => $this->waiting,
-            'health_center_id' => $this->health_center_id,
             'specialization_id' => $this->specialization_id,
             'phone' => $this->phone,
             'whatsApp' => $this->whatsApp,

@@ -25,8 +25,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \App\Http\Middleware\corsMiddleware::class,
-
+        \App\Http\Middleware\corsMiddleware::class
 
     ];
 
@@ -76,7 +75,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cors' => \App\Http\Middleware\corsMiddleware::class,
         'changeLanguage' => \App\Http\Middleware\ChangeLanguage::class,
-
 
     ];
 }

@@ -25,8 +25,9 @@ class AreaResource extends JsonResource
             return [
                 'id' => $this->id,
                 'nameAr' => $this->nameAr,
-                'view' => $this->view,
                 'nameEn' => $this->nameEn,
+                'view' => $this->view,
+
 
             ];
         } else {

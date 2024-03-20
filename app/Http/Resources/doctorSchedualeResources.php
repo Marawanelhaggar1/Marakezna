@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Doctors;
+use App\Models\HealthCenter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use DateTime;
@@ -37,7 +38,22 @@ class doctorSchedualeResources extends JsonResource
 
     public function toArray(Request $request): array
     {
+
+        $healthCenter_nameEn = null;
+        $healthCenter_nameAr = null;
+        $healthCenter_image = null;
+        $healthCenter_id = null;
+        $healthCenter = HealthCenter::find($this->center_id);
+        if ($healthCenter) {
+            $healthCenter_nameEn = $healthCenter->nameEn;
+            $healthCenter_nameAr = $healthCenter->nameAr;
+            $healthCenter_id = $healthCenter->id;
+
+            $healthCenter_image = $healthCenter->logo;
+        }
         $doctor = Doctors::findOrFail($this->doctor_id);
+        $doctor_image = $doctor->image;
+
         $availableTime = $this->getAvailableTime($this->start_time, $this->end_time, $doctor->waiting);
 
 
@@ -48,6 +64,17 @@ class doctorSchedualeResources extends JsonResource
                 'start_time' => $this->start_timeAr,
                 'end_time' => $this->end_timeAr,
                 'doctor_id' => $this->doctor_id,
+                'center_id' => $this->center_id,
+                'doctor' => [
+                    'id' => $this->doctor_id,
+                    'name' => $doctor->nameEn,
+                    'image' => 'https://marakezna.com/storage/app/public/' . $doctor->image,
+                ],
+                'center' => [
+                    'id' => $this->center_id,
+                    'name' => $healthCenter_nameAr,
+                ],
+
                 'times' => $availableTime
             ];
         } else if (app()->getLocale() == 'admin') {
@@ -57,8 +84,18 @@ class doctorSchedualeResources extends JsonResource
                 'start_timeAr' => $this->start_timeAr,
                 'end_timeAr' => $this->end_timeAr,
                 'doctor_id' => $this->doctor_id,
+                'center_id' => $this->center_id,
                 'timesAr' => $availableTime,
                 'date' => $this->date,
+                'doctor' => [
+                    'id' => $this->doctor_id,
+                    'name' => $doctor->nameEn,
+                    'image' => 'https://marakezna.com/storage/app/public/' . $doctor->image,
+                ],
+                'center' => [
+                    'id' => $this->center_id,
+                    'name' => $healthCenter_nameEn,
+                ],
                 'start_time' => $this->start_time,
                 'end_time' => $this->end_time,
                 'times' => $availableTime
@@ -69,6 +106,16 @@ class doctorSchedualeResources extends JsonResource
                 'date' => $this->date,
                 'start_time' => $this->start_time,
                 'end_time' => $this->end_time,
+                'doctor' => [
+                    'id' => $this->doctor_id,
+                    'name' => $doctor->nameEn,
+                    'image' => 'https://marakezna.com/storage/app/public/' . $doctor->image,
+                ],
+                'center' => [
+                    'id' => $this->center_id,
+                    'name' => $healthCenter_nameEn,
+                ],
+                'center_id' => $this->center_id,
                 'doctor_id' => $this->doctor_id,
                 'times' => $availableTime
             ];

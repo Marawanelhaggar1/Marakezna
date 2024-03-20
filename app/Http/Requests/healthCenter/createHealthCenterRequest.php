@@ -27,16 +27,19 @@ class createHealthCenterRequest extends FormRequest
             'nameEn' => 'required',
             'nameAr' => 'required',
             'address' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
             'area_id' => 'required|array',  // Assuming you are passing an array of area_ids
             'area_id.*' => 'exists:areas,id',
+            'sub_area_id' => 'required|array',  // Assuming you are passing an array of area_ids
+            'sub_area_id.*' => 'exists:sub_areas,id',
             'description1' => 'required',
             'description1Ar' => 'required',
             'description2' => 'nullable',
             'description2Ar' => 'nullable',
             'phone' => 'required',
-            'whatsApp' => 'required',
+            'whatsAppLink' => 'required',
             'scan' => 'required|boolean',
             'lab' => 'required|boolean',
             'view' => 'nullable',
@@ -48,6 +51,11 @@ class createHealthCenterRequest extends FormRequest
     {
         return $this->file('image')->store('center_images', 'public');
     }
+
+    public function getLogoPath(): string
+    {
+        return $this->file('logo')->store('center_images', 'public');
+    }
     public function createHealthCenter(): HealthCenter
     {
         // dd($this->input('area_id'));
@@ -57,6 +65,7 @@ class createHealthCenterRequest extends FormRequest
                 'nameAr' => $this->nameAr,
                 'address' => $this->address,
                 'image' => $this->getImagePath(),
+                'logo' => $this->getLogoPath(),
                 'addressAr' => $this->addressAr,
                 'description1' => $this->description1,
                 'description1Ar' => $this->description1Ar,
@@ -66,10 +75,11 @@ class createHealthCenterRequest extends FormRequest
                 'description2' => $this->description2,
                 'description2Ar' => $this->description2Ar,
                 'phone' => $this->phone,
-                'whatsApp' => $this->whatsApp, 'view' => $this->view,
+                'whatsAppLink' => $this->whatsAppLink, 'view' => $this->view,
 
             ]);
         $healthCenter->areas()->sync($this->input('area_id'));
+        $healthCenter->subAreas()->sync($this->input('sub_area_id'));
 
         return $healthCenter;
     }

@@ -2,26 +2,21 @@
 
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AreaController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\CareerController;
 use App\Http\Controllers\CenterCallsController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\DentalServiceController;
 use App\Http\Controllers\DoctorCallsController;
 use App\Http\Controllers\FaqsController;
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\IconsController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MobileSettingController;
-use App\Http\Controllers\NewEmployeesController;
-use App\Http\Controllers\PicsController;
-use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\VisitsController;
 use App\Http\Controllers\WebSettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\SubAreaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-// ForgotPasswordController
+
 
 Route::group(
     [
@@ -53,9 +48,9 @@ Route::group(
                 Route::post('/login', 'auth@login');
                 Route::put('/update/profile', 'auth@updateProfile')->middleware(['auth:sanctum']);
                 Route::put('/change/password', 'auth@changePassword')->middleware(['auth:sanctum']);
-                Route::post('/forgot/password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
-                Route::post('/reset/password', 'ResetPasswordController@showResetForm')->middleware(['auth:sanctum']);
                 Route::post('/google', 'SocialiteController@handelGoogleCallback');
+                Route::post('/forgot/password',  [ForgotPasswordController::class, 'sendResetLinkEmail']);
+                Route::post('/reset/password', 'ResetPasswordController@showResetForm')->middleware(['auth:sanctum']);
             }
         );
 
@@ -82,7 +77,6 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'ServicesController@index');
-                Route::get('/dental', 'ServicesController@indexDental');
                 Route::get('/featured', 'ServicesController@getFeaturedServices');
                 Route::get('/{id}', 'ServicesController@getById');
                 Route::post('/', 'ServicesController@create')->middleware(['auth:sanctum']);
@@ -104,6 +98,20 @@ Route::group(
                 Route::post('/', 'AreaController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'AreaController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'AreaController@delete')->middleware(['auth:sanctum']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => 'sub/area',
+            ],
+
+            function () {
+                Route::get('/', 'SubAreaController@index');
+                Route::get('/{id}', 'SubAreaController@getById');
+                Route::post('/', 'SubAreaController@create')->middleware(['auth:sanctum']);
+                Route::put('/', 'SubAreaController@update')->middleware(['auth:sanctum']);
+                Route::delete('/{id}', 'SubAreaController@delete')->middleware(['auth:sanctum']);
             }
         );
 
@@ -163,33 +171,6 @@ Route::group(
                 Route::delete('/{id}', 'IconsController@delete')->middleware(['auth:sanctum']);
             }
         );
-
-        Route::group(
-            [
-                'prefix' => 'pics',
-            ],
-
-            function () {
-                Route::get('/', 'PicsController@index');
-                Route::get('/{id}', 'PicsController@getById');
-                Route::post('/', 'PicsController@create')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'PicsController@delete')->middleware(['auth:sanctum']);
-            }
-        );
-
-        Route::group(
-            [
-                'prefix' => 'feedback',
-            ],
-
-            function () {
-                Route::get('/', 'FeedbackController@index');
-                Route::get('/{id}', 'FeedbackController@getById');
-                Route::post('/', 'FeedbackController@create')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'FeedbackController@delete')->middleware(['auth:sanctum']);
-            }
-        );
-
         Route::group(
             [
                 'prefix' => 'about/us'
@@ -206,57 +187,15 @@ Route::group(
 
         Route::group(
             [
-                'prefix' => 'dental/service'
+                'prefix' => 'notifications',
             ],
 
             function () {
-                Route::get('/', 'DentalServiceController@index');
-                Route::get('/{id}', 'DentalServiceController@getById');
-                Route::post('/', 'DentalServiceController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'DentalServiceController@update')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'DentalServiceController@delete')->middleware(['auth:sanctum']);
-            }
-        );
-
-        Route::group(
-            [
-                'prefix' => 'new/employee',
-            ],
-
-            function () {
-                Route::get('/', 'NewEmployeesController@index');
-                Route::get('/{id}', 'NewEmployeesController@getById');
-                Route::post('/', 'NewEmployeesController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'NewEmployeesController@update')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'NewEmployeesController@delete')->middleware(['auth:sanctum']);
-            }
-        );
-
-        Route::group(
-            [
-                'prefix' => 'promotion',
-            ],
-
-            function () {
-                Route::get('/', 'PromotionController@index');
-                Route::get('/{id}', 'PromotionController@getById');
-                Route::post('/', 'PromotionController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'PromotionController@update')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'PromotionController@delete')->middleware(['auth:sanctum']);
-            }
-        );
-
-        Route::group(
-            [
-                'prefix' => 'career',
-            ],
-
-            function () {
-                Route::get('/', 'CareerController@index');
-                Route::get('/{id}', 'CareerController@getById');
-                Route::post('/', 'CareerController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'CareerController@update')->middleware(['auth:sanctum']);
-                Route::delete('/{id}', 'CareerController@delete')->middleware(['auth:sanctum']);
+                Route::get('/', 'NotificationController@getByUser')->middleware(['auth:sanctum']);;
+                Route::get('/unread', 'NotificationController@readNotification')->middleware(['auth:sanctum']);;
+                Route::post('/{id}', 'NotificationController@markAsRead')->middleware(['auth:sanctum']);
+                // Route::put('/', 'AboutUsController@update')->middleware(['auth:sanctum']);
+                // Route::delete('/{id}', 'AboutUsController@delete')->middleware(['auth:sanctum']);
             }
         );
 
@@ -267,13 +206,18 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'HealthCenterController@index');
+                Route::get('/scans/labs', 'HealthCenterController@getScansOrLabs');
+                Route::post('/order', 'HealthCenterController@changeOrder');
                 Route::get('/admin', 'HealthCenterController@getForAdmin');
                 Route::get('/{id}', 'HealthCenterController@getById');
                 Route::get('/area/{id}', 'HealthCenterController@getByArea');
-                Route::get('/category/lab', 'HealthCenterController@getLabs');
                 Route::get('/category/lab/area/{id}', 'HealthCenterController@getLabsByArea');
-                Route::get('/category/scan', 'HealthCenterController@getScans');
                 Route::get('/category/scan/area/{id}', 'HealthCenterController@getScansByArea');
+                Route::get('/sub/area/{id}', 'HealthCenterController@getBySubArea');
+                Route::get('/category/lab/sub/area/{id}', 'HealthCenterController@getLabsBySubArea');
+                Route::get('/category/scan/sub/area/{id}', 'HealthCenterController@getScansBySubArea');
+                Route::get('/category/lab', 'HealthCenterController@getLabs');
+                Route::get('/category/scan', 'HealthCenterController@getScans');
                 Route::post('/', 'HealthCenterController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'HealthCenterController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'HealthCenterController@delete')->middleware(['auth:sanctum']);
@@ -388,7 +332,6 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'SpecializationController@index');
-                Route::get('/paginate/pag', 'SpecializationController@indexPaginate');
                 Route::get('/admin', 'SpecializationController@getForAdmin');
                 Route::get('/{id}', 'SpecializationController@getById');
                 Route::post('/search', 'SpecializationController@search');

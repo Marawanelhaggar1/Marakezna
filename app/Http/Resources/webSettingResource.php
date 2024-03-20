@@ -21,17 +21,13 @@ class webSettingResource extends JsonResource
                 'name' => $this->nameAr,
                 'phone' => $this->phoneAr,
                 'address' => $this->addressAr,
-                'whatsApp' => $this->whatsApp,
-                'location' => $this->location,
-                'youtube' => $this->youtube,
-                'snapChat' => $this->snapChat,
-                'whatsAppLink' => $this->whatsAppLink,
+                'twitter' => $this->twitter,
                 'facebook' => $this->facebook,
                 'linkedin' => $this->linkedin,
                 'instagram' => $this->instagram,
-                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
-                'favicon' => 'http://127.0.0.1:8000/storage/' . $this->favicon,
-                'footerLogo' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+                'logo' => 'https://marakezna.com/storage/app/public/' . $this->logo,
+                'favicon' => 'https://marakezna.com/storage/app/public/' . $this->favicon,
+                'footerLogo' => 'https://marakezna.com/storage/app/public/' . $this->footerLogo
             ];
         } else if (app()->getLocale() == 'admin') {
             return [
@@ -40,20 +36,16 @@ class webSettingResource extends JsonResource
                 'name' => $this->name,
                 'phone' => $this->phone,
                 'address' => $this->address,
-                'whatsApp' => $this->whatsApp,
-                'location' => $this->location,
-                'youtube' => $this->youtube,
-                'snapChat' => $this->snapChat,
-                'whatsAppLink' => $this->whatsAppLink,
+                'twitter' => $this->twitter,
                 'facebook' => $this->facebook,
                 'linkedin' => $this->linkedin,
                 'instagram' => $this->instagram,
                 'nameAr' => $this->nameAr,
                 'phoneAr' => $this->phoneAr,
                 'addressAr' => $this->addressAr,
-                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
-                'favicon' => 'http://127.0.0.1:8000/storage/' . $this->favicon,
-                'footerLogo' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+                'logo' => 'https://marakezna.com/storage/app/public/' . $this->logo,
+                'favicon' => 'https://marakezna.com/storage/app/public/' . $this->favicon,
+                'footerLogo' => 'https://marakezna.com/storage/app/public/' . $this->footerLogo
             ];
         } else {
             return [
@@ -62,17 +54,13 @@ class webSettingResource extends JsonResource
                 'name' => $this->name,
                 'phone' => $this->phone,
                 'address' => $this->address,
-                'whatsApp' => $this->whatsApp,
-                'location' => $this->location,
-                'youtube' => $this->youtube,
-                'snapChat' => $this->snapChat,
-                'whatsAppLink' => $this->whatsAppLink,
+                'twitter' => $this->twitter,
                 'facebook' => $this->facebook,
                 'linkedin' => $this->linkedin,
                 'instagram' => $this->instagram,
-                'logo' => 'http://127.0.0.1:8000/storage/' . $this->logo,
-                'favicon' => 'http://127.0.0.1:8000/storage/' . $this->favicon,
-                'footerLogo' => 'http://127.0.0.1:8000/storage/' . $this->footerLogo
+                'logo' => 'https://marakezna.com/storage/app/public/' . $this->logo,
+                'favicon' => 'https://marakezna.com/storage/app/public/' . $this->favicon,
+                'footerLogo' => 'https://marakezna.com/storage/app/public/' . $this->footerLogo
             ];
         }
     }

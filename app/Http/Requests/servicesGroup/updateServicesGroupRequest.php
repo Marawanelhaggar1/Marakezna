@@ -24,9 +24,9 @@ class updateServicesGroupRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:service_groups,id',
-            'nameEn' => 'required|unique:service_groups,nameEn,' . $this->id,
+            'nameEn' => 'required',
             'nameAr' => 'required',
-            'services_id' => 'required|exists:services,id'
+            'center_id' => 'required|exists:health_centers,id',
 
         ];
     }
@@ -37,8 +37,8 @@ class updateServicesGroupRequest extends FormRequest
         $serviceGroup->update([
             'id' => $this->id,
             'nameAr' => $this->nameAr,
-            'nameEn' => $this->nameEn, 'services_id' => $this->services_id,
-
+            'nameEn' => $this->nameEn,
+            'center_id' => $this->center_id,
         ]);
 
         return $serviceGroup;

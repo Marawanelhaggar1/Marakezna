@@ -27,16 +27,16 @@ class updateSlideRequest extends FormRequest
             'id' => 'required|exists:slides,id',
             'title' => 'required',
             'titleAr' => 'required',
-            'sub_title' => 'required',
-            'sub_titleAr' => 'required',
-            'description' => 'required',
-            'descriptionAr' => 'required',
+            'sub_title' => 'nullable',
+            'sub_titleAr' => 'nullable',
+            'description' => 'nullable',
+            'descriptionAr' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,mp4,svg|max:4096',
             'imageAr' => 'nullable|image|mimes:jpeg,png,jpg,gif,mp4,svg|max:4096',
         ];
     }
 
-    public function getImagePath(): string
+ public function getImagePath(): string
     {
         $doctor = Slide::findOrFail($this->id);
 
@@ -48,7 +48,7 @@ class updateSlideRequest extends FormRequest
         }
     }
 
-    public function getImagePathAr(): string
+public function getImagePathAr(): string
     {
         $doctor = Slide::findOrFail($this->id);
 

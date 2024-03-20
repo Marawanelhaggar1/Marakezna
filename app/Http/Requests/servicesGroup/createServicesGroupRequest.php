@@ -25,7 +25,7 @@ class createServicesGroupRequest extends FormRequest
         return [
             'nameEn' => 'required',
             'nameAr' => 'required',
-            'services_id' => 'required|exists:services,id'
+            'center_id' => 'required|exists:health_centers,id',
         ];
     }
 
@@ -33,8 +33,8 @@ class createServicesGroupRequest extends FormRequest
     {
         return ServiceGroup::create([
             'nameEn' => $this->nameEn,
-            'nameAr' => $this->nameAr,
-            'services_id' => $this->services_id,
+            'nameAr' => $this->nameAr, 'center_id' => $this->center_id,
+
         ]);
     }
 }

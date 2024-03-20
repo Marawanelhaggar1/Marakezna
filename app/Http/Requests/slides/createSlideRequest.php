@@ -26,10 +26,10 @@ class createSlideRequest extends FormRequest
         return [
             'title' => 'required',
             'titleAr' => 'required',
-            'sub_title' => 'required',
-            'sub_titleAr' => 'required',
-            'description' => 'required',
-            'descriptionAr' => 'required',
+            'sub_title' => 'nullable',
+            'sub_titleAr' => 'nullable',
+            'description' => 'nullable',
+            'descriptionAr' => 'nullable',
             'image' =>
             'required|file|mimes:jpeg,png,jpg,gif,svg,mp4|max:4096',
             'imageAr'

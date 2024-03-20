@@ -57,7 +57,8 @@ class WebSettingController extends Controller
             'users' => User::count(),
             'centers' => HealthCenter::count(),
             'doctors' => Doctors::count(),
-            'appointments' => CenterCalls::count() + Bookings::count()
+            'appointments' => CenterCalls::count(),
+		'booking'=> Bookings::count()
 
         ];
     }

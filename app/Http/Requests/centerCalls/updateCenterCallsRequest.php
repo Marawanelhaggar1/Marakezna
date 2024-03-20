@@ -25,17 +25,20 @@ class updateCenterCallsRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:center_calls,id',
-            'center_id' => 'required|exists:health_centers,id'
+            'center_id' => 'required|exists:health_centers,id',
+            'doctor_id' => 'nullable|exists:doctors,id',
+            'service_id' => 'nullable|exists:service_groups,id'
+
         ];
     }
 
     public function updateCall(): CenterCalls
     {
         $call = CenterCalls::findOrFail($this->id);
-        $user = auth()->user();
         $call->update([
-            'user_id' => $user->id,
             'center_id' => $this->center_id,
+            'doctor_id' => $this->doctor_id,
+            'service_id' => $this->service_id,
         ]);
 
         return $call;

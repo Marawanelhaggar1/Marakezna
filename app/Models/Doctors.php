@@ -33,9 +33,14 @@ class Doctors extends Model
         return $this->hasMany(Bookings::class);
     }
 
-    public function calls()
+    public function doctorCalls()
     {
         return $this->hasMany(DoctorCalls::class);
+    }
+
+    public function centerCalls()
+    {
+        return $this->hasMany(CenterCalls::class);
     }
 
     public function visits()

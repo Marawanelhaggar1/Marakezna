@@ -19,14 +19,16 @@ class bookingResource extends JsonResource
         $healthCenter_nameEn = null;
         $healthCenter_nameAr = null;
         $healthCenter_image = null;
+        $healthCenter_id = null;
         $doctor = Doctors::find($this->doctor_id);
         $doctor_image = $doctor->image;
         $healthCenter = HealthCenter::find($this->health_center_id);
-        // dd($healthCenter);
         if ($healthCenter) {
             $healthCenter_nameEn = $healthCenter->nameEn;
             $healthCenter_nameAr = $healthCenter->nameAr;
-            $healthCenter_image = $healthCenter->image;
+            $healthCenter_id = $healthCenter->id;
+
+            $healthCenter_image = $healthCenter->logo;
         }
 
         return [
@@ -41,17 +43,18 @@ class bookingResource extends JsonResource
             'doctor' => [
                 'id' => $this->doctor_id,
                 'name' => $doctor->nameEn,
-                'image' => 'https://pp.etqanis.com/storage/app/public/' . $doctor_image,
+                'image' => 'https://marakezna.com/storage/app/public/' . $doctor->image,
             ],
             'payment' => $this->payment,
             'health_center' => [
-                'id' =>
-                $this->health_center_id,
+                'id' => $healthCenter_id,
                 'nameEn' => $healthCenter_nameEn,
                 'nameAr' => $healthCenter_nameAr,
-                'image' => 'https://pp.etqanis.com/storage/app/public/' . $healthCenter_image,
+                'image' => 'https://marakezna.com/storage/app/public/' . $healthCenter_image,
             ],
-            'status' => $this->status
+            'status' => $this->status,
+            'user_id' => $this->user_id
+
         ];
     }
 }

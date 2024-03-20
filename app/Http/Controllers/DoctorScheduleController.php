@@ -19,6 +19,7 @@ class DoctorScheduleController extends Controller
         // Validate the incoming request
         $request->validate([
             'doctor_id' => 'required|exists:doctors,id',
+            'center_id' => 'required|exists:health_centers,id',
             'date' => 'required',
             'dateAr' => 'required',
             'start_timeAr' => 'required',
@@ -50,21 +51,23 @@ class DoctorScheduleController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // Validate the incoming request
         $request->validate([
             'doctor_id' => 'exists:doctors,id',
+            'id' => 'required|exists:doctor_schedules,id',
+            'center_id' => 'required|exists:health_centers,id',
             'date' => 'required',
             'dateAr' => 'required',
             'start_timeAr' => 'required',
             'end_timeAr' => 'required',
-            'start_time' => 'date_format:H:i',
-            'end_time' => 'date_format:H:i|after:start_time',
+            'start_time' => 'required',
+            'end_time' => 'required|after:start_time',
         ]);
 
         // Find the doctor schedule and update it
-        $doctorSchedule = DoctorSchedule::findOrFail($id);
+        $doctorSchedule = DoctorSchedule::findOrFail($request->id);
         $doctorSchedule->update($request->all());
 
         return response()->json($doctorSchedule);

@@ -28,15 +28,18 @@ class updateHealthCenterRequest extends FormRequest
             'nameAr' => 'required',
             'address' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'addressAr' => 'required',
             'description1' => 'required',
             'description1Ar' => 'required',
             'area_id' => 'required|array',  // Assuming you are passing an array of area_ids
             'area_id.*' => 'exists:areas,id',
+            'sub_area_id' => 'required|array',  // Assuming you are passing an array of sub_area_ids
+            'sub_area_id.*' => 'exists:sub_areas,id',
             'scan' => 'required|boolean',
             'lab' => 'required|boolean',
             'phone' => 'required',
-            'whatsApp' => 'required',
+            'whatsAppLink' => 'required',
             'description2' => 'nullable',
             'description2Ar' => 'nullable',
             'view' => 'required',
@@ -56,6 +59,18 @@ class updateHealthCenterRequest extends FormRequest
         }
     }
 
+    public function getLogoPath(): string
+    {
+        $icon = HealthCenter::findOrFail($this->id);
+
+        if ($this->hasFile('logo')) {
+            // Use the store() method to store the logo
+            return $this->file('logo')->store('center_images', 'public');
+        } else {
+            return $icon->logo;
+        }
+    }
+
     public function updateHealthCenter(): HealthCenter
     {
         $health = HealthCenter::findOrFail($this->id);
@@ -65,21 +80,23 @@ class updateHealthCenterRequest extends FormRequest
             'nameAr' => $this->nameAr,
             'address' => $this->address,
             'image' => $this->getImagePath(),
+            'logo' => $this->getLogoPath(),
             'addressAr' => $this->addressAr,
             'description1' => $this->description1,
             'description1Ar' => $this->description1Ar,
             'description2' => $this->description2,
             'description2Ar' => $this->description2Ar,
-            // 'area_id' => $this->area_id,
             'scan' => $this->scan,
             'lab' => $this->lab,
             'phone' => $this->phone,
-            'whatsApp' => $this->whatsApp, 'view' => $this->view,
+            'whatsAppLink' => $this->whatsAppLink,
+            'view' => $this->view,
 
 
         ]);
 
         $health->areas()->sync($this->input('area_id'));
+        $health->subAreas()->sync($this->input('sub_area_id'));
 
 
         return $health;

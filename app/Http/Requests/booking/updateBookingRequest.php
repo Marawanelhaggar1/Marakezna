@@ -3,7 +3,10 @@
 namespace App\Http\Requests\booking;
 
 use App\Models\Bookings;
+use App\Models\User;
+use App\Notifications\Booking;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Notification;
 
 class updateBookingRequest extends FormRequest
 {
@@ -12,7 +15,12 @@ class updateBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->isUser();
+        $user = auth()->user();
+        // dd($user);
+        // logger()->info('User Details:', ['user' => $user]);
+
+        // Check if a user is authenticated and call isUser() if true
+        return $user && $user->isUser();
     }
 
     /**
@@ -26,15 +34,15 @@ class updateBookingRequest extends FormRequest
             'id' => 'required|exists:bookings,id',
             'patient_name' => 'required',
             'phone' => 'required',
-            'diagnose' => 'nullable',
-            'location' => 'nullable',
-            'description' => 'nullable',
-            'date' => 'required',
-            'time' => 'required|date_format:H:i',
+            //'diagnose' => 'nullable',
+            //'location' => 'nullable',
+            //'description' => 'nullable',
+            // 'date' => 'nullable',
+            'time' => 'required',
             'doctor_id' => 'required|exists:doctors,id',
             'status' => 'required',
-            'health_center_id' => 'nullable|exists:health_centers,id',
-            'payment' => 'nullable', 'user_id' => 'required|exists:users,id',
+            // 'health_center_id' => 'nullable|exists:health_centers,id',
+            'payment' => 'nullable',
             'email' => 'required|email',
 
         ];
@@ -50,17 +58,18 @@ class updateBookingRequest extends FormRequest
             dd('Invalid target day. Please provide a valid day name (e.g., Sunday, Monday, etc.).');
         }
 
-        // Get the current date
         $today = now();
 
         // Calculate the next occurrence of the target day
-        $targetIndex = array_search($targetDay, $validDays) || array_search($targetDay, $validDaysAr);
-        $nextOccurrence = $today->copy();
-        $nextOccurrence->addDays(($targetIndex + 7 - $today->dayOfWeek) % 7);
+        $targetIndex = array_search($targetDay, $validDays);
+        if ($targetIndex === false) {
+            $targetIndex = array_search($targetDay, $validDaysAr);
+        }
+        $daysUntilNext = ($targetIndex + 7 - $today->dayOfWeek) % 7;
+        $nextOccurrence = $today->copy()->addDays($daysUntilNext);
 
         // Format the date as "dd/mm/yyyy"
         $formattedDate = $nextOccurrence->format('Y/m/d');
-        // $this->schedule['date'] = $formattedDate;
         return $formattedDate;
     }
     public function updateBooking(): Bookings
@@ -78,11 +87,13 @@ class updateBookingRequest extends FormRequest
             'description' => $this->description,
             'health_center_id' => $this->health_center_id,
             'payment' => $this->payment,
-            'user_id' => $this->user_id,
             'email' => $this->email, 'time' => $this->time,
 
 
         ]);
+        $users = User::where('role', 'admin')->get();
+        $booking_id = $booking->id;
+        Notification::send($users, new Booking($booking_id));
         return $booking;
     }
 }

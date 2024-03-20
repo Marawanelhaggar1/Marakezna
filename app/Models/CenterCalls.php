@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\servicesGroupResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,7 @@ class CenterCalls extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['center_id', 'user_id'];
+    protected $fillable = ['center_id', 'user_id', 'doctor_id', 'service_id'];
     protected $table = 'center_calls';
 
     public function centers()
@@ -17,6 +18,14 @@ class CenterCalls extends Model
         return $this->belongsTo(HealthCenter::class);
     }
 
+    public function services()
+    {
+        return $this->belongsTo(servicesGroupResource::class);
+    }
+    public function doctors()
+    {
+        return $this->belongsTo(Doctors::class);
+    }
     public function user()
     {
         return $this->belongsTo(User::class);

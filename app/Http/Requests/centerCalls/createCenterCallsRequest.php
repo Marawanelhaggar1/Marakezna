@@ -3,7 +3,10 @@
 namespace App\Http\Requests\centerCalls;
 
 use App\Models\CenterCalls;
+use App\Models\User;
+use App\Notifications\Calls;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Notification;
 
 class createCenterCallsRequest extends FormRequest
 {
@@ -24,16 +27,25 @@ class createCenterCallsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'center_id' => 'required|exists:health_centers,id'
+            'center_id' => 'required|exists:health_centers,id',
+            'doctor_id' => 'nullable|exists:doctors,id',
+            'service_id' => 'nullable|exists:service_groups,id'
         ];
     }
 
     public function createCall(): CenterCalls
     {
+
         $user = auth()->user();
-        return CenterCalls::create([
+        $center = CenterCalls::create([
             'user_id' => $user->id,
             'center_id' => $this->center_id,
+            'doctor_id' => $this->doctor_id, 'service_id' => $this->service_id,
+
         ]);
+        $users = User::where('role', 'admin')->get();
+        $call_id = $center->id;
+        Notification::send($users, new Calls($call_id));
+        return $center;
     }
 }
