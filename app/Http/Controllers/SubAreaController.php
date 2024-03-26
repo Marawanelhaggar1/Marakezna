@@ -22,6 +22,12 @@ class SubAreaController extends Controller
         return new subAreaResource($subArea);
     }
 
+    public function getByArea($id)
+    {
+        $subArea = SubArea::where('area_id', $id)->get();
+        return subAreaResource::collection($subArea);
+    }
+
     public function create(createSubAreaRequest $request)
     {
         $subAreas = $request->createSubArea();

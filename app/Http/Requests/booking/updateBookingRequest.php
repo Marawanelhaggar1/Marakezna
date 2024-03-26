@@ -15,12 +15,7 @@ class updateBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = auth()->user();
-        // dd($user);
-        // logger()->info('User Details:', ['user' => $user]);
-
-        // Check if a user is authenticated and call isUser() if true
-        return $user && $user->isUser();
+        return true;
     }
 
     /**
@@ -91,7 +86,10 @@ class updateBookingRequest extends FormRequest
 
 
         ]);
-        $users = User::where('role', 'admin')->get();
+        $users = User::where(function ($query) {
+            $query->where('role', 'admin')
+                ->orWhere('role', 'doctor');
+        })->get();
         $booking_id = $booking->id;
         Notification::send($users, new Booking($booking_id));
         return $booking;

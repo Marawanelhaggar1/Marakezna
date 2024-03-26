@@ -109,6 +109,7 @@ Route::group(
             function () {
                 Route::get('/', 'SubAreaController@index');
                 Route::get('/{id}', 'SubAreaController@getById');
+                Route::get('area/{id}', 'SubAreaController@getByArea');
                 Route::post('/', 'SubAreaController@create')->middleware(['auth:sanctum']);
                 Route::put('/', 'SubAreaController@update')->middleware(['auth:sanctum']);
                 Route::delete('/{id}', 'SubAreaController@delete')->middleware(['auth:sanctum']);
@@ -138,8 +139,8 @@ Route::group(
             function () {
                 Route::get('/', 'CenterCallsController@index');
                 Route::get('/{id}', 'CenterCallsController@getById');
-                Route::post('/', 'CenterCallsController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'CenterCallsController@update')->middleware(['auth:sanctum']);
+                Route::post('/', 'CenterCallsController@create');
+                Route::put('/', 'CenterCallsController@update');
                 Route::delete('/{id}', 'CenterCallsController@delete')->middleware(['auth:sanctum']);
             }
         );
@@ -231,6 +232,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'DoctorsController@index');
+                Route::get('/paginate', 'DoctorsController@Paginate');
                 Route::get('/admin', 'DoctorsController@getForAdmin');
                 Route::get('/featured', 'DoctorsController@getFeaturedDoctors');
                 Route::get('/{id}', 'DoctorsController@getById');
@@ -320,8 +322,8 @@ Route::group(
                 Route::get('/', 'BookingsController@index');
                 Route::get('/{id}', 'BookingsController@getById');
                 Route::get('/user/{id}', 'BookingsController@getByUserId')->middleware(['auth:sanctum']);;
-                Route::post('/', 'BookingsController@create')->middleware(['auth:sanctum']);
-                Route::put('/', 'BookingsController@update')->middleware(['auth:sanctum']);
+                Route::post('/', 'BookingsController@create');
+                Route::put('/', 'BookingsController@update');
                 Route::delete('/{id}', 'BookingsController@delete')->middleware(['auth:sanctum']);
             }
         );

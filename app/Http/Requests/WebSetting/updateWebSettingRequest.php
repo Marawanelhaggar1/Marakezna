@@ -35,6 +35,9 @@ class updateWebSettingRequest extends FormRequest
             'facebook' => 'nullable',
             'instagram' => 'nullable',
             'linkedin' => 'nullable',
+            'tiktok' => 'nullable',
+            'youtube' => 'nullable',
+            'snapchat' => 'nullable',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'footerLogo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'favicon' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -52,7 +55,7 @@ class updateWebSettingRequest extends FormRequest
         } else {
             return $setting->logo;
         }
-        }
+    }
 
     public function getFooterLogoPath(): string
     {
@@ -63,9 +66,9 @@ class updateWebSettingRequest extends FormRequest
             // Use the store() method to store the image
             return $this->file('footerLogo')->store('settings_images', 'public');
         } else {
-            return $setting ->footerLogo;
+            return $setting->footerLogo;
         }
-        }
+    }
 
     public function getFaviconPath(): string
     {
@@ -78,7 +81,7 @@ class updateWebSettingRequest extends FormRequest
         } else {
             return $setting->favicon;
         }
-        }
+    }
 
 
     public function updateWebSetting(): WebSetting
@@ -98,6 +101,9 @@ class updateWebSettingRequest extends FormRequest
             'facebook' => $this->facebook,
             'linkedin' => $this->linkedin,
             'instagram' => $this->instagram,
+            'youtube' => $this->youtube,
+            'snapchat' => $this->snapchat,
+            'tiktok' => $this->tiktok,
             'logo' => $this->getLogoPath(),
             'favicon' => $this->getFaviconPath(),
             'footerLogo' => $this->getFooterLogoPath()

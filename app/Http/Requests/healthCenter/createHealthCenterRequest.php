@@ -37,6 +37,7 @@ class createHealthCenterRequest extends FormRequest
             'description1' => 'required',
             'description1Ar' => 'required',
             'description2' => 'nullable',
+            'sort' => 'integer|nullable',
             'description2Ar' => 'nullable',
             'phone' => 'required',
             'whatsAppLink' => 'required',
@@ -75,6 +76,7 @@ class createHealthCenterRequest extends FormRequest
                 'description2' => $this->description2,
                 'description2Ar' => $this->description2Ar,
                 'phone' => $this->phone,
+                'sort' => $this->sort,
                 'whatsAppLink' => $this->whatsAppLink, 'view' => $this->view,
 
             ]);

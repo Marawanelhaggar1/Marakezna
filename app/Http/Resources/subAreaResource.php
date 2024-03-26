@@ -21,7 +21,7 @@ class subAreaResource extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->nameAr,
-                'area' => new AreaResource($area)
+                'area' => $area ? new AreaResource($area) : []
 
             ];
         } else if (app()->getLocale() == 'admin') {
@@ -30,7 +30,7 @@ class subAreaResource extends JsonResource
                 'nameAr' => $this->nameAr,
                 'nameEn' => $this->nameEn,
                 'area_id' => $this->area_id,
-                'area' => new AreaResource($area),
+                'area' => $area ? new AreaResource($area) : []
 
 
 
@@ -39,7 +39,7 @@ class subAreaResource extends JsonResource
             return [
                 'id' => $this->id,
                 'name' => $this->nameEn,
-                'area' => new AreaResource($area)
+                'area' => $area ? new AreaResource($area) : []
 
             ];
         }

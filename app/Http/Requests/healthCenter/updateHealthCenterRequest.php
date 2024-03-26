@@ -41,6 +41,7 @@ class updateHealthCenterRequest extends FormRequest
             'phone' => 'required',
             'whatsAppLink' => 'required',
             'description2' => 'nullable',
+            'sort' => 'nullable|integer',
             'description2Ar' => 'nullable',
             'view' => 'required',
 
@@ -88,6 +89,7 @@ class updateHealthCenterRequest extends FormRequest
             'description2Ar' => $this->description2Ar,
             'scan' => $this->scan,
             'lab' => $this->lab,
+            'sort' => $this->sort,
             'phone' => $this->phone,
             'whatsAppLink' => $this->whatsAppLink,
             'view' => $this->view,

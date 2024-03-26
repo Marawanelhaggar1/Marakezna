@@ -32,6 +32,8 @@ class updateDoctorRequest extends FormRequest
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'titleEn' => 'required',
             'titleAr' => 'required',
+            'sort' =>
+            'integer|nullable',
             'addressAr' => 'nullable',
             'phone' => 'nullable',
             'whatsApp' => 'nullable',
@@ -74,6 +76,7 @@ class updateDoctorRequest extends FormRequest
             'addressAr' => $this->addressAr,
             'image' => $this->getImagePath(),
             'titleEn' => $this->titleEn,
+            'sort' => $this->sort,
             'titleAr' => $this->titleAr,
             'ratingEn' => $this->ratingEn,
             'ratingAr' => $this->ratingAr,

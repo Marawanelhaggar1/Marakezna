@@ -80,6 +80,7 @@ class doctorsResource extends JsonResource
                 'address' => $this->addressEn,
                 'title' => $this->titleEn,
                 'rating' => $this->ratingEn,
+                'sort' => $this->sort,
                 'view' => $this->view,
                 'featured' => $this->featured,
                 'appointment' => $this->appointment,

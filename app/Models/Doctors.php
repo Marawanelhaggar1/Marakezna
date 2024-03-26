@@ -9,7 +9,7 @@ class Doctors extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nameAr', 'nameEn', 'specialization_id', 'feeEn', 'image', 'addressAr', 'health_center_id', 'titleEn', 'titleAr', 'addressEn', 'feeAr', 'ratingEn', 'ratingAr', 'waiting', 'phone', 'whatsApp', 'featured', 'appointment', 'view'];
+    protected $fillable = ['nameAr', 'nameEn', 'specialization_id', 'feeEn', 'image', 'addressAr', 'health_center_id', 'titleEn', 'titleAr', 'addressEn', 'feeAr', 'ratingEn', 'ratingAr', 'waiting', 'phone', 'whatsApp', 'featured', 'appointment', 'view', 'sort'];
 
 
     protected $table = 'doctors';

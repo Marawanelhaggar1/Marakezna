@@ -13,13 +13,13 @@ class HealthCenterController extends Controller
 {
     public function index()
     {
-        $healthCenter = HealthCenter::where('view', null)->orWhere('view', 1)->get();
+        $healthCenter = HealthCenter::where('view', null)->orWhere('view', 1)->orderBy('sort')->get();
         return healthCenterResource::collection($healthCenter);
     }
 
     public function getForAdmin()
     {
-        $healthCenter = HealthCenter::all();
+        $healthCenter = HealthCenter::orderBy('sort')->get();
         return healthCenterResource::collection($healthCenter);
     }
 
@@ -61,7 +61,7 @@ class HealthCenterController extends Controller
         $center =
             HealthCenter::whereHas('areas', function ($query) use ($id) {
                 $query->where('areas.id', $id);
-            })->get();
+            })->orderBy('sort')->get();
         return healthCenterResource::collection($center);
     }
 
@@ -70,7 +70,7 @@ class HealthCenterController extends Controller
         $center =
             HealthCenter::whereHas('subAreas', function ($query) use ($id) {
                 $query->where('sub_areas.id', $id);
-            })->get();
+            })->orderBy('sort')->get();
         return healthCenterResource::collection($center);
     }
     public function getScansOrLabs()
@@ -81,19 +81,19 @@ class HealthCenterController extends Controller
         })->where(function ($query) {
             $query->where('view', null)
                 ->orWhere('view', 1);
-        })->get();
+        })->orderBy('sort')->get();
         return healthCenterResource::collection($healthCenter);
     }
     public function getLabs()
     {
-        $center = HealthCenter::Where('lab', true)->get();
+        $center = HealthCenter::Where('lab', true)->orderBy('sort')->get();
         return healthCenterResource::collection($center);
     }
 
     public function getScans()
     {
 
-        $center = HealthCenter::Where('scan', true)->get();
+        $center = HealthCenter::Where('scan', true)->orderBy('sort')->get();
         return healthCenterResource::collection($center);
     }
 
@@ -101,7 +101,7 @@ class HealthCenterController extends Controller
     {
         $center = HealthCenter::where('lab', true)->whereHas('areas', function ($query) use ($id) {
             $query->where('areas.id', $id);
-        })->get();
+        })->orderBy('sort')->get();
 
         return HealthCenterResource::collection($center);
     }
@@ -110,7 +110,7 @@ class HealthCenterController extends Controller
     {
         $center = HealthCenter::where('lab', true)->whereHas('subAreas', function ($query) use ($id) {
             $query->where('sub_areas.id', $id);
-        })->get();
+        })->orderBy('sort')->get();
 
         return HealthCenterResource::collection($center);
     }
@@ -119,7 +119,7 @@ class HealthCenterController extends Controller
     {
         $center = HealthCenter::where('scan', true)->whereHas('areas', function ($query) use ($id) {
             $query->where('areas.id', $id);
-        })->get();
+        })->orderBy('sort')->get();
 
         return HealthCenterResource::collection($center);
     }
@@ -127,7 +127,7 @@ class HealthCenterController extends Controller
     {
         $center = HealthCenter::where('scan', true)->whereHas('subAreas', function ($query) use ($id) {
             $query->where('sub_areas.id', $id);
-        })->get();
+        })->orderBy('sort')->get();
 
         return HealthCenterResource::collection($center);
     }

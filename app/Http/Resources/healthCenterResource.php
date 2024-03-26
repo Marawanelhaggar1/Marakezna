@@ -61,6 +61,7 @@ class healthCenterResource extends JsonResource
         } elseif (app()->getLocale() == 'admin') {
             return [
                 'id' => $this->id,
+                'sort' => $this->sort,
                 'name' => $name,
                 'address' => $address,
                 'nameAr' => $nameAr,

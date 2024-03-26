@@ -15,12 +15,13 @@ class createBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = auth()->user();
+        // $user = auth()->user();
         // dd($user);
         // logger()->info('User Details:', ['user' => $user]);
 
         // Check if a user is authenticated and call isUser() if true
-        return $user && $user->isUser();
+        // return $user && $user->isUser();
+        return true;
     }
 
     /**
@@ -72,14 +73,19 @@ class createBookingRequest extends FormRequest
 
     public function createBooking(): Bookings
     {
-        $user = auth()->user();
+        if (auth()->user()) {
+            $user = auth()->user();
+        } else {
+            $user = null;
+        }
+
 
 
         // dd($this->getTheDate($this->date));
         $booking = Bookings::create([
             'patient_name' => $this->patient_name,
             'phone' => $this->phone,
-            'user_id' => $user->id,
+            'user_id' => $user ? $user->id : null,
             'email' => $this->email,
             'date' => $this->getTheDate($this->date),
             'diagnose' => $this->diagnose,
@@ -92,7 +98,10 @@ class createBookingRequest extends FormRequest
             'description' => $this->description,
         ]);
 
-        $users = User::where('role', 'admin')->get();
+        $users = User::where(function ($query) {
+            $query->where('role', 'admin')
+                ->orWhere('role', 'doctor');
+        })->get();
         $booking_id = $booking->id;
         Notification::send($users, new Booking($booking_id));
         return $booking;

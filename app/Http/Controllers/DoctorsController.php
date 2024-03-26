@@ -16,14 +16,19 @@ class DoctorsController extends Controller
 {
     public function index()
     {
-        $doctor = Doctors::where('view', null)->orWhere('view', 1)->get();
+        $doctor = Doctors::where('view', null)->orWhere('view', 1)->orderBy('sort')->get();
         return doctorsResource::collection($doctor);
     }
 
+    public function Paginate()
+    {
+        $doctor = Doctors::where('view', null)->orWhere('view', 1)->orderBy('sort')->paginate(12);
+        return doctorsResource::collection($doctor);
+    }
 
     public function getForAdmin()
     {
-        $healthCenter = Doctors::all();
+        $healthCenter = Doctors::orderBy('sort')->get();
         return doctorsResource::collection($healthCenter);
     }
     public function getById($id)
@@ -56,13 +61,13 @@ class DoctorsController extends Controller
 
     public function getFeaturedDoctors()
     {
-        $doctors = Doctors::where('featured', 1)->get();
+        $doctors = Doctors::where('featured', 1)->orderBy('sort')->get();
         return doctorsResource::collection($doctors);
     }
 
     public function getDoctorBySpecialty($id)
     {
-        $doctors = Doctors::where('specialization_id', $id)->get();
+        $doctors = Doctors::where('specialization_id', $id)->orderBy('sort')->get();
         return doctorsResource::collection($doctors);
     }
 
@@ -71,7 +76,7 @@ class DoctorsController extends Controller
         $doctors =
             Doctors::whereHas('healthCenter', function ($query) use ($id) {
                 $query->where('health_centers.id', $id);
-            })->get();
+            })->orderBy('sort')->get();
         return doctorsResource::collection($doctors);
     }
 
@@ -79,7 +84,7 @@ class DoctorsController extends Controller
     {
         $doctors = Doctors::whereHas('healthCenter', function ($query) use ($center_id) {
             $query->where('health_centers.id', $center_id);
-        })->where('specialization_id', $specialty_id)
+        })->where('specialization_id', $specialty_id)->orderBy('sort')
             ->get();
         return doctorsResource::collection($doctors);
     }

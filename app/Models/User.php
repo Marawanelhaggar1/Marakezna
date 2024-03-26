@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password',
         'social_id',
         'role',
-	'whatsApp',
+        'whatsApp',
         'image',
         'address',
 
@@ -64,6 +64,11 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role == 'admin' || $this->role == 'user' || $this->role == 'doctor';
+    }
+
+    public function notification()
+    {
+        return $this->role == 'admin' ||  $this->role == 'doctor';
     }
 
     public function booking()

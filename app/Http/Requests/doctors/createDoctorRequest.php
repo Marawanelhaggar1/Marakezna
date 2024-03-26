@@ -33,6 +33,8 @@ class createDoctorRequest extends FormRequest
             'titleAr' => 'required',
             'addressAr' => 'nullable',
             'waiting' => 'required',
+            'sort' =>
+            'integer|nullable',
             'ratingEn' => 'required',
             'ratingAr' => 'required',
             'health_center_id' => 'required|array',  // Assuming you are passing an array of area_ids
@@ -68,6 +70,7 @@ class createDoctorRequest extends FormRequest
             'titleEn' => $this->titleEn,
             'titleAr' => $this->titleAr,
             'ratingEn' => $this->ratingEn,
+            'sort' => $this->sort,
             'waiting' => $this->waiting,
             'ratingAr' => $this->ratingAr,
             // 'health_center_id' => $this->health_center_id,

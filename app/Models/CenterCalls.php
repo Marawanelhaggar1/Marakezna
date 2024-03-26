@@ -10,7 +10,7 @@ class CenterCalls extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['center_id', 'user_id', 'doctor_id', 'service_id'];
+    protected $fillable = ['center_id', 'user_id', 'doctor_id', 'service_id', 'user_name', 'user_email', 'user_mobile', 'status'];
     protected $table = 'center_calls';
 
     public function centers()
