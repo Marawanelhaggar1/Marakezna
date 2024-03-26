@@ -41,14 +41,14 @@ class createCenterCallsRequest extends FormRequest
             $user = null;
         }
         $center = CenterCalls::create([
-            'user_id' => $user ? $user->id : null,
+            'user_id' =>  $user->id,
             'status' => 'requested',
-            'user_email' => $user ? $user->email :
-                $this->user_email,
-            'user_mobile' =>  $user ? $user->mobile :
-                $this->user_mobile,
-            'user_name' => $user ? $user->first_name . ' ' . $user->last_name :
-                $this->user_name,
+            'user_email' =>
+            $this->user_email,
+            'user_mobile' =>
+            $this->user_mobile,
+            'user_name' =>
+            $this->user_name,
             'center_id' => $this->center_id,
             'doctor_id' => $this->doctor_id, 'service_id' => $this->service_id,
 
